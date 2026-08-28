@@ -164,26 +164,39 @@ a:hover {
   text-shadow: var(--theme-glow);
 }
 
+ul,
+ol {
+  list-style-position: outside;
+  margin: 0;
+  padding-left: 2ch;
+}
+
 ul {
-  list-style-position: inside;
   list-style-type: '▪';
-  text-indent: -1ch;
+}
+
+ul li::marker {
+  color: var(--theme-focused-foreground);
 }
 
 ol {
-  list-style-type: '';
-  list-style-position: inside;
+  list-style-type: none;
   counter-reset: nd;
-  text-indent: -1ch;
 }
 
 ol li {
   counter-increment: nd;
 }
 
-ol li::before {
-  content: counter(nd, decimal-leading-zero) ' ';
+ol li::marker {
+  content: counter(nd, decimal-leading-zero) '\00a0';
   color: var(--theme-focused-foreground);
+}
+
+ul li,
+ol li {
+  padding-left: 1ch;
+  margin: calc(var(--theme-line-height-base) * 0.25rem) 0;
 }
 
 code {

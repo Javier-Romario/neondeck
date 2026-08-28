@@ -1,36 +1,75 @@
 {
-  "name": "neondeck",
+  "name": "@javierromario/neondeck",
   "version": "0.1.0",
   "description": "NEONDECK — a cyberpunk React component library. Terminal-monospace primitives (à la SRCL / www-sacred) rebuilt with neon glows, semi-transparent glass panels, and ticker-board edge readouts.",
   "license": "MIT",
-  "private": true,
   "engines": {
     "node": ">=18"
   },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./global.css": "./dist/global.css",
+    "./global-fonts.css": "./dist/global-fonts.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "dev": "next -p 3000",
-    "build": "next build",
+    "build": "node scripts/build.mjs",
+    "prepublishOnly": "npm run build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "ladle": "ladle serve",
     "build-ladle": "ladle build",
     "screenshot": "node scripts/screenshot.mjs"
   },
-  "dependencies": {
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "@react-three/drei": "^10.0.0",
     "@react-three/fiber": "^9.0.0",
-    "next": "^16.2.12",
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8",
     "three": "^0.174.0"
+  },
+  "peerDependenciesMeta": {
+    "react-dom": {
+      "optional": true
+    },
+    "@react-three/drei": {
+      "optional": true
+    },
+    "@react-three/fiber": {
+      "optional": true
+    },
+    "three": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@ladle/react": "^5.1.1",
     "@playwright/mcp": "^0.0.79",
+    "@react-three/drei": "^10.0.0",
+    "@react-three/fiber": "^9.0.0",
     "@types/node": "^22.10.0",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
+    "next": "^16.2.12",
     "playwright": "^1.63.0-alpha-2026-08-05",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "three": "^0.174.0",
     "typescript": "^5.9.3"
   }
 }

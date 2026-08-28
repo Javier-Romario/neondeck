@@ -1,0 +1,23 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "declaration": true,
+    "declarationMap": false,
+    "emitDeclarationOnly": false,
+    "outDir": "dist",
+    "rootDir": ".",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "sourceMap": false,
+    "incremental": false
+  },
+  "include": [
+    "css.d.ts",
+    "index.ts",
+    "components/**/*.ts",
+    "components/**/*.tsx",
+    "common/**/*.ts"
+  ],
+  "exclude": ["node_modules", ".next", "build", "dist", "stories", "app", "scripts"]
+}
