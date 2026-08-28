@@ -374,3 +374,34 @@ Shared plumbing first:
   }
   ```
 - **Theming:** `--theme-border` (via CanvasShell)
+
+## HexGrid
+
+- **Path:** `components/HexGrid.tsx`
+- **Purpose:** Animated hexagonal tile grid; an expanding pulse ring highlights hexes in its path.
+- **Props:** `height?, color?, size?` (hex radius), `pulseRate?` (waves/sec), `glow?`.
+
+## Starfield
+
+- **Path:** `components/Starfield.tsx`
+- **Purpose:** Hyperspace warp — stars streak outward from center, accelerating as they pass.
+- **Props:** `height?, color?, count?, speed?`.
+
+## Spectrum
+
+- **Path:** `components/Spectrum.tsx`
+- **Purpose:** Equalizer bars — eased toward random targets, neon gradient + glow.
+- **Props:** `height?, color?, bars?, speed?` (lerp), `glow?`.
+
+## CRTOverlay
+
+- **Path:** `components/CRTOverlay.tsx`
+- **Purpose:** CRT effects over arbitrary children — scanlines, rolling band, noise, vignette, flicker. Canvas sits on top (`pointer-events: none`).
+- **Props:** `height?, scanlines? (0..1), flicker? (0..1), vignette? (0..1), noise? (0..1), roll?, children?`.
+
+## NeonTunnel
+
+- **Path:** `components/NeonTunnel.tsx`
+- **Purpose:** react-three-fiber fly-through — neon torus rings recycle toward the camera + starfield.
+- **Props:** `height?, color?, accent?, speed?, rings?`.
+- **Deps:** `three`, `@react-three/fiber`, `@react-three/drei`. Client-only (`'use client'`).

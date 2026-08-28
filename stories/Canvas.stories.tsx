@@ -2,10 +2,14 @@ import type { Story } from '@ladle/react';
 
 import GridCanvas from '@components/GridCanvas';
 import GlitchText from '@components/GlitchText';
+import HexGrid from '@components/HexGrid';
 import Hologram from '@components/Hologram';
 import MatrixRain from '@components/MatrixRain';
+import NeonTunnel from '@components/NeonTunnel';
 import NeuralField from '@components/NeuralField';
 import Radar from '@components/Radar';
+import Spectrum from '@components/Spectrum';
+import Starfield from '@components/Starfield';
 import Waveform from '@components/Waveform';
 
 export default {
@@ -66,3 +70,31 @@ Hologram3D.argTypes = {
     control: { type: 'select' },
   },
 };
+
+export const Hexes: Story<{ color: string; size: number }> = ({ color, size }) => (
+  <div style={{ maxWidth: 720 }}>
+    <HexGrid height={320} color={color} size={size} />
+  </div>
+);
+Hexes.args = { color: '#00ffd1', size: 26 };
+
+export const Warp: Story<{ color: string; speed: number; count: number }> = ({ color, speed, count }) => (
+  <div style={{ maxWidth: 720 }}>
+    <Starfield height={320} color={color} speed={speed} count={count} />
+  </div>
+);
+Warp.args = { color: '#00ffd1', speed: 1, count: 220 };
+
+export const Equalizer: Story<{ color: string; bars: number }> = ({ color, bars }) => (
+  <div style={{ maxWidth: 720 }}>
+    <Spectrum height={240} color={color} bars={bars} />
+  </div>
+);
+Equalizer.args = { color: '#00ffd1', bars: 48 };
+
+export const Tunnel3D: Story<{ color: string; speed: number }> = ({ color, speed }) => (
+  <div style={{ maxWidth: 720 }}>
+    <NeonTunnel height={400} color={color} accent="#ff2d78" speed={speed} />
+  </div>
+);
+Tunnel3D.args = { color: '#00ffd1', speed: 6 };

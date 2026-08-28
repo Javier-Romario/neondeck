@@ -16,6 +16,7 @@ import ButtonGroup from '@components/ButtonGroup';
 import Card from '@components/Card';
 import CardDouble from '@components/CardDouble';
 import Checkbox from '@components/Checkbox';
+import CRTOverlay from '@components/CRTOverlay';
 import CodeBlock from '@components/CodeBlock';
 import Dialog from '@components/Dialog';
 import Divider from '@components/Divider';
@@ -23,15 +24,19 @@ import Drawer from '@components/Drawer';
 import Grid from '@components/Grid';
 import GlitchText from '@components/GlitchText';
 import GridCanvas from '@components/GridCanvas';
+import HexGrid from '@components/HexGrid';
 import Hologram from '@components/Hologram';
 import Input from '@components/Input';
 import MatrixRain from '@components/MatrixRain';
 import Navigation from '@components/Navigation';
+import NeonTunnel from '@components/NeonTunnel';
 import NeuralField from '@components/NeuralField';
 import Radar from '@components/Radar';
 import Row from '@components/Row';
 import RowSpaceBetween from '@components/RowSpaceBetween';
 import Select from '@components/Select';
+import Spectrum from '@components/Spectrum';
+import Starfield from '@components/Starfield';
 import Table from '@components/Table';
 import TableColumn from '@components/TableColumn';
 import TableRow from '@components/TableRow';
@@ -138,6 +143,31 @@ export default function Page() {
 
         <Card title="GLITCH TEXT">
           <GlitchText text="NEONDECK" height={200} />
+        </Card>
+
+        <Card title="HEX GRID">
+          <HexGrid height={200} />
+        </Card>
+
+        <Card title="STARFIELD WARP">
+          <Starfield height={200} speed={1.4} />
+        </Card>
+
+        <Card title="SPECTRUM">
+          <Spectrum height={200} />
+        </Card>
+
+        <Card title="CRT OVERLAY">
+          <CRTOverlay height={200}>
+            <div style={{ padding: '1.2rem 1ch', fontFamily: 'var(--font-family-mono)' }}>
+              <Row style={{ fontSize: 22, color: 'var(--theme-focused-foreground)' }}>SYSTEM READY</Row>
+              <Row style={{ color: 'var(--theme-muted)' }}>scanlines · noise · vignette · rolling band</Row>
+            </div>
+          </CRTOverlay>
+        </Card>
+
+        <Card title="NEON TUNNEL — 3D">
+          <NeonTunnel height={300} />
         </Card>
 
         <TickerBoard message="TICKER" tickerItems={['UPLINK', 'SYNC', 'LOCK']} tickerSpeed={16}>
