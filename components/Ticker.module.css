@@ -37,7 +37,7 @@
 .label {
   display: inline-flex;
   align-items: center;
-  margin: 0 10px 0 0;
+  margin: 0 10px;
   padding: 3px 8px;
   color: #03110d;
   background: var(--tone, var(--theme-focused-foreground));
