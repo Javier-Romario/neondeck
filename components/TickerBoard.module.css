@@ -65,9 +65,72 @@
   font-weight: 700;
 }
 
+/* ---- board body: fuzzy glass + chamfered gradient frame ---- */
 .body {
   position: relative;
   display: block;
+
+  /* chamfer size for the 45° corner cutouts */
+  --nd-cut: 18px;
+  --nd-border: 2px;
+
+  /* fuzzy glass fill */
+  --nd-glass: linear-gradient(
+    180deg,
+    rgba(10, 17, 28, 0.58) 0%,
+    rgba(7, 12, 19, 0.4) 100%
+  );
+
+  /* gradient border (top + bottom only, no side borders) */
+  --nd-border-gradient: linear-gradient(
+    90deg,
+    var(--neon-teal) 0%,
+    var(--neon-blue) 50%,
+    var(--neon-magenta) 100%
+  );
+
+  /* glow carried by the borders */
+  --nd-glow: 0 0 14px -3px rgba(0, 255, 209, 0.75),
+    0 0 30px -8px rgba(45, 226, 255, 0.55),
+    0 0 30px -8px rgba(255, 45, 120, 0.45);
+
+  background: var(--nd-glass);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+
+  /* 45° angular cutouts on all four corners */
+  clip-path: polygon(
+    var(--nd-cut) 0,
+    calc(100% - var(--nd-cut)) 0,
+    100% var(--nd-cut),
+    100% calc(100% - var(--nd-cut)),
+    calc(100% - var(--nd-cut)) 100%,
+    var(--nd-cut) 100%,
+    0 calc(100% - var(--nd-cut)),
+    0 var(--nd-cut)
+  );
+}
+
+/* gradient borders: top + bottom only, ends follow the corner chamfers */
+.body::before,
+.body::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: var(--nd-border);
+  background: var(--nd-border-gradient);
+  box-shadow: var(--nd-glow);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.body::before {
+  top: 0;
+}
+
+.body::after {
+  bottom: 0;
 }
 
 .topTicker {
@@ -76,4 +139,40 @@
 
 .bottomTicker {
   display: block;
+}
+
+/* ---- light mode: explicit component theme + global light context ---- */
+.root[data-theme='light'] .body,
+html[data-theme='light'] .body {
+  --nd-glass: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.74) 0%,
+    rgba(240, 246, 250, 0.56) 100%
+  );
+  --nd-border-gradient: linear-gradient(
+    90deg,
+    #00c8a8 0%,
+    #2b9fd8 50%,
+    #e0408f 100%
+  );
+  --nd-glow: 0 0 12px -3px rgba(0, 200, 168, 0.5),
+    0 0 26px -8px rgba(43, 159, 216, 0.36);
+}
+
+@media (prefers-color-scheme: light) {
+  html:not([data-theme='dark']) .body {
+    --nd-glass: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.74) 0%,
+      rgba(240, 246, 250, 0.56) 100%
+    );
+    --nd-border-gradient: linear-gradient(
+      90deg,
+      #00c8a8 0%,
+      #2b9fd8 50%,
+      #e0408f 100%
+    );
+    --nd-glow: 0 0 12px -3px rgba(0, 200, 168, 0.5),
+      0 0 26px -8px rgba(43, 159, 216, 0.36);
+  }
 }

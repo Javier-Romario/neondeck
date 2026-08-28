@@ -13,6 +13,7 @@ interface TickerBoardProps extends React.HTMLAttributes<HTMLDivElement> {
   tickerSpeed?: number;
   showTopTicker?: boolean;
   showBottomTicker?: boolean;
+  theme?: 'dark' | 'light';
   children?: React.ReactNode;
 }
 
@@ -26,6 +27,7 @@ const TickerBoard: React.FC<TickerBoardProps> = ({
   tickerSpeed,
   showTopTicker = true,
   showBottomTicker = false,
+  theme,
   children,
   style,
   ...rest
@@ -33,7 +35,7 @@ const TickerBoard: React.FC<TickerBoardProps> = ({
   const hasTicker = tickerItems.length > 0 || Boolean(tickerLabel);
 
   return (
-    <div className={styles.root} style={style} {...rest}>
+    <div className={styles.root} {...rest} data-theme={theme} style={style}>
       {message ? (
         <div className={styles.message} data-tone={messageTone}>
           <span className={styles.messageGlyph} aria-hidden="true">

@@ -114,3 +114,14 @@
     animation: none;
   }
 }
+
+/* ---- light mode: swap the dark marquee strip for light glass ---- */
+html[data-theme='light'] .root {
+  background: rgba(240, 246, 250, 0.72);
+}
+
+@media (prefers-color-scheme: light) {
+  html:not([data-theme='dark']) .root {
+    background: rgba(240, 246, 250, 0.72);
+  }
+}

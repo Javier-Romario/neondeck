@@ -1,5 +1,7 @@
 import type { Story } from '@ladle/react';
 
+import * as React from 'react';
+
 import Card from '@components/Card';
 import Ticker from '@components/Ticker';
 import TickerBoard from '@components/TickerBoard';
@@ -40,7 +42,8 @@ export const WrappedCard: Story<{
   tickerSpeed: number;
   tickerDirection: 'left' | 'right';
   showBottomTicker: boolean;
-}> = ({ message, messageTone, tickerTone, tickerSpeed, tickerDirection, showBottomTicker }) => (
+  theme: 'dark' | 'light';
+}> = ({ message, messageTone, tickerTone, tickerSpeed, tickerDirection, showBottomTicker, theme }) => (
   <TickerBoard
     message={message}
     messageTone={messageTone as any}
@@ -50,6 +53,7 @@ export const WrappedCard: Story<{
     tickerSpeed={tickerSpeed}
     tickerDirection={tickerDirection}
     showBottomTicker={showBottomTicker}
+    theme={theme}
   >
     <Card title="DECKS">
       A small message box sits right above the component. Ticker strips run along the top and bottom edges.
@@ -63,6 +67,7 @@ WrappedCard.args = {
   tickerSpeed: 28,
   tickerDirection: 'left',
   showBottomTicker: true,
+  theme: 'dark',
 };
 WrappedCard.argTypes = {
   messageTone: { control: { type: 'select', options: TONES } },
@@ -70,6 +75,7 @@ WrappedCard.argTypes = {
   tickerDirection: { control: { type: 'select', options: ['left', 'right'] } },
   tickerSpeed: { control: { type: 'number', min: 5, max: 60, step: 1 } },
   showBottomTicker: { control: { type: 'boolean' } },
+  theme: { control: { type: 'select', options: ['dark', 'light'] } },
 };
 
 export const WrappedWindow: Story<{ message: string }> = ({ message }) => (
@@ -86,4 +92,30 @@ export const WrappedWindow: Story<{ message: string }> = ({ message }) => (
 );
 WrappedWindow.args = {
   message: 'SYS.LOG // FEED',
+};
+
+export const LightTheme: Story = () => (
+  <Light>
+    <TickerBoard
+      message="SYS.UPLINK // LIGHT MODE"
+      messageTone="magenta"
+      tickerLabel="NEONDECK"
+      tickerItems={DEFAULT_TICKER_FEED}
+      tickerSpeed={28}
+      showBottomTicker
+    >
+      <Card title="DECKS">
+        Light mode: the glass fill, gradient borders, glow and chamfered corners all soften for a bright backdrop.
+      </Card>
+    </TickerBoard>
+  </Light>
+);
+
+const Light: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  React.useEffect(() => {
+    document.documentElement.setAttribute('data-theme', 'light');
+    return () => document.documentElement.removeAttribute('data-theme');
+  }, []);
+
+  return <>{children}</>;
 };
