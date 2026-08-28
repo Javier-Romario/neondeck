@@ -21,6 +21,7 @@ import Dialog from '@components/Dialog';
 import Divider from '@components/Divider';
 import Drawer from '@components/Drawer';
 import Grid from '@components/Grid';
+import GlitchText from '@components/GlitchText';
 import GridCanvas from '@components/GridCanvas';
 import Hologram from '@components/Hologram';
 import Input from '@components/Input';
@@ -133,6 +134,10 @@ export default function Page() {
 
         <Card title="RADAR">
           <Radar height={200} />
+        </Card>
+
+        <Card title="GLITCH TEXT">
+          <GlitchText text="NEONDECK" height={200} />
         </Card>
 
         <TickerBoard message="TICKER" tickerItems={['UPLINK', 'SYNC', 'LOCK']} tickerSpeed={16}>

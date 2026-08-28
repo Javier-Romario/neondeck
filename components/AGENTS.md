@@ -359,3 +359,18 @@ Shared plumbing first:
   ```
 - **Deps:** `three`, `@react-three/fiber`, `@react-three/drei`. Client-only (`'use client'`).
 - **Theming:** `--theme-border`, `--theme-focused-foreground` (readout).
+
+## GlitchText
+
+- **Path:** `components/GlitchText.tsx`
+- **Purpose:** Canvas text with RGB channel split, micro-jitter, and periodic horizontal slice glitch.
+- **Props:**
+  ```ts
+  interface GlitchTextProps extends React.HTMLAttributes<HTMLDivElement> {
+    text: string; color?: string; accentA?: string; accentB?: string;
+    fontSize?: number; height?: number | string;
+    glitchRate?: number; // chance per frame of a slice glitch
+    intensity?: number;  // max offset, px
+  }
+  ```
+- **Theming:** `--theme-border` (via CanvasShell)
