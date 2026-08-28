@@ -42,6 +42,72 @@ through CSS custom properties (`--theme-*`, `--neon-*`, `--cp-*`).
 - 📟 **Ticker-board edges** — the signature. A `Ticker` marquee strip runs along an edge, and a small `message` box floats **right above** the component via `TickerBoard`.
 - 🧩 **SRCL-shaped API** — `Card`, `Button`, `Accordion`, `Window`, `Select`, `Dialog`… the same prop shapes you already know.
 
+## // Install
+
+```sh
+npm install @javier-romario/neondeck
+```
+
+React 19 is a peer dependency (install alongside if missing):
+
+```sh
+npm install react react-dom
+```
+
+### 1. Import the stylesheet
+
+Once, at your app root (`app/layout.tsx`, `main.tsx`, etc.):
+
+```tsx
+import '@javier-romario/neondeck/global.css';
+```
+
+`global-fonts.css` is optional — it loads the bundled cyberpunk display font.
+
+### 2. Use the components
+
+```tsx
+import { NeoCard, NeoButton, TickerBoard } from '@javier-romario/neondeck';
+
+<TickerBoard
+  message="SYS.UPLINK // NODE 0x1F"
+  messageTone="magenta"
+  tickerLabel="NEONDECK"
+  tickerItems={['UPLINK 34.2TB/S', 'ICE-BREAKER v2.1']}
+>
+  <NeoCard title="DECKS" tone="teal">
+    <NeoButton tone="yellow">Sync</NeoButton>
+  </NeoCard>
+</TickerBoard>;
+```
+
+### Next.js (App Router)
+
+Several components are client components (`'use client'`). Add the package to
+`transpilePackages` so Next honors those boundaries and compiles the CSS modules:
+
+```js
+// next.config.mjs
+const nextConfig = {
+  transpilePackages: ['@javier-romario/neondeck'],
+};
+
+export default nextConfig;
+```
+
+### 3D / canvas components
+
+`Hologram` needs the R3F peer deps (optional — skip unless you use it):
+
+```sh
+npm install three @react-three/fiber @react-three/drei
+```
+
+### Theming
+
+All color comes from CSS custom properties. Re-theme by overriding tokens on `body`,
+or use the shipped tint classes (`body.tint-magenta`, `body.tint-yellow`, …).
+
 ## // The ticker-board treatment
 
 Wrap any component in `TickerBoard`:
