@@ -45,7 +45,7 @@ through CSS custom properties (`--theme-*`, `--neon-*`, `--cp-*`).
 ## // Install
 
 ```sh
-npm install @javier-romario/neondeck
+npm install @javierromario/neondeck
 ```
 
 React 19 is a peer dependency (install alongside if missing):
@@ -59,7 +59,7 @@ npm install react react-dom
 Once, at your app root (`app/layout.tsx`, `main.tsx`, etc.):
 
 ```tsx
-import '@javier-romario/neondeck/global.css';
+import '@javierromario/neondeck/global.css';
 ```
 
 `global-fonts.css` is optional — it loads the bundled cyberpunk display font.
@@ -67,7 +67,7 @@ import '@javier-romario/neondeck/global.css';
 ### 2. Use the components
 
 ```tsx
-import { NeoCard, NeoButton, TickerBoard } from '@javier-romario/neondeck';
+import { NeoCard, NeoButton, TickerBoard } from '@javierromario/neondeck';
 
 <TickerBoard
   message="SYS.UPLINK // NODE 0x1F"
@@ -89,7 +89,7 @@ Several components are client components (`'use client'`). Add the package to
 ```js
 // next.config.mjs
 const nextConfig = {
-  transpilePackages: ['@javier-romario/neondeck'],
+  transpilePackages: ['@javierromario/neondeck'],
 };
 
 export default nextConfig;
