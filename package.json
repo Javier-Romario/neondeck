@@ -1,6 +1,6 @@
 {
   "name": "@javierromario/neondeck",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "NEONDECK — a cyberpunk React component library. Terminal-monospace primitives (à la SRCL / www-sacred) rebuilt with neon glows, semi-transparent glass panels, and ticker-board edge readouts.",
   "license": "MIT",
   "engines": {
