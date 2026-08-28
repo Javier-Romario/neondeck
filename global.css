@@ -113,6 +113,14 @@ body {
 
   --theme-window-background: rgba(10, 17, 28, 0.5);
   --theme-window-shadow: rgba(0, 255, 209, 0.16);
+
+  /* ---- neumorphic tokens (experimental) ---- */
+  --neo-surface: rgba(10, 17, 28, 0.55);
+  --neo-raised: 6px 6px 14px rgba(0, 0, 0, 0.55), -6px -6px 14px rgba(255, 255, 255, 0.04);
+  --neo-pressed: inset 4px 4px 10px rgba(0, 0, 0, 0.6), inset -4px -4px 10px rgba(255, 255, 255, 0.035);
+  --neo-well: inset 6px 6px 12px rgba(0, 0, 0, 0.55), inset -6px -6px 12px rgba(255, 255, 255, 0.04);
+  --neo-drop: drop-shadow(7px 7px 16px rgba(0, 0, 0, 0.5))
+    drop-shadow(-7px -7px 16px rgba(255, 255, 255, 0.05));
 }
 
 /* ---- page backdrop: grid + scanlines + aurora ---- */
@@ -315,6 +323,14 @@ html[data-theme='light'] body {
 
   --theme-window-background: rgba(255, 255, 255, 0.62);
   --theme-window-shadow: rgba(0, 150, 130, 0.22);
+
+  /* ---- neumorphic tokens (experimental) ---- */
+  --neo-surface: rgba(255, 255, 255, 0.6);
+  --neo-raised: 6px 6px 14px rgba(0, 0, 0, 0.12), -6px -6px 14px rgba(255, 255, 255, 0.9);
+  --neo-pressed: inset 4px 4px 10px rgba(0, 0, 0, 0.14), inset -4px -4px 10px rgba(255, 255, 255, 0.85);
+  --neo-well: inset 6px 6px 12px rgba(0, 0, 0, 0.12), inset -6px -6px 12px rgba(255, 255, 255, 0.9);
+  --neo-drop: drop-shadow(7px 7px 16px rgba(0, 0, 0, 0.12))
+    drop-shadow(-7px -7px 16px rgba(255, 255, 255, 0.9));
 }
 
 @media (prefers-color-scheme: light) {
@@ -341,6 +357,14 @@ html[data-theme='light'] body {
 
     --theme-window-background: rgba(255, 255, 255, 0.62);
     --theme-window-shadow: rgba(0, 150, 130, 0.22);
+
+    /* ---- neumorphic tokens (experimental) ---- */
+    --neo-surface: rgba(255, 255, 255, 0.6);
+    --neo-raised: 6px 6px 14px rgba(0, 0, 0, 0.12), -6px -6px 14px rgba(255, 255, 255, 0.9);
+    --neo-pressed: inset 4px 4px 10px rgba(0, 0, 0, 0.14), inset -4px -4px 10px rgba(255, 255, 255, 0.85);
+    --neo-well: inset 6px 6px 12px rgba(0, 0, 0, 0.12), inset -6px -6px 12px rgba(255, 255, 255, 0.9);
+    --neo-drop: drop-shadow(7px 7px 16px rgba(0, 0, 0, 0.12))
+      drop-shadow(-7px -7px 16px rgba(255, 255, 255, 0.9));
   }
 }
 

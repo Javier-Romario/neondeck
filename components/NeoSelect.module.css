@@ -1,0 +1,115 @@
+/* neumorphic raised trigger + inset menu, cyberpunk neon accents */
+.root {
+  position: relative;
+  display: inline-block;
+  min-width: 24ch;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: calc(var(--theme-line-height-base) * 0.25rem) 1ch;
+  background: var(--neo-surface);
+  border-radius: 12px;
+  box-shadow: var(--neo-raised);
+  color: var(--theme-text);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size);
+  letter-spacing: 1px;
+  cursor: pointer;
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  transition: box-shadow 180ms ease, color 180ms ease;
+}
+
+.trigger:hover {
+  color: var(--tone, var(--theme-focused-foreground));
+  box-shadow: var(--neo-raised), inset 0 0 0 1px var(--tone, var(--theme-focused-foreground));
+}
+
+.root[data-open='true'] .trigger {
+  box-shadow: var(--neo-pressed);
+  color: var(--tone, var(--theme-focused-foreground));
+}
+
+.value {
+  flex: 1;
+  text-align: left;
+}
+
+.glyph {
+  color: var(--tone, var(--theme-focused-foreground));
+  text-shadow: 0 0 6px var(--tone, var(--theme-focused-foreground));
+  font-size: 11px;
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  max-height: 16rem;
+  overflow-y: auto;
+  background: var(--neo-surface);
+  border-radius: 12px;
+  box-shadow: var(--neo-raised), inset 0 0 0 1px var(--tone, var(--theme-focused-foreground));
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  padding: 4px;
+  z-index: var(--z-index-page-select);
+}
+
+.option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: calc(var(--theme-line-height-base) * 0.25rem) 1ch;
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  color: var(--theme-text);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size);
+  cursor: pointer;
+}
+
+.option:hover {
+  background: var(--neo-surface);
+  box-shadow: var(--neo-pressed);
+  color: var(--tone, var(--theme-focused-foreground));
+}
+
+.root[data-tone='teal'] {
+  --tone: var(--neon-teal);
+}
+
+.root[data-tone='magenta'] {
+  --tone: var(--neon-magenta);
+}
+
+.root[data-tone='yellow'] {
+  --tone: var(--neon-yellow);
+}
+
+.root[data-tone='green'] {
+  --tone: var(--neon-green);
+}
+
+.root[data-tone='violet'] {
+  --tone: var(--neon-violet);
+}
+
+.root[data-tone='orange'] {
+  --tone: var(--neon-orange);
+}
+
+.root[data-tone='red'] {
+  --tone: var(--neon-red);
+}
+
+.root[data-tone='blue'] {
+  --tone: var(--neon-blue);
+}

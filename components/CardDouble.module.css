@@ -1,44 +1,34 @@
+/* wrapper carries the neumorphic drop-shadow so it follows the chamfered shape */
+.frame {
+  display: block;
+  filter: var(--neo-drop);
+}
+
 .card {
   position: relative;
   display: block;
-  padding: 2px;
-  background: var(--theme-panel);
+
+  --nd-cut: 18px;
+
+  --nd-glass: linear-gradient(
+    180deg,
+    rgba(10, 17, 28, 0.6) 0%,
+    rgba(7, 12, 19, 0.42) 100%
+  );
+
+  background: var(--nd-glass);
   backdrop-filter: blur(12px) saturate(140%);
   -webkit-backdrop-filter: blur(12px) saturate(140%);
-  border: 1px solid var(--theme-border);
-  box-shadow: inset 0 0 0 1px var(--theme-border-subdued);
-  transition: border-color 200ms ease, box-shadow 200ms ease;
-}
 
-.card:hover {
-  border-color: var(--theme-border-bright);
-  box-shadow: inset 0 0 0 1px var(--theme-border-subdued), 0 0 22px -8px var(--theme-focused-foreground);
-}
-
-.card::before,
-.card::after {
-  content: '';
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.card::before {
-  top: 2px;
-  left: 2px;
-  border-top: 2px solid var(--theme-focused-foreground);
-  border-left: 2px solid var(--theme-focused-foreground);
-  box-shadow: 0 0 8px -1px var(--theme-focused-foreground);
-}
-
-.card::after {
-  bottom: 2px;
-  right: 2px;
-  border-bottom: 2px solid var(--theme-focused-foreground);
-  border-right: 2px solid var(--theme-focused-foreground);
-  box-shadow: 0 0 8px -1px var(--theme-focused-foreground);
+  /* 45° cutouts on two opposite corners (top-left + bottom-right) */
+  clip-path: polygon(
+    var(--nd-cut) 0,
+    100% 0,
+    100% calc(100% - var(--nd-cut)),
+    calc(100% - var(--nd-cut)) 100%,
+    0 100%,
+    0 var(--nd-cut)
+  );
 }
 
 .children {
@@ -54,41 +44,34 @@
 .action {
   display: flex;
   align-items: flex-end;
-  justify-content: space-between;
-}
-
-.left {
-  min-width: 10%;
-  width: 100%;
-  box-shadow: inset 2px 0 0 0 var(--theme-text), inset 0 2px 0 0 var(--theme-text);
-  padding: calc((var(--font-size) * 0.5) * var(--theme-line-height-base)) 2ch 0px 1ch;
-}
-
-.leftCorner {
-  flex-shrink: 0;
-  box-shadow: inset 2px 0 0 0 var(--theme-text), inset 0 2px 0 0 var(--theme-text);
-  padding: calc((var(--font-size) * 0.5) * var(--theme-line-height-base)) 1ch 0px 1ch;
-}
-
-.right {
-  min-width: 10%;
-  width: 100%;
-  box-shadow: inset -2px 0 0 0 var(--theme-text), inset 0 2px 0 0 var(--theme-text);
-  padding: calc((var(--font-size) * 0.5) * var(--theme-line-height-base)) 2ch 0px 1ch;
-}
-
-.rightCorner {
-  flex-shrink: 0;
-  box-shadow: inset -2px 0 0 0 var(--theme-text), inset 0 2px 0 0 var(--theme-text);
-  padding: calc((var(--font-size) * 0.5) * var(--theme-line-height-base)) 1ch 0px 1ch;
+  justify-content: center;
 }
 
 .title {
   flex-shrink: 0;
-  padding: 0 1ch 0 1ch;
+  padding: calc(var(--theme-line-height-base) * 0.5rem) 1ch 0 1ch;
   font-size: var(--font-size);
   font-weight: 700;
   letter-spacing: 1px;
   color: var(--theme-focused-foreground);
   text-shadow: 0 0 10px var(--theme-focused-foreground-subdued);
+}
+
+/* ---- light mode: swap dark glass for bright frosted glass ---- */
+html[data-theme='light'] .card {
+  --nd-glass: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.74) 0%,
+    rgba(240, 246, 250, 0.56) 100%
+  );
+}
+
+@media (prefers-color-scheme: light) {
+  html:not([data-theme='dark']) .card {
+    --nd-glass: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.74) 0%,
+      rgba(240, 246, 250, 0.56) 100%
+    );
+  }
 }

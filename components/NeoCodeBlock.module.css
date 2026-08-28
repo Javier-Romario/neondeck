@@ -1,0 +1,65 @@
+/* neumorphic inset well + neon left accent */
+.pre {
+  display: block;
+  margin: 0;
+  padding: calc(var(--theme-line-height-base) * 0.5rem) 1ch;
+  background: var(--neo-surface);
+  border-radius: 12px;
+  box-shadow: var(--neo-well), inset 3px 0 0 0 var(--tone, var(--theme-focused-foreground));
+  font-family: var(--font-family-mono);
+  font-size: 13px;
+  line-height: calc(var(--theme-line-height-base) * 1rem);
+  overflow-x: auto;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.line {
+  display: block;
+  white-space: pre;
+}
+
+.number {
+  display: inline-block;
+  width: 3ch;
+  margin-right: 1ch;
+  color: var(--theme-muted);
+  user-select: none;
+  text-align: right;
+}
+
+.code {
+  color: var(--theme-text);
+}
+
+.pre[data-tone='teal'] {
+  --tone: var(--neon-teal);
+}
+
+.pre[data-tone='magenta'] {
+  --tone: var(--neon-magenta);
+}
+
+.pre[data-tone='yellow'] {
+  --tone: var(--neon-yellow);
+}
+
+.pre[data-tone='green'] {
+  --tone: var(--neon-green);
+}
+
+.pre[data-tone='violet'] {
+  --tone: var(--neon-violet);
+}
+
+.pre[data-tone='orange'] {
+  --tone: var(--neon-orange);
+}
+
+.pre[data-tone='red'] {
+  --tone: var(--neon-red);
+}
+
+.pre[data-tone='blue'] {
+  --tone: var(--neon-blue);
+}

@@ -1,0 +1,114 @@
+/* wrapper carries the neumorphic drop-shadow so it follows the chamfered shape */
+.frame {
+  display: block;
+  filter: var(--neo-drop);
+}
+
+.card {
+  position: relative;
+  display: block;
+
+  --nd-cut: 18px;
+
+  --neo-glass: linear-gradient(
+    180deg,
+    rgba(10, 17, 28, 0.6) 0%,
+    rgba(7, 12, 19, 0.42) 100%
+  );
+
+  background: var(--neo-glass);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+
+  /* 45° cutouts on two opposite corners (top-left + bottom-right) */
+  clip-path: polygon(
+    var(--nd-cut) 0,
+    100% 0,
+    100% calc(100% - var(--nd-cut)),
+    calc(100% - var(--nd-cut)) 100%,
+    0 100%,
+    0 var(--nd-cut)
+  );
+}
+
+.ticker {
+  display: block;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 2ch 0 2ch;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--tone, var(--theme-focused-foreground));
+  text-shadow: 0 0 10px var(--tone-soft, var(--theme-focused-foreground-subdued));
+}
+
+.body {
+  display: block;
+  padding: 12px 2ch 18px 2ch;
+  color: var(--theme-text);
+}
+
+.frame[data-tone='teal'] {
+  --tone: var(--neon-teal);
+  --tone-soft: rgba(0, 255, 209, 0.45);
+}
+
+.frame[data-tone='magenta'] {
+  --tone: var(--neon-magenta);
+  --tone-soft: rgba(255, 45, 120, 0.45);
+}
+
+.frame[data-tone='yellow'] {
+  --tone: var(--neon-yellow);
+  --tone-soft: rgba(255, 230, 109, 0.45);
+}
+
+.frame[data-tone='green'] {
+  --tone: var(--neon-green);
+  --tone-soft: rgba(0, 255, 157, 0.45);
+}
+
+.frame[data-tone='violet'] {
+  --tone: var(--neon-violet);
+  --tone-soft: rgba(183, 139, 255, 0.45);
+}
+
+.frame[data-tone='orange'] {
+  --tone: var(--neon-orange);
+  --tone-soft: rgba(255, 157, 45, 0.45);
+}
+
+.frame[data-tone='red'] {
+  --tone: var(--neon-red);
+  --tone-soft: rgba(255, 77, 94, 0.45);
+}
+
+.frame[data-tone='blue'] {
+  --tone: var(--neon-blue);
+  --tone-soft: rgba(45, 226, 255, 0.45);
+}
+
+/* ---- light mode: swap dark glass for bright frosted glass ---- */
+html[data-theme='light'] .card {
+  --neo-glass: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.74) 0%,
+    rgba(240, 246, 250, 0.56) 100%
+  );
+}
+
+@media (prefers-color-scheme: light) {
+  html:not([data-theme='dark']) .card {
+    --neo-glass: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.74) 0%,
+      rgba(240, 246, 250, 0.56) 100%
+    );
+  }
+}

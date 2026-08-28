@@ -1,0 +1,63 @@
+/* neumorphic raised row, pressed on hover, neon icon */
+.item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: calc(var(--theme-line-height-base) * 0.25rem) 1ch;
+  border-radius: 8px;
+  background: var(--neo-surface);
+  box-shadow: var(--neo-raised);
+  color: var(--theme-text);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size);
+  text-decoration: none;
+  cursor: pointer;
+  transition: box-shadow 160ms ease, color 160ms ease;
+}
+
+.item:hover {
+  color: var(--tone, var(--theme-focused-foreground));
+  box-shadow: var(--neo-pressed);
+}
+
+.icon {
+  color: var(--tone, var(--theme-focused-foreground));
+  text-shadow: 0 0 6px var(--tone, var(--theme-focused-foreground));
+  flex-shrink: 0;
+}
+
+.content {
+  line-height: var(--theme-line-height-base);
+}
+
+.item[data-tone='teal'] {
+  --tone: var(--neon-teal);
+}
+
+.item[data-tone='magenta'] {
+  --tone: var(--neon-magenta);
+}
+
+.item[data-tone='yellow'] {
+  --tone: var(--neon-yellow);
+}
+
+.item[data-tone='green'] {
+  --tone: var(--neon-green);
+}
+
+.item[data-tone='violet'] {
+  --tone: var(--neon-violet);
+}
+
+.item[data-tone='orange'] {
+  --tone: var(--neon-orange);
+}
+
+.item[data-tone='red'] {
+  --tone: var(--neon-red);
+}
+
+.item[data-tone='blue'] {
+  --tone: var(--neon-blue);
+}

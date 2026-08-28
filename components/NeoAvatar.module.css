@@ -1,0 +1,79 @@
+/* neumorphic raised portrait frame + neon ring */
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  vertical-align: top;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--theme-text);
+  text-decoration: none;
+}
+
+.portrait {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--theme-line-height-base) * 2.5rem);
+  height: calc(var(--theme-line-height-base) * 2.5rem);
+  border-radius: 10px;
+  background: var(--neo-surface);
+  box-shadow: var(--neo-raised), inset 0 0 0 1px var(--tone, var(--theme-focused-foreground));
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.placeholder {
+  color: var(--tone, var(--theme-focused-foreground));
+  font-size: 18px;
+  text-shadow: 0 0 8px var(--tone, var(--theme-focused-foreground));
+}
+
+.label {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size);
+  line-height: var(--theme-line-height-base);
+}
+
+.root[data-tone='teal'] {
+  --tone: var(--neon-teal);
+}
+
+.root[data-tone='magenta'] {
+  --tone: var(--neon-magenta);
+}
+
+.root[data-tone='yellow'] {
+  --tone: var(--neon-yellow);
+}
+
+.root[data-tone='green'] {
+  --tone: var(--neon-green);
+}
+
+.root[data-tone='violet'] {
+  --tone: var(--neon-violet);
+}
+
+.root[data-tone='orange'] {
+  --tone: var(--neon-orange);
+}
+
+.root[data-tone='red'] {
+  --tone: var(--neon-red);
+}
+
+.root[data-tone='blue'] {
+  --tone: var(--neon-blue);
+}

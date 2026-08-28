@@ -1,0 +1,49 @@
+/* neumorphic raised table frame */
+.scrollWrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+  background: var(--neo-surface);
+  border-radius: 12px;
+  box-shadow: var(--neo-raised), inset 0 0 0 1px var(--tone, var(--theme-border-bright));
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-family-mono);
+  font-size: 13.5px;
+}
+
+.scrollWrapper[data-tone='teal'] {
+  --tone: var(--neon-teal);
+}
+
+.scrollWrapper[data-tone='magenta'] {
+  --tone: var(--neon-magenta);
+}
+
+.scrollWrapper[data-tone='yellow'] {
+  --tone: var(--neon-yellow);
+}
+
+.scrollWrapper[data-tone='green'] {
+  --tone: var(--neon-green);
+}
+
+.scrollWrapper[data-tone='violet'] {
+  --tone: var(--neon-violet);
+}
+
+.scrollWrapper[data-tone='orange'] {
+  --tone: var(--neon-orange);
+}
+
+.scrollWrapper[data-tone='red'] {
+  --tone: var(--neon-red);
+}
+
+.scrollWrapper[data-tone='blue'] {
+  --tone: var(--neon-blue);
+}
