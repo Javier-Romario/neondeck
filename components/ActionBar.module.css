@@ -1,0 +1,11 @@
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: calc(var(--theme-line-height-base) * 0.5rem) 1ch;
+  background: rgba(7, 12, 19, 0.55);
+  border: 1px solid var(--theme-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}

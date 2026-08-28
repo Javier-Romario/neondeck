@@ -1,0 +1,255 @@
+/*
+NEONDECK — cyberpunk component library.
+Root palette is the NEON_NATIVE / ISO_TACTICS-inspired neon ramp. Every token is a
+CSS custom property so components theme off --theme-* (kept in the SRCL shape) while
+the cyberpunk identity lives in --neon-* and the semi-transparent --cp-* surfaces.
+*/
+
+/* ---- reset ---- */
+a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote,
+body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt,
+embed, em, figure, figcaption, fieldset, footer, form, h1, h2, h3, h4, h5, h6,
+header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu,
+nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike,
+strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u,
+ul, var, video {
+  border: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav,
+section {
+  display: block;
+}
+
+:root {
+  color-scheme: dark;
+
+  /* ---- neon ramp ---- */
+  --neon-teal: #00ffd1;
+  --neon-teal-dim: #00e5c3;
+  --neon-teal-dark: #00a896;
+  --neon-magenta: #ff2d78;
+  --neon-yellow: #ffe66d;
+  --neon-red: #ff4d5e;
+  --neon-green: #00ff9d;
+  --neon-orange: #ff9d2d;
+  --neon-violet: #b78bff;
+  --neon-blue: #2de2ff;
+
+  /* ---- cyberpunk surfaces (semi-transparent) ---- */
+  --cp-bg: #04070b;
+  --cp-bg-2: #070c13;
+  --cp-panel: rgba(10, 17, 28, 0.55);
+  --cp-panel-2: rgba(14, 22, 36, 0.62);
+  --cp-border: #12313a;
+  --cp-border-bright: #1d5a63;
+
+  --cp-text: #d7fff6;
+  --cp-muted: #5f8f88;
+
+  --cp-glow-teal: 0 0 8px rgba(0, 255, 209, 0.55), 0 0 24px rgba(0, 255, 209, 0.22);
+  --cp-glow-magenta: 0 0 8px rgba(255, 45, 120, 0.55), 0 0 24px rgba(255, 45, 120, 0.22);
+
+  --font-family-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --theme-line-height-base: 1.25;
+  --font-size: 15px;
+
+  --z-index-page: 1;
+  --z-index-page-select: 3;
+  --z-index-page-tooltips: 4;
+  --z-index-page-popover: 5;
+  --z-index-page-dropdown-menus: 6;
+  --z-index-page-modals: 10;
+}
+
+html,
+body {
+  background: var(--theme-background);
+  color: var(--theme-text);
+  font-family: var(--font-family-mono);
+  line-height: calc(var(--theme-line-height-base) * 1rem);
+  font-size: var(--font-size);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums lining-nums;
+  text-rendering: geometricPrecision;
+}
+
+/* ---- body theme (default cyberpunk: teal on glass) ---- */
+body {
+  --theme-background: rgba(4, 7, 11, 0.78);
+  --theme-background-solid: var(--cp-bg);
+  --theme-panel: var(--cp-panel);
+  --theme-panel-2: var(--cp-panel-2);
+  --theme-border: var(--cp-border);
+  --theme-border-bright: var(--cp-border-bright);
+  --theme-border-subdued: rgba(29, 90, 99, 0.45);
+
+  --theme-text: var(--cp-text);
+  --theme-muted: var(--cp-muted);
+
+  --theme-button: var(--neon-teal);
+  --theme-button-text: #03110d;
+  --theme-button-background: rgba(0, 255, 209, 0.08);
+  --theme-button-foreground: rgba(215, 255, 246, 0.72);
+
+  --theme-focused-foreground: var(--neon-teal);
+  --theme-focused-foreground-subdued: rgba(0, 255, 209, 0.5);
+  --theme-accent: var(--neon-magenta);
+  --theme-glow: var(--cp-glow-teal);
+  --theme-glow-accent: var(--cp-glow-magenta);
+
+  --theme-overlay: rgba(4, 7, 11, 0.6);
+  --theme-background-modal: rgba(10, 17, 28, 0.82);
+  --theme-background-modal-footer: rgba(14, 22, 36, 0.85);
+  --theme-background-input: rgba(4, 7, 11, 0.6);
+
+  --theme-window-background: rgba(10, 17, 28, 0.5);
+  --theme-window-shadow: rgba(0, 255, 209, 0.16);
+}
+
+/* ---- page backdrop: grid + scanlines + aurora ---- */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(0, 255, 209, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 209, 0.035) 1px, transparent 1px);
+  background-size: 34px 34px;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 50% at 15% 0%, rgba(255, 45, 120, 0.10), transparent 60%),
+    radial-gradient(50% 50% at 90% 10%, rgba(0, 255, 209, 0.10), transparent 60%),
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.12) 0px, rgba(0, 0, 0, 0.12) 1px, transparent 1px, transparent 3px);
+  z-index: 0;
+}
+
+#__next {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- base elements ---- */
+a {
+  color: var(--theme-focused-foreground);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  text-shadow: var(--theme-glow);
+}
+
+ul {
+  list-style-position: inside;
+  list-style-type: '▪';
+  text-indent: -1ch;
+}
+
+ol {
+  list-style-type: '';
+  list-style-position: inside;
+  counter-reset: nd;
+  text-indent: -1ch;
+}
+
+ol li {
+  counter-increment: nd;
+}
+
+ol li::before {
+  content: counter(nd, decimal-leading-zero) ' ';
+  color: var(--theme-focused-foreground);
+}
+
+code {
+  background: var(--theme-panel-2);
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-family: var(--font-family-mono);
+  font-size: 0.9em;
+  color: var(--theme-focused-foreground);
+  border: 1px solid var(--theme-border);
+}
+
+/* ---- tint themes: recolor the accent channel ---- */
+body.tint-magenta {
+  --theme-focused-foreground: var(--neon-magenta);
+  --theme-focused-foreground-subdued: rgba(255, 45, 120, 0.5);
+  --theme-button: var(--neon-magenta);
+  --theme-button-background: rgba(255, 45, 120, 0.08);
+  --theme-accent: var(--neon-teal);
+  --theme-glow: var(--cp-glow-magenta);
+  --theme-window-shadow: rgba(255, 45, 120, 0.16);
+}
+
+body.tint-yellow {
+  --theme-focused-foreground: var(--neon-yellow);
+  --theme-focused-foreground-subdued: rgba(255, 230, 109, 0.5);
+  --theme-button: var(--neon-yellow);
+  --theme-button-text: #14100a;
+  --theme-button-background: rgba(255, 230, 109, 0.08);
+  --theme-glow: 0 0 8px rgba(255, 230, 109, 0.55), 0 0 24px rgba(255, 230, 109, 0.22);
+  --theme-window-shadow: rgba(255, 230, 109, 0.16);
+}
+
+body.tint-green {
+  --theme-focused-foreground: var(--neon-green);
+  --theme-focused-foreground-subdued: rgba(0, 255, 157, 0.5);
+  --theme-button: var(--neon-green);
+  --theme-button-text: #04110a;
+  --theme-button-background: rgba(0, 255, 157, 0.08);
+  --theme-glow: 0 0 8px rgba(0, 255, 157, 0.55), 0 0 24px rgba(0, 255, 157, 0.22);
+  --theme-window-shadow: rgba(0, 255, 157, 0.16);
+}
+
+body.tint-violet {
+  --theme-focused-foreground: var(--neon-violet);
+  --theme-focused-foreground-subdued: rgba(183, 139, 255, 0.5);
+  --theme-button: var(--neon-violet);
+  --theme-button-text: #0d0714;
+  --theme-button-background: rgba(183, 139, 255, 0.08);
+  --theme-glow: 0 0 8px rgba(183, 139, 255, 0.55), 0 0 24px rgba(183, 139, 255, 0.22);
+  --theme-window-shadow: rgba(183, 139, 255, 0.16);
+}
+
+body.tint-orange {
+  --theme-focused-foreground: var(--neon-orange);
+  --theme-focused-foreground-subdued: rgba(255, 157, 45, 0.5);
+  --theme-button: var(--neon-orange);
+  --theme-button-text: #140c04;
+  --theme-button-background: rgba(255, 157, 45, 0.08);
+  --theme-glow: 0 0 8px rgba(255, 157, 45, 0.55), 0 0 24px rgba(255, 157, 45, 0.22);
+  --theme-window-shadow: rgba(255, 157, 45, 0.16);
+}
+
+body.tint-red {
+  --theme-focused-foreground: var(--neon-red);
+  --theme-focused-foreground-subdued: rgba(255, 77, 94, 0.5);
+  --theme-button: var(--neon-red);
+  --theme-button-background: rgba(255, 77, 94, 0.08);
+  --theme-glow: 0 0 8px rgba(255, 77, 94, 0.55), 0 0 24px rgba(255, 77, 94, 0.22);
+  --theme-window-shadow: rgba(255, 77, 94, 0.16);
+}
+
+body.tint-blue {
+  --theme-focused-foreground: var(--neon-blue);
+  --theme-focused-foreground-subdued: rgba(45, 226, 255, 0.5);
+  --theme-button: var(--neon-blue);
+  --theme-button-text: #031015;
+  --theme-button-background: rgba(45, 226, 255, 0.08);
+  --theme-glow: 0 0 8px rgba(45, 226, 255, 0.55), 0 0 24px rgba(45, 226, 255, 0.22);
+  --theme-window-shadow: rgba(45, 226, 255, 0.16);
+}

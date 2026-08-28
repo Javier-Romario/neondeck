@@ -1,0 +1,7 @@
+.row {
+  display: block;
+  padding: calc(var(--theme-line-height-base) * 0.25rem) 0;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size);
+  line-height: var(--theme-line-height-base);
+}

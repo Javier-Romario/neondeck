@@ -1,0 +1,79 @@
+.root {
+  position: relative;
+  display: block;
+}
+
+.message {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 -1px 14px;
+  padding: 4px 12px 4px 6px;
+  font-family: var(--font-family-mono);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--theme-text);
+  background: var(--theme-background-modal);
+  border: 1px solid var(--tone, var(--theme-focused-foreground));
+  border-bottom-color: var(--tone, var(--theme-focused-foreground));
+  box-shadow: 0 0 16px -4px var(--tone, var(--theme-focused-foreground));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.message[data-tone='teal'] {
+  --tone: var(--neon-teal);
+}
+
+.message[data-tone='magenta'] {
+  --tone: var(--neon-magenta);
+}
+
+.message[data-tone='yellow'] {
+  --tone: var(--neon-yellow);
+}
+
+.message[data-tone='green'] {
+  --tone: var(--neon-green);
+}
+
+.message[data-tone='violet'] {
+  --tone: var(--neon-violet);
+}
+
+.message[data-tone='orange'] {
+  --tone: var(--neon-orange);
+}
+
+.message[data-tone='red'] {
+  --tone: var(--neon-red);
+}
+
+.message[data-tone='blue'] {
+  --tone: var(--neon-blue);
+}
+
+.messageGlyph {
+  color: var(--tone, var(--theme-focused-foreground));
+  text-shadow: 0 0 6px var(--tone, var(--theme-focused-foreground));
+}
+
+.messageText {
+  font-weight: 700;
+}
+
+.body {
+  position: relative;
+  display: block;
+}
+
+.topTicker {
+  display: block;
+}
+
+.bottomTicker {
+  display: block;
+}

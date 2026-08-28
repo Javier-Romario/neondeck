@@ -1,0 +1,6 @@
+.text {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size);
+  line-height: calc(var(--theme-line-height-base) * 1.4);
+  max-width: 72ch;
+}

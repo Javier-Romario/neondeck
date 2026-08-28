@@ -1,0 +1,24 @@
+.window {
+  position: relative;
+  display: block;
+  background: var(--theme-window-background);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  border: 1px solid var(--theme-border-bright);
+  box-shadow: 0 0 22px -6px var(--theme-window-shadow), 0 0 0 1px rgba(0, 255, 209, 0.05);
+  overflow: hidden;
+  min-width: min(24ch, 100%);
+}
+
+.window::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.06) 0px, rgba(0, 0, 0, 0.06) 1px, transparent 1px, transparent 3px);
+  z-index: 1;
+}
+
+.scanlines {
+  pointer-events: none;
+}

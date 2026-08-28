@@ -1,0 +1,12 @@
+.item {
+  padding: calc(var(--theme-line-height-base) * 0.25rem) 1ch;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size);
+  line-height: var(--theme-line-height-base);
+  list-style: none;
+}
+
+.item:hover {
+  background: rgba(0, 255, 209, 0.06);
+  color: var(--theme-focused-foreground);
+}

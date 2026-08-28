@@ -1,0 +1,25 @@
+.banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: calc(var(--theme-line-height-base) * 0.5rem) 1ch;
+  background: rgba(255, 45, 120, 0.07);
+  border: 1px solid var(--theme-border);
+  border-left: 3px solid var(--neon-magenta);
+  color: var(--theme-text);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.glyph {
+  color: var(--neon-magenta);
+  text-shadow: 0 0 8px var(--neon-magenta);
+  flex-shrink: 0;
+}
+
+.content {
+  line-height: var(--theme-line-height-base);
+}

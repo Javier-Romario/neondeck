@@ -1,0 +1,44 @@
+.backdrop {
+  display: block;
+  padding: 1rem;
+  background: rgba(4, 7, 11, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid var(--theme-border);
+}
+
+.dialog {
+  max-width: 48ch;
+  margin: 0 auto;
+  background: var(--theme-background-modal);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  border: 1px solid var(--theme-border-bright);
+  box-shadow: 0 0 30px -8px var(--theme-window-shadow);
+}
+
+.header {
+  padding: calc(var(--theme-line-height-base) * 0.5rem) 1ch;
+  border-bottom: 1px solid var(--theme-border);
+  color: var(--theme-focused-foreground);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size);
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px var(--theme-focused-foreground-subdued);
+}
+
+.body {
+  padding: calc(var(--theme-line-height-base) * 1rem) 1ch;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size);
+  line-height: var(--theme-line-height-base);
+}
+
+.footer {
+  display: flex;
+  gap: 10px;
+  padding: calc(var(--theme-line-height-base) * 0.5rem) 1ch;
+  border-top: 1px solid var(--theme-border);
+  background: var(--theme-background-modal-footer);
+}

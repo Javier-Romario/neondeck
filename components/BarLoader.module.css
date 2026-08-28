@@ -1,0 +1,28 @@
+.track {
+  position: relative;
+  display: block;
+  height: calc(var(--theme-line-height-base) * 1rem);
+  width: 100%;
+  background: var(--theme-panel-2);
+  border: 1px solid var(--theme-border-bright);
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--neon-teal-dark), var(--neon-teal));
+  box-shadow: 0 0 14px -2px var(--neon-teal);
+  transition: width 200ms ease;
+}
+
+.label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family-mono);
+  font-size: 11px;
+  color: var(--theme-text);
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.8);
+}

@@ -1,0 +1,24 @@
+.single,
+.double,
+.gradient {
+  display: block;
+  width: 100%;
+}
+
+.single {
+  height: 1px;
+  background: var(--theme-border-bright);
+  box-shadow: 0 0 8px -1px var(--theme-focused-foreground-subdued);
+}
+
+.double {
+  height: 3px;
+  border-top: 1px solid var(--theme-border-bright);
+  border-bottom: 1px solid var(--theme-border-bright);
+}
+
+.gradient {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--theme-focused-foreground), var(--theme-accent), transparent);
+  box-shadow: 0 0 12px -2px var(--theme-focused-foreground);
+}

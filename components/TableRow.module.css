@@ -1,0 +1,7 @@
+.row {
+  border-bottom: 1px solid var(--theme-border);
+}
+
+.row:hover {
+  background: rgba(0, 255, 209, 0.04);
+}

@@ -1,0 +1,6 @@
+.column {
+  padding: calc(var(--theme-line-height-base) * 0.25rem) 1ch;
+  color: var(--theme-text);
+  border-bottom: 1px solid var(--theme-border);
+  vertical-align: top;
+}

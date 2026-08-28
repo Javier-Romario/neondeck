@@ -1,0 +1,32 @@
+.pre {
+  display: block;
+  margin: 0;
+  padding: calc(var(--theme-line-height-base) * 0.5rem) 1ch;
+  background: rgba(4, 7, 11, 0.6);
+  border: 1px solid var(--theme-border);
+  border-left: 3px solid var(--theme-focused-foreground);
+  font-family: var(--font-family-mono);
+  font-size: 13px;
+  line-height: calc(var(--theme-line-height-base) * 1rem);
+  overflow-x: auto;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.line {
+  display: block;
+  white-space: pre;
+}
+
+.number {
+  display: inline-block;
+  width: 3ch;
+  margin-right: 1ch;
+  color: var(--theme-muted);
+  user-select: none;
+  text-align: right;
+}
+
+.code {
+  color: #bfeee6;
+}

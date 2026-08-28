@@ -1,0 +1,23 @@
+.bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size);
+  line-height: 1;
+  white-space: pre;
+}
+
+.filled {
+  color: var(--theme-focused-foreground);
+  text-shadow: 0 0 6px var(--theme-focused-foreground);
+}
+
+.empty {
+  color: var(--theme-border);
+}
+
+.label {
+  color: var(--theme-muted);
+  font-size: 12px;
+}

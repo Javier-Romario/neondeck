@@ -1,0 +1,30 @@
+{
+  "name": "neondeck",
+  "version": "0.1.0",
+  "description": "NEONDECK — a cyberpunk React component library. Terminal-monospace primitives (à la SRCL / www-sacred) rebuilt with neon glows, semi-transparent glass panels, and ticker-board edge readouts.",
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "dev": "next -p 3000",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "ladle": "ladle serve",
+    "build-ladle": "ladle build"
+  },
+  "dependencies": {
+    "next": "^16.2.12",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@ladle/react": "^5.1.1",
+    "typescript": "^5.9.3"
+  }
+}

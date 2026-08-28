@@ -1,0 +1,48 @@
+.label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: calc(var(--theme-line-height-base) * 0.25rem) 0;
+  cursor: pointer;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size);
+}
+
+.box {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--theme-line-height-base) * 1rem);
+  height: calc(var(--theme-line-height-base) * 1rem);
+  border: 1px solid var(--theme-border-bright);
+  background: var(--theme-background-input);
+  flex-shrink: 0;
+}
+
+.input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  inset: 0;
+}
+
+.glyph {
+  color: transparent;
+  text-shadow: none;
+  transition: 160ms ease all;
+}
+
+.input:checked + .glyph {
+  color: var(--theme-focused-foreground);
+  text-shadow: 0 0 8px var(--theme-focused-foreground);
+}
+
+.input:focus-visible + .glyph {
+  color: var(--theme-focused-foreground);
+  text-shadow: 0 0 8px var(--theme-focused-foreground);
+}
+
+.content {
+  line-height: var(--theme-line-height-base);
+}

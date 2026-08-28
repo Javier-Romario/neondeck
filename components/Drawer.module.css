@@ -1,0 +1,41 @@
+.drawer {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: calc(var(--theme-line-height-base) * 0.25rem) 1ch;
+  background: var(--theme-panel);
+  border: 1px solid var(--theme-border-bright);
+  color: var(--theme-focused-foreground);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size);
+  letter-spacing: 1px;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.toggle:hover {
+  box-shadow: 0 0 16px -6px var(--theme-focused-foreground);
+}
+
+.glyph {
+  text-shadow: 0 0 6px var(--theme-focused-foreground);
+}
+
+.label {
+  font-weight: 700;
+}
+
+.body {
+  margin-top: 4px;
+  padding: calc(var(--theme-line-height-base) * 0.25rem) 0;
+  border: 1px solid var(--theme-border);
+  background: var(--theme-panel-2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}

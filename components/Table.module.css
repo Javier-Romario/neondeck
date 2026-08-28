@@ -1,0 +1,11 @@
+.scrollWrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-family-mono);
+  font-size: 13.5px;
+}

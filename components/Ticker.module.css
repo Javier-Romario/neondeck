@@ -1,0 +1,116 @@
+.root {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  background: rgba(4, 7, 11, 0.66);
+  border-top: 1px solid var(--theme-border);
+  border-bottom: 1px solid var(--theme-border);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-family: var(--font-family-mono);
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  line-height: 1;
+  padding: 6px 0;
+  user-select: none;
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  animation: ticker-scroll var(--ticker-speed, 24s) linear infinite;
+  will-change: transform;
+}
+
+.track[data-direction='right'] {
+  animation-direction: reverse;
+}
+
+.run {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 10px 0 0;
+  padding: 3px 8px;
+  color: #03110d;
+  background: var(--tone, var(--theme-focused-foreground));
+  box-shadow: 0 0 12px -2px var(--tone, var(--theme-focused-foreground));
+  font-weight: 700;
+}
+
+.entry {
+  display: inline-flex;
+  align-items: center;
+}
+
+.sep {
+  margin: 0 10px;
+  color: var(--tone, var(--theme-focused-foreground));
+  text-shadow: 0 0 6px var(--tone, var(--theme-focused-foreground));
+}
+
+.item {
+  color: var(--theme-text);
+}
+
+.label[data-tone='teal'],
+.sep[data-tone='teal'] {
+  --tone: var(--neon-teal);
+}
+
+.label[data-tone='magenta'],
+.sep[data-tone='magenta'] {
+  --tone: var(--neon-magenta);
+}
+
+.label[data-tone='yellow'],
+.sep[data-tone='yellow'] {
+  --tone: var(--neon-yellow);
+}
+
+.label[data-tone='green'],
+.sep[data-tone='green'] {
+  --tone: var(--neon-green);
+}
+
+.label[data-tone='violet'],
+.sep[data-tone='violet'] {
+  --tone: var(--neon-violet);
+}
+
+.label[data-tone='orange'],
+.sep[data-tone='orange'] {
+  --tone: var(--neon-orange);
+}
+
+.label[data-tone='red'],
+.sep[data-tone='red'] {
+  --tone: var(--neon-red);
+}
+
+.label[data-tone='blue'],
+.sep[data-tone='blue'] {
+  --tone: var(--neon-blue);
+}
+
+@keyframes ticker-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+  }
+}

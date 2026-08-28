@@ -1,0 +1,51 @@
+.accordion {
+  display: block;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: calc(var(--theme-line-height-base) * 0.25rem) 1ch;
+  background: var(--theme-panel);
+  border: 1px solid var(--theme-border);
+  color: var(--theme-text);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size);
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: 200ms ease all;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.header:hover {
+  border-color: var(--theme-border-bright);
+  box-shadow: 0 0 16px -8px var(--theme-focused-foreground);
+}
+
+.glyph {
+  color: var(--theme-focused-foreground);
+  text-shadow: 0 0 6px var(--theme-focused-foreground);
+}
+
+.title {
+  flex: 1;
+  text-align: left;
+  font-weight: 700;
+}
+
+.state {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: var(--theme-muted);
+}
+
+.body {
+  padding: calc(var(--theme-line-height-base) * 0.5rem) 1ch;
+  border-left: 1px solid var(--theme-border);
+  border-right: 1px solid var(--theme-border);
+  border-bottom: 1px solid var(--theme-border);
+  background: rgba(4, 7, 11, 0.35);
+}
