@@ -81,7 +81,7 @@
     rgba(7, 12, 19, 0.4) 100%
   );
 
-  /* gradient border (top + bottom only, no side borders) */
+  /* neon gradient border (full ring, drawn via mask) */
   --nd-border-gradient: linear-gradient(
     90deg,
     var(--neon-teal) 0%,
@@ -89,48 +89,44 @@
     var(--neon-magenta) 100%
   );
 
-  /* glow carried by the borders */
-  --nd-glow: 0 0 14px -3px rgba(0, 255, 209, 0.75),
-    0 0 30px -8px rgba(45, 226, 255, 0.55),
-    0 0 30px -8px rgba(255, 45, 120, 0.45);
+  /* glow applied as drop-shadow on the masked border ring */
+  --nd-glow: drop-shadow(0 0 10px rgba(0, 255, 209, 0.55))
+    drop-shadow(0 0 24px rgba(45, 226, 255, 0.35))
+    drop-shadow(0 0 24px rgba(255, 45, 120, 0.3));
 
   background: var(--nd-glass);
   backdrop-filter: blur(16px) saturate(160%);
   -webkit-backdrop-filter: blur(16px) saturate(160%);
 
-  /* 45° angular cutouts on all four corners */
+  /* 45° angular cutouts on two opposite corners (top-left + bottom-right) */
   clip-path: polygon(
     var(--nd-cut) 0,
-    calc(100% - var(--nd-cut)) 0,
-    100% var(--nd-cut),
+    100% 0,
     100% calc(100% - var(--nd-cut)),
     calc(100% - var(--nd-cut)) 100%,
-    var(--nd-cut) 100%,
-    0 calc(100% - var(--nd-cut)),
+    0 100%,
     0 var(--nd-cut)
   );
 }
 
-/* gradient borders: top + bottom only, ends follow the corner chamfers */
-.body::before,
-.body::after {
+/* neon border ring: mask-composite excludes the inner box, leaving a 2px frame */
+.body::before {
   content: '';
   position: absolute;
-  left: 0;
-  right: 0;
-  height: var(--nd-border);
+  inset: 0;
+  padding: var(--nd-border);
   background: var(--nd-border-gradient);
-  box-shadow: var(--nd-glow);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  filter: var(--nd-glow);
   pointer-events: none;
   z-index: 2;
-}
-
-.body::before {
-  top: 0;
-}
-
-.body::after {
-  bottom: 0;
 }
 
 .topTicker {
@@ -155,8 +151,8 @@ html[data-theme='light'] .body {
     #2b9fd8 50%,
     #e0408f 100%
   );
-  --nd-glow: 0 0 12px -3px rgba(0, 200, 168, 0.5),
-    0 0 26px -8px rgba(43, 159, 216, 0.36);
+  --nd-glow: drop-shadow(0 0 8px rgba(0, 200, 168, 0.4))
+    drop-shadow(0 0 20px rgba(43, 159, 216, 0.3));
 }
 
 @media (prefers-color-scheme: light) {
@@ -172,7 +168,7 @@ html[data-theme='light'] .body {
       #2b9fd8 50%,
       #e0408f 100%
     );
-    --nd-glow: 0 0 12px -3px rgba(0, 200, 168, 0.5),
-      0 0 26px -8px rgba(43, 159, 216, 0.36);
+    --nd-glow: drop-shadow(0 0 8px rgba(0, 200, 168, 0.4))
+      drop-shadow(0 0 20px rgba(43, 159, 216, 0.3));
   }
 }
