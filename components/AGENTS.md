@@ -374,3 +374,39 @@ Shared plumbing first:
   }
   ```
 - **Theming:** `--theme-border` (via CanvasShell)
+
+---
+
+## Neomorphic layer (mixed cyberpunk)
+
+Every `Neo*` component mixes soft neumorphic extrusion (`--neo-surface` / `--neo-raised` /
+`--neo-pressed` / `--neo-well` / `--neo-drop`) with a cyberpunk neon accent. All accept a
+`tone?: NeonTone` prop (`'teal' | 'magenta' | 'yellow' | 'green' | 'violet' | 'orange' |
+'red' | 'blue'`) that drives `--tone` via `data-tone`. Light/dark is free: the `--neo-*`
+tokens and `--theme-*` text re-key in `global.css` under `html[data-theme='light']` and
+`prefers-color-scheme: light`.
+
+Surfaces: `NeoButton`, `NeoCard`, `NeoToggle`, `NeoTicker` (see `stories/Neomorphic.stories.tsx`).
+
+### Forms
+
+- **NeoInput** — `components/NeoInput.tsx`. Labeled single-line input in a neumorphic well + neon caret. Props: `caretChars?, label?, isBlink?, tone?` + input attrs.
+- **NeoTextArea** — `components/NeoTextArea.tsx`. Multi-line input, neumorphic well, optional `autoPlay` typewriter. Props: `autoPlay?, autoPlaySpeedMS?, isBlink?, tone?` + textarea attrs.
+- **NeoSelect** — `components/NeoSelect.tsx`. Raised trigger + inset glass menu. Props: `name, options, placeholder?, defaultValue?, onChange?, tone?`.
+- **NeoCheckbox** — `components/NeoCheckbox.tsx`. Inset neumorphic box + neon `◈` glyph. Props: `style?, checkboxStyle?, name, defaultChecked?, onChange?, tabIndex?, children?, tone?`.
+- **NeoBarLoader** — `components/NeoBarLoader.tsx`. Pill well + neon fill bar. Props: `intervalRate?, progress?, tone?`.
+- **NeoBarProgress** — `components/NeoBarProgress.tsx`. Character-fill meter in a pill well. Props: `intervalRate?, progress?, fillChar?, tone?`.
+- **NeoBlockLoader** — `components/NeoBlockLoader.tsx`. Spinner glyph in a circular raised orb. Props: `mode?, tone?`.
+
+### Data & Structure
+
+- **NeoAccordion** — `components/NeoAccordion.tsx`. Raised header (pressed when open) + inset body. Props: `defaultValue?, title, children?, tone?`.
+- **NeoTable / NeoTableRow / NeoTableColumn** — `components/NeoTable*.tsx`. Raised table frame, pressed row hover. Props: `tone?` (table only).
+- **NeoDialog** — `components/NeoDialog.tsx`. Backdrop + chamfered neumorphic panel, `NeoButton` footer. Props: `title?, children?, style?, onConfirm?, onCancel?, tone?`.
+- **NeoDrawer** — `components/NeoDrawer.tsx`. Raised toggle + inset body. Props: `children?, defaultValue?, tone?`.
+- **NeoNavigation** — `components/NeoNavigation.tsx`. Raised top bar + neon logo. Props: `logoHref?, logoTarget?, onClickLogo?, logo?, left?, right?, children?, tone?`.
+- **NeoBreadcrumbs** — `components/NeoBreadcrumbs.tsx`. Neon trail in a soft pill well. Props: `items: { name, url? }[], tone?`.
+- **NeoAvatar** — `components/NeoAvatar.tsx`. Raised portrait frame + neon ring. Props: `src?, href?, target?, style?, children?, tone?`.
+- **NeoAlertBanner** — `components/NeoAlertBanner.tsx`. Raised banner + neon alert accent (default `magenta`). Props: `style?, children?, tone?`.
+- **NeoCodeBlock** — `components/NeoCodeBlock.tsx`. Inset well + neon left accent. Props: `children?, tone?` + pre attrs.
+- **NeoActionListItem** — `components/NeoActionListItem.tsx`. Raised row, pressed on hover. Props: `style?, icon?, children?, href?, target?, onClick?, role?, tone?`.

@@ -1,0 +1,79 @@
+/* backdrop + chamfered neumorphic panel with neon header */
+.backdrop {
+  display: block;
+  padding: 1rem;
+  background: var(--neo-surface);
+  border-radius: 16px;
+  box-shadow: var(--neo-well);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.dialog {
+  max-width: 48ch;
+  margin: 0 auto;
+  background: var(--neo-surface);
+  border-radius: 14px;
+  box-shadow: var(--neo-raised), inset 0 0 0 1px var(--tone, var(--theme-border-bright));
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  overflow: hidden;
+}
+
+.header {
+  padding: calc(var(--theme-line-height-base) * 0.5rem) 1ch;
+  color: var(--tone, var(--theme-focused-foreground));
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size);
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px var(--tone, var(--theme-focused-foreground-subdued));
+}
+
+.body {
+  padding: calc(var(--theme-line-height-base) * 1rem) 1ch;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size);
+  line-height: var(--theme-line-height-base);
+  color: var(--theme-text);
+}
+
+.footer {
+  display: flex;
+  gap: 10px;
+  padding: calc(var(--theme-line-height-base) * 0.5rem) 1ch;
+  background: var(--neo-surface);
+  box-shadow: var(--neo-pressed);
+}
+
+.backdrop[data-tone='teal'] {
+  --tone: var(--neon-teal);
+}
+
+.backdrop[data-tone='magenta'] {
+  --tone: var(--neon-magenta);
+}
+
+.backdrop[data-tone='yellow'] {
+  --tone: var(--neon-yellow);
+}
+
+.backdrop[data-tone='green'] {
+  --tone: var(--neon-green);
+}
+
+.backdrop[data-tone='violet'] {
+  --tone: var(--neon-violet);
+}
+
+.backdrop[data-tone='orange'] {
+  --tone: var(--neon-orange);
+}
+
+.backdrop[data-tone='red'] {
+  --tone: var(--neon-red);
+}
+
+.backdrop[data-tone='blue'] {
+  --tone: var(--neon-blue);
+}

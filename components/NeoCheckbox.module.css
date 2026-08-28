@@ -1,0 +1,83 @@
+/* neumorphic inset box + neon glyph check */
+.label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: calc(var(--theme-line-height-base) * 0.25rem) 0;
+  cursor: pointer;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size);
+}
+
+.box {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--theme-line-height-base) * 1rem);
+  height: calc(var(--theme-line-height-base) * 1rem);
+  border-radius: 6px;
+  background: var(--neo-surface);
+  box-shadow: var(--neo-well);
+  flex-shrink: 0;
+  transition: box-shadow 180ms ease;
+}
+
+.input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  inset: 0;
+}
+
+.glyph {
+  color: transparent;
+  text-shadow: none;
+  transition: 160ms ease all;
+}
+
+.input:checked + .glyph {
+  color: var(--tone, var(--theme-focused-foreground));
+  text-shadow: 0 0 8px var(--tone, var(--theme-focused-foreground));
+}
+
+.input:focus-visible + .glyph {
+  color: var(--tone, var(--theme-focused-foreground));
+  text-shadow: 0 0 8px var(--tone, var(--theme-focused-foreground));
+}
+
+.content {
+  line-height: var(--theme-line-height-base);
+}
+
+.label[data-tone='teal'] {
+  --tone: var(--neon-teal);
+}
+
+.label[data-tone='magenta'] {
+  --tone: var(--neon-magenta);
+}
+
+.label[data-tone='yellow'] {
+  --tone: var(--neon-yellow);
+}
+
+.label[data-tone='green'] {
+  --tone: var(--neon-green);
+}
+
+.label[data-tone='violet'] {
+  --tone: var(--neon-violet);
+}
+
+.label[data-tone='orange'] {
+  --tone: var(--neon-orange);
+}
+
+.label[data-tone='red'] {
+  --tone: var(--neon-red);
+}
+
+.label[data-tone='blue'] {
+  --tone: var(--neon-blue);
+}

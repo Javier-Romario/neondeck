@@ -1,0 +1,9 @@
+/* rows hover into a soft pressed well */
+.row {
+  border-bottom: 1px solid var(--theme-border);
+}
+
+.row:hover {
+  background: var(--neo-surface);
+  box-shadow: var(--neo-pressed);
+}

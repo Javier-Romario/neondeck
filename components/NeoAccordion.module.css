@@ -1,0 +1,94 @@
+/* neumorphic raised header (pressed when open) + inset body, neon glyph */
+.accordion {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: calc(var(--theme-line-height-base) * 0.25rem) 1ch;
+  background: var(--neo-surface);
+  border-radius: 12px;
+  box-shadow: var(--neo-raised);
+  color: var(--theme-text);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size);
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: box-shadow 200ms ease, color 200ms ease;
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+}
+
+.header:hover {
+  color: var(--tone, var(--theme-focused-foreground));
+}
+
+.accordion[data-expanded='true'] .header {
+  box-shadow: var(--neo-pressed);
+  border-radius: 12px 12px 0 0;
+  color: var(--tone, var(--theme-focused-foreground));
+}
+
+.glyph {
+  color: var(--tone, var(--theme-focused-foreground));
+  text-shadow: 0 0 6px var(--tone, var(--theme-focused-foreground));
+}
+
+.title {
+  flex: 1;
+  text-align: left;
+  font-weight: 700;
+}
+
+.state {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: var(--theme-muted);
+}
+
+.body {
+  padding: calc(var(--theme-line-height-base) * 0.5rem) 1ch;
+  background: var(--neo-surface);
+  box-shadow: var(--neo-well);
+  border-radius: 0 0 12px 12px;
+  color: var(--theme-text);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size);
+  line-height: var(--theme-line-height-base);
+}
+
+.accordion[data-tone='teal'] {
+  --tone: var(--neon-teal);
+}
+
+.accordion[data-tone='magenta'] {
+  --tone: var(--neon-magenta);
+}
+
+.accordion[data-tone='yellow'] {
+  --tone: var(--neon-yellow);
+}
+
+.accordion[data-tone='green'] {
+  --tone: var(--neon-green);
+}
+
+.accordion[data-tone='violet'] {
+  --tone: var(--neon-violet);
+}
+
+.accordion[data-tone='orange'] {
+  --tone: var(--neon-orange);
+}
+
+.accordion[data-tone='red'] {
+  --tone: var(--neon-red);
+}
+
+.accordion[data-tone='blue'] {
+  --tone: var(--neon-blue);
+}

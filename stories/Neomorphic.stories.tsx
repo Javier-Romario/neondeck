@@ -4,6 +4,7 @@ import * as React from 'react';
 
 import NeoButton from '@components/NeoButton';
 import NeoCard from '@components/NeoCard';
+import NeoTicker from '@components/NeoTicker';
 import NeoToggle from '@components/NeoToggle';
 
 import { DEFAULT_TICKER_FEED } from '@common/constants';
@@ -47,6 +48,17 @@ export const NeoToggles: Story<{ tone: string; label: string }> = ({ tone, label
 );
 NeoToggles.args = { tone: 'magenta', label: 'ARMED' };
 NeoToggles.argTypes = { tone: { control: { type: 'select', options: TONES } } };
+
+export const NeoTickerWell: Story<{ tone: string; label: string }> = ({ tone, label }) => (
+  <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+    <NeoTicker label={label} tone={tone as any} items={DEFAULT_TICKER_FEED} />
+    <NeoTicker tone={tone as any} items={DEFAULT_TICKER_FEED} direction="right" />
+  </div>
+);
+NeoTickerWell.args = { tone: 'teal', label: 'NEONDECK' };
+NeoTickerWell.argTypes = {
+  tone: { control: { type: 'select', options: TONES } },
+};
 
 export const Console = () => (
   <NeoCard title="DASH // NEO" tone="magenta" ticker tickerLabel="LIVE" tickerItems={DEFAULT_TICKER_FEED}>

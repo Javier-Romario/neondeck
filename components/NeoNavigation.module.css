@@ -1,0 +1,71 @@
+/* neumorphic raised bar + neon logo */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: calc(var(--theme-line-height-base) * 0.5rem) 2ch;
+  background: var(--neo-surface);
+  border-radius: 14px;
+  box-shadow: var(--neo-raised);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size);
+}
+
+.left,
+.right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.center {
+  flex: 1;
+  text-align: center;
+  color: var(--theme-text);
+}
+
+.logo {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: var(--tone, var(--theme-focused-foreground));
+  font-size: 18px;
+  cursor: pointer;
+  text-shadow: 0 0 10px var(--tone, var(--theme-focused-foreground));
+  line-height: 1;
+}
+
+.nav[data-tone='teal'] {
+  --tone: var(--neon-teal);
+}
+
+.nav[data-tone='magenta'] {
+  --tone: var(--neon-magenta);
+}
+
+.nav[data-tone='yellow'] {
+  --tone: var(--neon-yellow);
+}
+
+.nav[data-tone='green'] {
+  --tone: var(--neon-green);
+}
+
+.nav[data-tone='violet'] {
+  --tone: var(--neon-violet);
+}
+
+.nav[data-tone='orange'] {
+  --tone: var(--neon-orange);
+}
+
+.nav[data-tone='red'] {
+  --tone: var(--neon-red);
+}
+
+.nav[data-tone='blue'] {
+  --tone: var(--neon-blue);
+}
