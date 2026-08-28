@@ -70,6 +70,7 @@ export { default as Window } from '@components/Window';
 // canvas / overlay primitives
 export { default as CRTOverlay } from '@components/CRTOverlay';
 export { default as HexGrid } from '@components/HexGrid';
+export { default as NeonTunnel } from '@components/NeonTunnel';
 export { default as Spectrum } from '@components/Spectrum';
 export { default as Starfield } from '@components/Starfield';
 
