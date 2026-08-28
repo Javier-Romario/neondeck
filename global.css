@@ -78,6 +78,10 @@ body {
   text-rendering: geometricPrecision;
 }
 
+html {
+  background: var(--cp-bg);
+}
+
 /* ---- body theme (default cyberpunk: teal on glass) ---- */
 body {
   --theme-background: rgba(4, 7, 11, 0.78);

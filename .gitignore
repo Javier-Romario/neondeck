@@ -5,6 +5,10 @@ node_modules
 .next
 out
 
+# next dev auto-generated agent rules
+AGENTS.md
+CLAUDE.md
+
 # ladle
 build
 

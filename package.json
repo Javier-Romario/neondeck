@@ -13,7 +13,8 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "ladle": "ladle serve",
-    "build-ladle": "ladle build"
+    "build-ladle": "ladle build",
+    "screenshot": "node scripts/screenshot.mjs"
   },
   "dependencies": {
     "next": "^16.2.12",
@@ -21,10 +22,12 @@
     "react-dom": "^19.2.8"
   },
   "devDependencies": {
+    "@ladle/react": "^5.1.1",
+    "@playwright/mcp": "^0.0.79",
     "@types/node": "^22.10.0",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
-    "@ladle/react": "^5.1.1",
+    "playwright": "^1.63.0-alpha-2026-08-05",
     "typescript": "^5.9.3"
   }
 }
