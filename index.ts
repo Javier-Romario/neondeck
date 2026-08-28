@@ -66,3 +66,16 @@ export { default as Ticker } from '@components/Ticker';
 export { default as TickerBoard } from '@components/TickerBoard';
 export { default as Waveform } from '@components/Waveform';
 export { default as Window } from '@components/Window';
+
+// canvas / overlay primitives
+export { default as CRTOverlay } from '@components/CRTOverlay';
+export { default as HexGrid } from '@components/HexGrid';
+export { default as Spectrum } from '@components/Spectrum';
+export { default as Starfield } from '@components/Starfield';
+
+// shared utilities
+export { hexToRgba } from '@common/color';
+export { useCanvas } from '@common/useCanvas';
+export type { CanvasDrawFn } from '@common/useCanvas';
+export * from '@common/utilities';
+export * from '@common/constants';
