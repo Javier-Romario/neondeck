@@ -21,8 +21,13 @@ import Dialog from '@components/Dialog';
 import Divider from '@components/Divider';
 import Drawer from '@components/Drawer';
 import Grid from '@components/Grid';
+import GridCanvas from '@components/GridCanvas';
+import Hologram from '@components/Hologram';
 import Input from '@components/Input';
+import MatrixRain from '@components/MatrixRain';
 import Navigation from '@components/Navigation';
+import NeuralField from '@components/NeuralField';
+import Radar from '@components/Radar';
 import Row from '@components/Row';
 import RowSpaceBetween from '@components/RowSpaceBetween';
 import Select from '@components/Select';
@@ -33,6 +38,7 @@ import Text from '@components/Text';
 import TextArea from '@components/TextArea';
 import Ticker from '@components/Ticker';
 import TickerBoard from '@components/TickerBoard';
+import Waveform from '@components/Waveform';
 import Window from '@components/Window';
 
 export const dynamic = 'force-static';
@@ -89,7 +95,46 @@ export default function Page() {
       <br />
       <br />
 
+      <TickerBoard message="3D // HOLOGRAM" messageTone="magenta" tickerLabel="R3F" tickerItems={Constants.DEFAULT_TICKER_FEED} tickerSpeed={22}>
+        <Card title="HOLOGRAM — R3F ISLAND">
+          <Text>
+            A three.js scene is just another island. Pick a shape, drag to orbit, hover to flip the neon. Zero extra config — the{' '}
+            <code>shape</code> prop swaps the geometry.
+          </Text>
+          <br />
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '1rem' }}>
+            <Hologram shape="diamond" height={280} />
+            <Hologram shape="knot" color="#2de2ff" accent="#ff2d78" height={280} />
+            <Hologram shape="torus" color="#b78bff" accent="#00ffd1" height={280} />
+            <Hologram shape="icosahedron" color="#ffe66d" accent="#ff2d78" height={280} />
+          </div>
+        </Card>
+      </TickerBoard>
+
+      <br />
+      <br />
+
       <Grid>
+        <Card title="SYNTHWAVE GRID">
+          <GridCanvas height={200} />
+        </Card>
+
+        <Card title="MATRIX RAIN">
+          <MatrixRain height={200} />
+        </Card>
+
+        <Card title="NEURAL FIELD — POKE IT">
+          <NeuralField height={200} />
+        </Card>
+
+        <Card title="WAVEFORM">
+          <Waveform height={200} />
+        </Card>
+
+        <Card title="RADAR">
+          <Radar height={200} />
+        </Card>
+
         <TickerBoard message="TICKER" tickerItems={['UPLINK', 'SYNC', 'LOCK']} tickerSpeed={16}>
           <Card title="TICKER BOARD">
             A small message box sits right above the component, while a scrolling ticker strip runs along the top edge. Toggle the

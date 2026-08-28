@@ -292,3 +292,70 @@ SRCL-shaped primitive retuned for cyberpunk glass.
 - **Path:** `components/Table.tsx`, `TableRow.tsx`, `TableColumn.tsx`
 - **Purpose:** Semantic table shell, row, and cell.
 - **Theming:** `--theme-border`, `--theme-text`
+
+## Canvas + 3D (the neon deck's live layer)
+
+Shared plumbing first:
+
+- **`common/useCanvas.ts`** — `useCanvas(draw, fps)` hook. Owns a `<canvas>`'s DPR-aware
+  sizing (`ResizeObserver`) + `requestAnimationFrame` loop. `draw` is stored in a ref so prop
+  changes never restart the loop; only `fps` does. Signature:
+  `(ctx, width, height, time, frame) => void`.
+- **`common/color.ts`** — `hexToRgba(hex, alpha)` for neon glows (canvas 2D can't resolve
+  `var(--neon-*)` strings).
+- **`CanvasShell.tsx`** — glass frame + full-bleed `<canvas>` that runs a `draw` fn. Every 2D
+  canvas component is `CanvasShell` + a `draw` closure.
+
+## GridCanvas
+
+- **Path:** `components/GridCanvas.tsx`
+- **Purpose:** Synthwave perspective grid — scrolling floor, converging lines, horizon glow, optional sun.
+- **Props:**
+  ```ts
+  interface GridCanvasProps extends React.HTMLAttributes<HTMLDivElement> {
+    height?: number | string; speed?: number;   // rows per second
+    color?: string;          horizon?: number;  // 0..1 vertical horizon position
+    sunColor?: string;       // 'transparent' hides the sun
+  }
+  ```
+- **Theming:** `--theme-border` (via CanvasShell)
+
+## MatrixRain
+
+- **Path:** `components/MatrixRain.tsx`
+- **Purpose:** Falling katakana/digit rain with ghost trails (translucent-fade technique).
+- **Props:** `height?, color?, fontSize?, speed?, density?` (density = 0..1 active-column fraction).
+
+## NeuralField
+
+- **Path:** `components/NeuralField.tsx`
+- **Purpose:** Drifting node network; links appear within `linkDistance`. Pointer repels nodes (poke it).
+- **Props:** `height?, color?, nodeCount?, linkDistance?, nodeRadius?, speed?, interactive?`.
+
+## Waveform
+
+- **Path:** `components/Waveform.tsx`
+- **Purpose:** Oscilloscope trace — layered sines + occasional glitch spikes.
+- **Props:** `height?, color?, speed?, amplitude?, layers?, glitch?` (glitch = 0..1 chance/frame).
+
+## Radar
+
+- **Path:** `components/Radar.tsx`
+- **Purpose:** Sweeping radar with fading blips and trailing sweep ghosts.
+- **Props:** `height?, color?, sweepSpeed?, blipRate?, maxBlips?`.
+
+## Hologram
+
+- **Path:** `components/Hologram.tsx`
+- **Purpose:** react-three-fiber scene — rotating neon shape + orbiting halo + stars. The 3D signature.
+- **Props:**
+  ```ts
+  interface HologramProps extends React.HTMLAttributes<HTMLDivElement> {
+    shape?: 'diamond' | 'sphere' | 'torus' | 'knot' | 'icosahedron';
+    color?: string; accent?: string; height?: number | string;
+    interactive?: boolean;  // OrbitControls
+    autoRotate?: boolean;
+  }
+  ```
+- **Deps:** `three`, `@react-three/fiber`, `@react-three/drei`. Client-only (`'use client'`).
+- **Theming:** `--theme-border`, `--theme-focused-foreground` (readout).
