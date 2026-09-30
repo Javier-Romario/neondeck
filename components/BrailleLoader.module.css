@@ -1,0 +1,227 @@
+/*
+ * Braille loader — glyphs are swapped by CSS alone.
+ *
+ *   @property --bl-frame  registered <integer>, animated with steps()
+ *   @counter-style        maps the integer onto braille symbols (system: cyclic)
+ *   .cell::before         content: counter(bl, <style>)
+ *
+ * Each cell has --i, so multi-cell variants stagger with a negative delay.
+ */
+
+@property --bl-frame {
+  syntax: '<integer>';
+  inherits: false;
+  initial-value: 0;
+}
+
+@counter-style nd-braille-spin {
+  system: cyclic;
+  symbols: '⠋' '⠙' '⠹' '⠸' '⠼' '⠴' '⠦' '⠧' '⠇' '⠏';
+}
+
+/* dots rise and fall — 16 frames */
+@counter-style nd-braille-wave {
+  system: cyclic;
+  symbols: '⠀' '⡀' '⣀' '⣄' '⣤' '⣦' '⣶' '⣷' '⣿' '⣷' '⣶' '⣦' '⣤' '⣄' '⣀' '⡀';
+}
+
+/* density trickles down a column — 12 frames */
+@counter-style nd-braille-rain {
+  system: cyclic;
+  symbols: '⠁' '⠃' '⠇' '⡇' '⣇' '⣧' '⣷' '⣿' '⣾' '⣼' '⣸' '⢸';
+}
+
+/* grows from the centre out, then hollows — 12 frames */
+@counter-style nd-braille-pulse {
+  system: cyclic;
+  symbols: '⠀' '⠂' '⠒' '⠲' '⠶' '⠷' '⠿' '⡿' '⣿' '⣟' '⡛' '⠐';
+}
+
+/* fill then hold, so staggered cells read as a bar sweep — 12 frames */
+@counter-style nd-braille-bar {
+  system: cyclic;
+  symbols: '⠀' '⣀' '⣤' '⣶' '⣿' '⣿' '⣿' '⣿' '⣿' '⣶' '⣤' '⣀';
+}
+
+.root {
+  --bl-speed: 1.1s;
+  --bl-stagger: -90ms;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75ch;
+  font-family: var(--font-family-code);
+  font-size: var(--font-size);
+  line-height: 1;
+  color: var(--tone, var(--theme-focused-foreground));
+  text-shadow: 0 0 6px var(--tone-soft, var(--theme-focused-foreground-subdued));
+  user-select: none;
+}
+
+.cells {
+  display: inline-flex;
+  gap: 0;
+}
+
+.cell {
+  position: relative;
+  display: inline-block;
+  width: 1ch;
+  counter-reset: bl var(--bl-frame);
+  animation: bl-step var(--bl-speed) steps(10, end) infinite;
+  animation-delay: calc(var(--i, 0) * var(--bl-stagger));
+}
+
+.cell::before {
+  content: counter(bl, nd-braille-spin);
+}
+
+/* ---- variants: frame count + counter style ---- */
+.root[data-variant='wave'] .cell {
+  animation-timing-function: steps(16, end);
+  animation-name: bl-step-16;
+}
+.root[data-variant='wave'] .cell::before {
+  content: counter(bl, nd-braille-wave);
+}
+
+.root[data-variant='rain'] {
+  --bl-speed: 0.9s;
+}
+.root[data-variant='rain'] .cell {
+  animation-timing-function: steps(12, end);
+  animation-name: bl-step-12;
+  /* pseudo-random desync: prime-ish multipliers so columns never line up */
+  animation-delay: calc(var(--i, 0) * -137ms);
+  animation-duration: calc(var(--bl-speed) + var(--i, 0) * 70ms);
+}
+.root[data-variant='rain'] .cell::before {
+  content: counter(bl, nd-braille-rain);
+}
+
+.root[data-variant='pulse'] {
+  --bl-speed: 1.3s;
+}
+.root[data-variant='pulse'] .cell {
+  animation-timing-function: steps(12, end);
+  animation-name: bl-step-12;
+}
+.root[data-variant='pulse'] .cell::before {
+  content: counter(bl, nd-braille-pulse);
+}
+
+.root[data-variant='bar'] {
+  --bl-speed: 1.6s;
+  --bl-stagger: -110ms;
+}
+.root[data-variant='bar'] .cell {
+  animation-timing-function: steps(12, end);
+  animation-name: bl-step-12;
+}
+.root[data-variant='bar'] .cell::before {
+  content: counter(bl, nd-braille-bar);
+}
+
+@keyframes bl-step {
+  from { --bl-frame: 0; }
+  to { --bl-frame: 10; }
+}
+@keyframes bl-step-12 {
+  from { --bl-frame: 0; }
+  to { --bl-frame: 12; }
+}
+@keyframes bl-step-16 {
+  from { --bl-frame: 0; }
+  to { --bl-frame: 16; }
+}
+
+.label {
+  font-family: var(--font-family-mono);
+  font-size: 0.8em;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--theme-text);
+  text-shadow: none;
+}
+
+/* ---- glitch: chromatic aberration in steps(1) + a sliced ghost layer ---- */
+.root[data-glitch] .cells {
+  animation: bl-aberrate 2.4s steps(1, end) infinite;
+}
+
+.root[data-glitch] .cell::after {
+  content: counter(bl, nd-braille-spin);
+  position: absolute;
+  inset: 0;
+  color: var(--neon-magenta);
+  mix-blend-mode: screen;
+  opacity: 0;
+  animation: bl-ghost 2.4s steps(1, end) infinite;
+  animation-delay: calc(var(--i, 0) * -310ms);
+  pointer-events: none;
+}
+.root[data-glitch][data-variant='wave'] .cell::after { content: counter(bl, nd-braille-wave); }
+.root[data-glitch][data-variant='rain'] .cell::after { content: counter(bl, nd-braille-rain); }
+.root[data-glitch][data-variant='pulse'] .cell::after { content: counter(bl, nd-braille-pulse); }
+.root[data-glitch][data-variant='bar'] .cell::after { content: counter(bl, nd-braille-bar); }
+
+.root[data-glitch] .label {
+  animation: bl-flicker 3.1s steps(1, end) infinite;
+}
+
+@keyframes bl-aberrate {
+  0%, 84%, 100% {
+    transform: none;
+    text-shadow: 0 0 6px var(--tone-soft, transparent);
+  }
+  86% {
+    transform: translateX(1px) skewX(-6deg);
+    text-shadow: -2px 0 var(--neon-magenta), 2px 0 var(--neon-blue), 0 0 6px var(--tone-soft, transparent);
+  }
+  88% {
+    transform: translateX(-2px);
+    text-shadow: 2px 0 var(--neon-magenta), -2px 0 var(--neon-blue), 0 0 6px var(--tone-soft, transparent);
+  }
+  90% {
+    transform: none;
+    text-shadow: 0 0 6px var(--tone-soft, transparent);
+  }
+  93% {
+    transform: translateY(1px) skewX(8deg);
+    text-shadow: -1px 0 var(--neon-magenta), 1px 0 var(--neon-blue);
+  }
+  95% {
+    transform: none;
+    text-shadow: 0 0 6px var(--tone-soft, transparent);
+  }
+}
+
+@keyframes bl-ghost {
+  0%, 70%, 100% { opacity: 0; }
+  72% { opacity: 0.9; clip-path: inset(0 0 55% 0); transform: translateX(2px); }
+  75% { opacity: 0.9; clip-path: inset(45% 0 0 0); transform: translateX(-2px); }
+  78% { opacity: 0; }
+  91% { opacity: 0.8; clip-path: inset(30% 0 30% 0); transform: translateX(-3px); color: var(--neon-blue); }
+  93% { opacity: 0; }
+}
+
+@keyframes bl-flicker {
+  0%, 89%, 100% { opacity: 1; }
+  90% { opacity: 0.35; }
+  91% { opacity: 1; }
+  94% { opacity: 0.5; letter-spacing: 2.5px; }
+  95% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cell,
+  .root[data-glitch] .cells,
+  .root[data-glitch] .cell::after,
+  .root[data-glitch] .label {
+    animation: none;
+  }
+  .cell::before {
+    content: '⣿';
+  }
+}

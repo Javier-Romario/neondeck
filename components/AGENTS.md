@@ -225,6 +225,25 @@ SRCL-shaped primitive retuned for cyberpunk glass.
 - **Props:** `interface BarProgressProps { intervalRate?: number; progress?: number; fillChar?: string }`
 - **Theming:** `--theme-focused-foreground`, `--theme-border`, `--theme-muted`
 
+## BrailleLoader
+
+- **Path:** `components/BrailleLoader.tsx`
+- **Purpose:** Braille-cell loader animated by CSS alone: an `@property`-registered `<integer>` is stepped with `steps()`, and a `@counter-style` (`system: cyclic`, braille `symbols`) turns it into a glyph via `content: counter()`. No timers, no re-renders. Multi-cell variants stagger via `--i`. `glitch` adds `steps(1)` chromatic aberration (magenta/blue `text-shadow`), skew jitter and a sliced `::after` ghost layer. Honors `prefers-reduced-motion`.
+- **Props:**
+  ```ts
+  type BrailleVariant = 'spin' | 'wave' | 'rain' | 'pulse' | 'bar';
+  interface BrailleLoaderProps extends Omit<React.HTMLAttributes<HTMLSpanElement>, 'children'> {
+    variant?: BrailleVariant;   // default 'spin'
+    tone?: NeonTone;
+    cells?: number;             // multi-cell variants; defaults wave 8 / rain 10 / bar 8
+    speed?: number;             // seconds per cycle
+    glitch?: boolean;
+    size?: number | string;     // glyph font-size
+    label?: string;             // uppercase caption after the cells; also the aria-label
+  }
+  ```
+- **Theming:** `--tone` / `--tone-soft`, `--neon-magenta`, `--neon-blue`, `--font-family-code`
+
 ## BlockLoader
 
 - **Path:** `components/BlockLoader.tsx`

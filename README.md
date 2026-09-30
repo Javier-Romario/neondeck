@@ -226,6 +226,7 @@ ticker cap:
 | `Badge`, `AlertBanner`, `Divider`, `CodeBlock` | 🏷 Status + copy primitives |
 | `ActionBar`, `ActionButton`, `ActionListItem`, `ButtonGroup` | ⌨ Command surfaces |
 | `Input`, `TextArea`, `Checkbox`, `BarLoader`, `BarProgress`, `BlockLoader` | ⌨ Forms + progress |
+| `BrailleLoader` | ⣿ CSS-only braille spinners (`@property` + `@counter-style`), optional glitch |
 | `Avatar`, `Breadcrumbs`, `Navigation` | 🪪 Identity + navigation |
 | `Grid`, `Row`, `RowSpaceBetween`, `ContentFluid`, `Indent` | 📐 Layout |
 | `Table`, `TableRow`, `TableColumn`, `ListItem`, `Text` | 🗃 Data + copy |

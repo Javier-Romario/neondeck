@@ -8,6 +8,8 @@ export { default as Badge } from '@components/Badge';
 export { default as BarLoader } from '@components/BarLoader';
 export { default as BarProgress } from '@components/BarProgress';
 export { default as BlockLoader } from '@components/BlockLoader';
+export { default as BrailleLoader } from '@components/BrailleLoader';
+export type { BrailleVariant } from '@components/BrailleLoader';
 export { default as Breadcrumbs } from '@components/Breadcrumbs';
 export { default as Button } from '@components/Button';
 export { default as ButtonGroup } from '@components/ButtonGroup';
