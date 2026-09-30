@@ -41,5 +41,12 @@ await panels.evaluate(() => (document.documentElement.dataset.theme = 'dark'));
 await panels.waitForTimeout(1800);
 await shot(panels, 'panels.png');
 
+// --- Panel trails ---
+const trails = await browser.newPage({ viewport: { width: 1280, height: 330 } });
+await trails.goto('http://localhost:61000/?story=panel--trails&mode=preview', { waitUntil: 'networkidle' });
+await trails.evaluate(() => (document.documentElement.dataset.theme = 'dark'));
+await trails.waitForTimeout(1800);
+await shot(trails, 'trails.png');
+
 await browser.close();
 console.log('done');

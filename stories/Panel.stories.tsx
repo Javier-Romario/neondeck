@@ -5,6 +5,7 @@ import * as React from 'react';
 import Panel from '@components/Panel';
 import { PANEL_SHAPES } from '@common/shape';
 import type { Cuts, PanelShape } from '@common/shape';
+import { DEFAULT_TICKER_FEED } from '@common/constants';
 
 const TONES = ['teal', 'magenta', 'yellow', 'green', 'violet', 'orange', 'red', 'blue'] as const;
 
@@ -55,3 +56,22 @@ export const CustomCuts: Story<{ tone: string }> = ({ tone }) => (
 );
 CustomCuts.args = { tone: 'magenta' };
 CustomCuts.argTypes = { tone: { control: { type: 'select' }, options: TONES } };
+
+export const Trails: Story<{ tone: string; route: string }> = ({ tone, route }) => (
+  <div style={{ ...backdrop, padding: 48 }}>
+    <Panel
+      shape="wipeout"
+      tone={tone as any}
+      style={{ maxWidth: 560, minHeight: 180, margin: '0 auto' }}
+      before={{ route, anchor: 0.3, items: DEFAULT_TICKER_FEED, label: 'IN' }}
+      after={{ route, anchor: 0.7, items: DEFAULT_TICKER_FEED, label: 'OUT', capWidth: 220 }}
+    >
+      <strong style={{ letterSpacing: 2, textTransform: 'uppercase' }}>Trails</strong>
+      <p style={{ margin: '8px 0 0' }}>
+        Lead lines zigzag at 45° off either edge and end in a teardrop ticker cap.
+      </p>
+    </Panel>
+  </div>
+);
+Trails.args = { tone: 'teal', route: 'h20 u14 h28 d14 h20' };
+Trails.argTypes = { tone: { control: { type: 'select' }, options: TONES } };

@@ -1,0 +1,61 @@
+/* A lead line + ticker cap that hangs off one side of a Panel.
+   Sits in a flex row next to the panel; translated so the line's
+   first point lands on --trail-anchor of the panel's height. */
+.trail {
+  position: relative;
+  flex: 0 0 auto;
+  align-self: stretch; /* so a % anchor resolves against the panel's height */
+  pointer-events: none;
+}
+
+.inner {
+  position: absolute;
+  left: 0;
+  /* first svg point sits at the anchor: anchor − origin */
+  top: calc(var(--trail-anchor) - var(--trail-origin));
+  display: flex;
+  align-items: flex-start;
+}
+
+.trail[data-side='before'] .inner {
+  left: auto;
+  right: 0;
+  flex-direction: row-reverse;
+}
+
+.line {
+  display: block;
+  flex: 0 0 auto;
+  overflow: visible;
+  fill: var(--tone, var(--neon-teal));
+  stroke: var(--tone, var(--neon-teal));
+  stroke-width: 1.5;
+  stroke-linejoin: miter;
+  stroke-linecap: square;
+  filter: drop-shadow(0 0 4px var(--tone-soft, rgba(0, 255, 209, 0.45)));
+}
+
+.line polyline {
+  fill: none;
+}
+
+.cap {
+  flex: 0 0 auto;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+}
+
+.cap > :last-child {
+  width: 100%;
+}
+
+.ticker {
+  background: transparent;
+  border: 0;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  font-size: 9px;
+  padding: 0 8px;
+  line-height: 1;
+}

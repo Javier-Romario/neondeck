@@ -30,6 +30,8 @@ export { default as ListItem } from '@components/ListItem';
 export { default as MatrixRain } from '@components/MatrixRain';
 export { default as Panel } from '@components/Panel';
 export type { PanelProps } from '@components/Panel';
+export { default as PanelTrail } from '@components/PanelTrail';
+export type { TrailProps } from '@components/PanelTrail';
 export { default as Navigation } from '@components/Navigation';
 export { default as NeoAccordion } from '@components/NeoAccordion';
 export { default as NeoActionListItem } from '@components/NeoActionListItem';

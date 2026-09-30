@@ -14,6 +14,16 @@
   color: var(--theme-text);
 }
 
+.rig {
+  display: flex;
+  align-items: flex-start;
+}
+
+.rig > .panel {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
 .halo,
 .ring,
 .glass {

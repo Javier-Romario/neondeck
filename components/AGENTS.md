@@ -62,6 +62,8 @@ SRCL-shaped primitive retuned for cyberpunk glass.
     border?: number;            // ring width px, default 1.5
     flat?: boolean;             // no halo / drop shadow
     clipContent?: boolean;      // clip children to the inner shape, default true
+    before?: TrailProps | true; // lead line + ticker cap off the left edge
+    after?: TrailProps | true;  // … off the right edge
   }
 
   interface Cuts {
@@ -75,6 +77,7 @@ SRCL-shaped primitive retuned for cyberpunk glass.
     anchor?: 'start' | 'center' | 'end';
   }
   ```
+- **Trails:** `PanelTrail` (`components/PanelTrail.tsx`) draws an SVG lead line that leaves the panel edge at `anchor` (0–1 of height, or px), zigzags at 45° along `route` (`'h20 u14 h28 d14 h20'`: `h` horizontal, `u`/`d` 45° up/down, px), and ends in a horizontal-teardrop `Panel` cap holding a `Ticker` (`items`, `label`, `speed`, `direction`, `capWidth`, `capHeight`, `noCap`).
 - **CSS hooks:** `--panel-pad` (content padding), `--nd-glass` (fill gradient). `shapePaths(cuts, border)` is exported if you need the `polygon()` strings elsewhere.
 - **Theming:** `--neon-*`, `--neo-drop`, `--theme-text`; `--tone` / `--tone-soft` come from the shared `[data-tone]` rules in `global.css`.
 
