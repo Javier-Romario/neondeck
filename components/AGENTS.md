@@ -16,7 +16,7 @@ SRCL-shaped primitive retuned for cyberpunk glass.
 ## Ticker
 
 - **Path:** `components/Ticker.tsx`
-- **Purpose:** Seamless scrolling ticker-tape marquee (duplicated track, CSS `translateX` loop). Lives on any edge.
+- **Purpose:** Seamless scrolling ticker-tape marquee (duplicated track, CSS `translateX` loop). The `label` is pinned as a static 45°-cut tab at the start; only the feed scrolls, fading at both ends.
 - **Props:**
   ```ts
   interface TickerProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -32,7 +32,7 @@ SRCL-shaped primitive retuned for cyberpunk glass.
 ## TickerBoard
 
 - **Path:** `components/TickerBoard.tsx`
-- **Purpose:** Wraps any component; renders a small message box **right above** the component plus ticker strips on the top/bottom edges.
+- **Purpose:** Chamfered glass frame with gradient top/bottom borders. Renders a small message box **right above** the frame; ticker strips sit **inside** the frame, inset past the corner chamfers with 45°-cut ends, so they are always shorter than the box.
 - **Props:**
   ```ts
   interface TickerBoardProps extends React.HTMLAttributes<HTMLDivElement> {

@@ -161,7 +161,7 @@ export default function ExampleSite() {
       <section className={styles.section}>
         <div className={styles.sectionHead}>
           <span className={styles.sectionLabel}>03</span>
-          <h2 className={styles.sectionTitle}>CONTROLS // NEOMORPHIC</h2>
+          <h2 className={styles.sectionTitle}>CONTROLS // NEUMORPHIC</h2>
         </div>
         <div className={styles.grid}>
           <NeoCard title="INPUT" tone="teal">

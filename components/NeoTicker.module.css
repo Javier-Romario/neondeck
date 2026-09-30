@@ -1,19 +1,31 @@
 /* neumorphic well: inset shadow presses the marquee into the surface */
 .root {
   position: relative;
-  display: block;
+  display: flex;
+  align-items: center;
   overflow: hidden;
   white-space: nowrap;
-  border-radius: 999px;
-  background: var(--neo-surface);
+  border-radius: var(--neo-corner, 10px);
+  corner-shape: bevel;
+  background: var(--neo-bg);
   box-shadow: var(--neo-well);
   font-family: var(--font-family-mono);
   font-size: 11px;
   letter-spacing: 1px;
   text-transform: uppercase;
   line-height: 1;
-  padding: 8px 0;
+  padding: 4px 6px;
+  gap: 8px;
   user-select: none;
+}
+
+.viewport {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  padding: 4px 0;
+  mask-image: linear-gradient(90deg, transparent 0, #000 18px, #000 calc(100% - 18px), transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 18px, #000 calc(100% - 18px), transparent 100%);
 }
 
 .track {
@@ -34,11 +46,13 @@
 }
 
 .label {
+  flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
-  margin: 0 10px 0 0;
+  margin: 0;
   padding: 4px 10px;
-  border-radius: 999px;
+  border-radius: 6px;
+  corner-shape: bevel;
   color: var(--tone, var(--theme-focused-foreground));
   background: var(--neo-surface);
   box-shadow: var(--neo-raised), inset 0 0 0 1px var(--tone, var(--theme-focused-foreground));
@@ -58,46 +72,6 @@
 .item {
   color: var(--theme-text);
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
-}
-
-.label[data-tone='teal'],
-.sep[data-tone='teal'] {
-  --tone: var(--neon-teal);
-}
-
-.label[data-tone='magenta'],
-.sep[data-tone='magenta'] {
-  --tone: var(--neon-magenta);
-}
-
-.label[data-tone='yellow'],
-.sep[data-tone='yellow'] {
-  --tone: var(--neon-yellow);
-}
-
-.label[data-tone='green'],
-.sep[data-tone='green'] {
-  --tone: var(--neon-green);
-}
-
-.label[data-tone='violet'],
-.sep[data-tone='violet'] {
-  --tone: var(--neon-violet);
-}
-
-.label[data-tone='orange'],
-.sep[data-tone='orange'] {
-  --tone: var(--neon-orange);
-}
-
-.label[data-tone='red'],
-.sep[data-tone='red'] {
-  --tone: var(--neon-red);
-}
-
-.label[data-tone='blue'],
-.sep[data-tone='blue'] {
-  --tone: var(--neon-blue);
 }
 
 @keyframes neoticker-scroll {

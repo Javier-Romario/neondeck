@@ -2,10 +2,8 @@ import type { Story } from '@ladle/react';
 
 import * as React from 'react';
 
-import Card from '@components/Card';
 import Ticker from '@components/Ticker';
 import TickerBoard from '@components/TickerBoard';
-import Window from '@components/Window';
 
 import { DEFAULT_TICKER_FEED } from '@common/constants';
 
@@ -55,9 +53,9 @@ export const WrappedCard: Story<{
     showBottomTicker={showBottomTicker}
     theme={theme}
   >
-    <Card title="DECKS">
-      A small message box sits right above the component. Ticker strips run along the top and bottom edges.
-    </Card>
+    <Blurb title="DECKS">
+      A small message box sits right above the component. Ticker strips sit inside the frame, inset past the chamfers.
+    </Blurb>
   </TickerBoard>
 );
 WrappedCard.args = {
@@ -80,14 +78,12 @@ WrappedCard.argTypes = {
 
 export const WrappedWindow: Story<{ message: string }> = ({ message }) => (
   <TickerBoard message={message} messageTone="teal" tickerLabel="LIVE" tickerItems={DEFAULT_TICKER_FEED} tickerSpeed={18}>
-    <Window>
-      <div style={{ padding: '2rem 2ch' }}>
-        <span style={{ color: 'var(--neon-teal)', fontSize: 22, textShadow: '0 0 12px var(--neon-teal)' }}>NEONDECK</span>
-        <div style={{ color: 'var(--theme-muted)', marginTop: 8 }}>
-          Terminal-monospace primitives, rebuilt with neon glows and semi-transparent glass.
-        </div>
+    <div style={{ padding: '1.5rem 3ch 2rem' }}>
+      <span style={{ color: 'var(--neon-teal)', fontSize: 22, textShadow: '0 0 12px var(--neon-teal)' }}>NEONDECK</span>
+      <div style={{ color: 'var(--theme-muted)', marginTop: 8 }}>
+        Terminal-monospace primitives, rebuilt with neon glows and semi-transparent glass.
       </div>
-    </Window>
+    </div>
   </TickerBoard>
 );
 WrappedWindow.args = {
@@ -104,11 +100,28 @@ export const LightTheme: Story = () => (
       tickerSpeed={28}
       showBottomTicker
     >
-      <Card title="DECKS">
+      <Blurb title="DECKS">
         Light mode: the glass fill, gradient borders, glow and chamfered corners all soften for a bright backdrop.
-      </Card>
+      </Blurb>
     </TickerBoard>
   </Light>
+);
+
+const Blurb: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
+  <div style={{ padding: '12px 3ch 20px' }}>
+    <div
+      style={{
+        color: 'var(--theme-focused-foreground)',
+        fontWeight: 700,
+        letterSpacing: 1.5,
+        textShadow: '0 0 10px var(--theme-focused-foreground-subdued)',
+        marginBottom: 8,
+      }}
+    >
+      {title}
+    </div>
+    {children}
+  </div>
 );
 
 const Light: React.FC<{ children: React.ReactNode }> = ({ children }) => {

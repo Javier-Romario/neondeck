@@ -1,6 +1,9 @@
 /* chamfers, glass, border and shadow live in Panel */
 .ticker {
   display: block;
+  /* clear the corner chamfers + ring; strip ends are cut at 45° so it reads as a bezel slot */
+  margin: 8px 26px 0 26px;
+  clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 100%, 0 100%);
 }
 
 .title {

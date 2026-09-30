@@ -24,38 +24,6 @@
   -webkit-backdrop-filter: blur(10px);
 }
 
-.message[data-tone='teal'] {
-  --tone: var(--neon-teal);
-}
-
-.message[data-tone='magenta'] {
-  --tone: var(--neon-magenta);
-}
-
-.message[data-tone='yellow'] {
-  --tone: var(--neon-yellow);
-}
-
-.message[data-tone='green'] {
-  --tone: var(--neon-green);
-}
-
-.message[data-tone='violet'] {
-  --tone: var(--neon-violet);
-}
-
-.message[data-tone='orange'] {
-  --tone: var(--neon-orange);
-}
-
-.message[data-tone='red'] {
-  --tone: var(--neon-red);
-}
-
-.message[data-tone='blue'] {
-  --tone: var(--neon-blue);
-}
-
 .messageGlyph {
   color: var(--tone, var(--theme-focused-foreground));
   text-shadow: 0 0 6px var(--tone, var(--theme-focused-foreground));
@@ -133,11 +101,25 @@
   bottom: 0;
 }
 
-.topTicker {
+/* strips are inset past the corner chamfers so they always sit inside the frame;
+   ends are cut at 45° to echo the corners */
+.topTicker,
+.bottomTicker {
   display: block;
+  margin: calc(var(--nd-border) + 6px) calc(var(--nd-cut) + 8px) 0;
+}
+
+.topTicker {
+  clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 100%, 0 100%);
 }
 
 .bottomTicker {
+  margin-top: 0;
+  margin-bottom: calc(var(--nd-border) + 6px);
+  clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 100%, 8px 100%);
+}
+
+.content {
   display: block;
 }
 

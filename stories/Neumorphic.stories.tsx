@@ -20,7 +20,7 @@ export const GlassNeoCard: Story<{ title: string; tone: string; ticker: boolean 
     Chamfered corners + frosted glass + a soft neumorphic shadow. Ticker runs along the top edge.
   </NeoCard>
 );
-GlassNeoCard.args = { title: 'NEOMORPH // GLASS', tone: 'teal', ticker: true };
+GlassNeoCard.args = { title: 'NEUMORPH // GLASS', tone: 'teal', ticker: true };
 GlassNeoCard.argTypes = {
   tone: { control: { type: 'select', options: TONES } },
   ticker: { control: { type: 'boolean' } },

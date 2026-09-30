@@ -27,14 +27,9 @@ const NeoTicker: React.FC<NeoTickerProps> = ({
 
   const renderRun = (key: string) => (
     <div className={styles.run} key={key} aria-hidden={key === 'run-b' ? 'true' : undefined}>
-      {label ? (
-        <span className={styles.label} data-tone={tone}>
-          {label}
-        </span>
-      ) : null}
       {feed.map((item, index) => (
         <span className={styles.entry} key={`${key}-${index}`}>
-          <span className={styles.sep} data-tone={tone} aria-hidden="true">
+          <span className={styles.sep} aria-hidden="true">
             ◈
           </span>
           <span className={styles.item}>{item}</span>
@@ -44,10 +39,13 @@ const NeoTicker: React.FC<NeoTickerProps> = ({
   );
 
   return (
-    <div className={styles.root} style={{ ...duration, ...style }} {...rest}>
-      <div className={styles.track} data-direction={direction}>
-        {renderRun('run-a')}
-        {renderRun('run-b')}
+    <div className={styles.root} data-tone={tone} style={{ ...duration, ...style }} {...rest}>
+      {label ? <span className={styles.label}>{label}</span> : null}
+      <div className={styles.viewport}>
+        <div className={styles.track} data-direction={direction}>
+          {renderRun('run-a')}
+          {renderRun('run-b')}
+        </div>
       </div>
     </div>
   );

@@ -44,29 +44,31 @@ const TickerBoard: React.FC<TickerBoardProps> = ({
           <span className={styles.messageText}>{message}</span>
         </div>
       ) : null}
-      {showTopTicker && hasTicker ? (
-        <div className={styles.topTicker}>
-          <Ticker
-            items={tickerItems}
-            label={tickerLabel}
-            tone={tickerTone}
-            direction={tickerDirection}
-            speed={tickerSpeed}
-          />
-        </div>
-      ) : null}
-      <div className={styles.body}>{children}</div>
-      {showBottomTicker && hasTicker ? (
-        <div className={styles.bottomTicker}>
-          <Ticker
-            items={tickerItems}
-            label={tickerLabel}
-            tone={tickerTone}
-            direction={tickerDirection === 'left' ? 'right' : 'left'}
-            speed={tickerSpeed}
-          />
-        </div>
-      ) : null}
+      <div className={styles.body}>
+        {showTopTicker && hasTicker ? (
+          <div className={styles.topTicker}>
+            <Ticker
+              items={tickerItems}
+              label={tickerLabel}
+              tone={tickerTone}
+              direction={tickerDirection}
+              speed={tickerSpeed}
+            />
+          </div>
+        ) : null}
+        <div className={styles.content}>{children}</div>
+        {showBottomTicker && hasTicker ? (
+          <div className={styles.bottomTicker}>
+            <Ticker
+              items={tickerItems}
+              label={tickerLabel}
+              tone={tickerTone}
+              direction={tickerDirection === 'left' ? 'right' : 'left'}
+              speed={tickerSpeed}
+            />
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 };
