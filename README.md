@@ -176,6 +176,21 @@ several 45° notches. Pick a preset or pass a `Cuts` spec:
 The neon edge and glow are separate clipped layers, so they follow every diagonal —
 something a plain `clip-path` + `border` can't do.
 
+Panels can also trail off either edge with a 45° zigzag lead line that ends in a
+teardrop ticker cap:
+
+```tsx
+<Panel
+  shape="wipeout"
+  before={{ route: 'h20 u14 h28 d14 h20', anchor: 0.3, items: FEED, label: 'IN' }}
+  after={{ route: 'h32 d18 h40', anchor: 0.7, items: FEED, label: 'OUT' }}
+>
+  …
+</Panel>
+```
+
+![NEONDECK panel trails](docs/screenshots/trails.png)
+
 Panels can trail off either side into a 45° zigzag lead line that ends in a teardrop
 ticker cap:
 

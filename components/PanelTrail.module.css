@@ -59,3 +59,14 @@
   padding: 0 8px;
   line-height: 1;
 }
+
+/* fade the ticker out before it hits the pointed tip / far chamfers */
+.trail[data-side='after'] .ticker {
+  mask-image: linear-gradient(90deg, transparent 0, #000 16px, #000 calc(100% - 8px), transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 16px, #000 calc(100% - 8px), transparent 100%);
+}
+
+.trail[data-side='before'] .ticker {
+  mask-image: linear-gradient(270deg, transparent 0, #000 16px, #000 calc(100% - 8px), transparent 100%);
+  -webkit-mask-image: linear-gradient(270deg, transparent 0, #000 16px, #000 calc(100% - 8px), transparent 100%);
+}

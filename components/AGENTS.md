@@ -81,6 +81,25 @@ SRCL-shaped primitive retuned for cyberpunk glass.
 - **CSS hooks:** `--panel-pad` (content padding), `--nd-glass` (fill gradient). `shapePaths(cuts, border)` is exported if you need the `polygon()` strings elsewhere.
 - **Theming:** `--neon-*`, `--neo-drop`, `--theme-text`; `--tone` / `--tone-soft` come from the shared `[data-tone]` rules in `global.css`.
 
+## PanelTrail
+
+- **Path:** `components/PanelTrail.tsx`
+- **Purpose:** Lead line that leaves a `Panel` edge, zigzags at 45°, and ends in a small horizontal-teardrop glass cap containing a `Ticker`. Rendered by `Panel` via `before` / `after`; also usable standalone.
+- **Props:**
+  ```ts
+  interface TrailProps {
+    route?: string;      // 'h20 u14 h28 d14 h20' — h = horizontal, u/d = 45° up/down, px
+    anchor?: number;     // where the line leaves the edge: 0–1 fraction of height, or px
+    tone?: NeonTone;
+    capWidth?: number;   // default 180
+    capHeight?: number;  // default 26
+    noCap?: boolean;     // line only
+    items?: string[]; label?: string; speed?: number; direction?: 'left' | 'right';
+  }
+  interface PanelTrailProps extends TrailProps { side: 'before' | 'after' }
+  ```
+- **Theming:** `--tone` / `--tone-soft` via `data-tone`; cap is a `Panel` so it inherits glass + halo tokens.
+
 ## Card
 
 - **Path:** `components/Card.tsx`

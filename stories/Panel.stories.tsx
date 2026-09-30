@@ -62,7 +62,7 @@ export const Trails: Story<{ tone: string; route: string }> = ({ tone, route }) 
     <Panel
       shape="wipeout"
       tone={tone as any}
-      style={{ maxWidth: 560, minHeight: 180, margin: '0 auto' }}
+      style={{ minHeight: 180 }}
       before={{ route, anchor: 0.3, items: DEFAULT_TICKER_FEED, label: 'IN' }}
       after={{ route, anchor: 0.7, items: DEFAULT_TICKER_FEED, label: 'OUT', capWidth: 220 }}
     >
