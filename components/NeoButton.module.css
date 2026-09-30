@@ -16,6 +16,8 @@
   color: var(--theme-text);
   background: var(--neo-surface);
   box-shadow: var(--neo-raised);
+  border-radius: var(--neo-corner, 8px);
+  corner-shape: bevel;
   cursor: pointer;
   user-select: none;
   transition: box-shadow 160ms ease, transform 160ms ease, color 160ms ease, text-shadow 160ms ease;
@@ -23,12 +25,15 @@
 
 .root:hover {
   color: var(--tone, var(--theme-focused-foreground));
+  box-shadow: var(--neo-raised), 0 0 18px -6px var(--tone-soft, transparent);
 }
 
 .root:active {
+  background: linear-gradient(145deg, var(--neo-bg) 0%, var(--neo-surface-flat) 100%);
   box-shadow: var(--neo-pressed);
   transform: translateY(1px);
   color: var(--tone, var(--theme-focused-foreground));
+  text-shadow: 0 0 8px var(--tone-soft, transparent);
 }
 
 .root:focus-visible {
@@ -37,8 +42,10 @@
 }
 
 .pressed {
+  background: linear-gradient(145deg, var(--neo-bg) 0%, var(--neo-surface-flat) 100%);
   box-shadow: var(--neo-pressed);
   color: var(--tone, var(--theme-focused-foreground));
+  text-shadow: 0 0 8px var(--tone-soft, transparent);
 }
 
 .glass {
@@ -50,36 +57,4 @@
 
 .glass:active {
   box-shadow: var(--neo-pressed), inset 0 0 0 1px var(--tone, var(--theme-focused-foreground));
-}
-
-.root[data-tone='teal'] {
-  --tone: var(--neon-teal);
-}
-
-.root[data-tone='magenta'] {
-  --tone: var(--neon-magenta);
-}
-
-.root[data-tone='yellow'] {
-  --tone: var(--neon-yellow);
-}
-
-.root[data-tone='green'] {
-  --tone: var(--neon-green);
-}
-
-.root[data-tone='violet'] {
-  --tone: var(--neon-violet);
-}
-
-.root[data-tone='orange'] {
-  --tone: var(--neon-orange);
-}
-
-.root[data-tone='red'] {
-  --tone: var(--neon-red);
-}
-
-.root[data-tone='blue'] {
-  --tone: var(--neon-blue);
 }

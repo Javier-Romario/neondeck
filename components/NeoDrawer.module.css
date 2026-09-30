@@ -5,12 +5,15 @@
 }
 
 .toggle {
+  border: 0;
+  outline: 0;
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: calc(var(--theme-line-height-base) * 0.25rem) 1ch;
   background: var(--neo-surface);
-  border-radius: 12px;
+  border-radius: var(--neo-corner, 10px);
+  corner-shape: bevel;
   box-shadow: var(--neo-raised);
   color: var(--tone, var(--theme-focused-foreground));
   font-family: var(--font-family-mono);
@@ -37,7 +40,8 @@
 .body {
   margin-top: 6px;
   padding: 6px;
-  border-radius: 12px;
+  border-radius: var(--neo-corner, 10px);
+  corner-shape: bevel;
   background: var(--neo-surface);
   box-shadow: var(--neo-well);
   backdrop-filter: blur(10px) saturate(140%);
@@ -74,4 +78,8 @@
 
 .drawer[data-tone='blue'] {
   --tone: var(--neon-blue);
+}
+
+.toggle:focus-visible {
+  box-shadow: var(--neo-raised), inset 0 0 0 1px var(--tone, var(--theme-focused-foreground));
 }

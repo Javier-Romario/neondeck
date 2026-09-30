@@ -19,7 +19,7 @@ import { NeoThemeToggle } from './NeoTheme';
 const TONES = ['teal', 'magenta', 'yellow', 'green', 'violet', 'orange', 'red', 'blue'] as const;
 
 export default {
-  title: 'Neomorphic / Data',
+  title: 'Neumorphic / Data',
 };
 
 export const NeoNavigationBar: Story<{ tone: string }> = ({ tone }) => (

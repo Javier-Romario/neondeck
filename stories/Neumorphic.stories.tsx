@@ -12,7 +12,7 @@ import { DEFAULT_TICKER_FEED } from '@common/constants';
 const TONES = ['teal', 'magenta', 'yellow', 'green', 'violet', 'orange', 'red', 'blue'] as const;
 
 export default {
-  title: 'Neomorphic',
+  title: 'Neumorphic',
 };
 
 export const GlassNeoCard: Story<{ title: string; tone: string; ticker: boolean }> = ({ title, tone, ticker }) => (

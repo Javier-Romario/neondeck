@@ -114,13 +114,23 @@ body {
   --theme-window-background: rgba(10, 17, 28, 0.5);
   --theme-window-shadow: rgba(0, 255, 209, 0.16);
 
-  /* ---- neumorphic tokens (experimental) ---- */
-  --neo-surface: rgba(10, 17, 28, 0.55);
-  --neo-raised: 6px 6px 14px rgba(0, 0, 0, 0.55), -6px -6px 14px rgba(255, 255, 255, 0.04);
-  --neo-pressed: inset 4px 4px 10px rgba(0, 0, 0, 0.6), inset -4px -4px 10px rgba(255, 255, 255, 0.035);
-  --neo-well: inset 6px 6px 12px rgba(0, 0, 0, 0.55), inset -6px -6px 12px rgba(255, 255, 255, 0.04);
-  --neo-drop: drop-shadow(7px 7px 16px rgba(0, 0, 0, 0.5))
-    drop-shadow(-7px -7px 16px rgba(255, 255, 255, 0.05));
+  /* ---- neumorphic tokens ----
+     Neumorphism needs a surface a few steps brighter than the page so both
+     the dark and the light shadow can read. On dark the "light" shadow is a
+     cool steel-blue, optionally tinted by the element's neon tone via --neo-light. */
+  --neo-bg: #0c1420;
+  --neo-surface: linear-gradient(145deg, #121c2b 0%, #0a111b 100%);
+  --neo-surface-flat: #0d1622;
+  --neo-light: rgba(96, 140, 180, 0.16);
+  --neo-dark: rgba(0, 0, 0, 0.72);
+  --neo-rim: inset 1px 1px 0 rgba(255, 255, 255, 0.07), inset -1px -1px 0 rgba(0, 0, 0, 0.55);
+  --neo-raised: 7px 7px 16px var(--neo-dark), -6px -6px 14px var(--neo-light), var(--neo-rim);
+  --neo-pressed: inset 5px 5px 12px rgba(0, 0, 0, 0.8), inset -4px -4px 10px var(--neo-light),
+    inset 0 1px 0 rgba(0, 0, 0, 0.6);
+  --neo-well: inset 6px 6px 14px rgba(0, 0, 0, 0.78), inset -5px -5px 12px var(--neo-light);
+  --neo-drop: drop-shadow(8px 8px 18px rgba(0, 0, 0, 0.62))
+    drop-shadow(-6px -6px 14px rgba(96, 140, 180, 0.12));
+  --neo-corner: 8px;
 }
 
 /* ---- page backdrop: grid + scanlines + aurora ---- */
@@ -338,12 +348,17 @@ html[data-theme='light'] body {
   --theme-window-shadow: rgba(0, 150, 130, 0.22);
 
   /* ---- neumorphic tokens (experimental) ---- */
-  --neo-surface: rgba(255, 255, 255, 0.6);
-  --neo-raised: 6px 6px 14px rgba(0, 0, 0, 0.12), -6px -6px 14px rgba(255, 255, 255, 0.9);
-  --neo-pressed: inset 4px 4px 10px rgba(0, 0, 0, 0.14), inset -4px -4px 10px rgba(255, 255, 255, 0.85);
-  --neo-well: inset 6px 6px 12px rgba(0, 0, 0, 0.12), inset -6px -6px 12px rgba(255, 255, 255, 0.9);
-  --neo-drop: drop-shadow(7px 7px 16px rgba(0, 0, 0, 0.12))
-    drop-shadow(-7px -7px 16px rgba(255, 255, 255, 0.9));
+  --neo-bg: #e6eef3;
+  --neo-surface: linear-gradient(145deg, #f7fbfd 0%, #dfe8ee 100%);
+  --neo-surface-flat: #ecf2f6;
+  --neo-light: rgba(255, 255, 255, 0.95);
+  --neo-dark: rgba(60, 90, 110, 0.22);
+  --neo-rim: inset 1px 1px 0 rgba(255, 255, 255, 0.9), inset -1px -1px 0 rgba(60, 90, 110, 0.12);
+  --neo-raised: 7px 7px 16px var(--neo-dark), -6px -6px 14px var(--neo-light), var(--neo-rim);
+  --neo-pressed: inset 5px 5px 12px rgba(60, 90, 110, 0.26), inset -4px -4px 10px var(--neo-light);
+  --neo-well: inset 6px 6px 14px rgba(60, 90, 110, 0.22), inset -5px -5px 12px var(--neo-light);
+  --neo-drop: drop-shadow(8px 8px 18px rgba(60, 90, 110, 0.2))
+    drop-shadow(-6px -6px 14px rgba(255, 255, 255, 0.95));
 }
 
 @media (prefers-color-scheme: light) {
@@ -372,12 +387,17 @@ html[data-theme='light'] body {
     --theme-window-shadow: rgba(0, 150, 130, 0.22);
 
     /* ---- neumorphic tokens (experimental) ---- */
-    --neo-surface: rgba(255, 255, 255, 0.6);
-    --neo-raised: 6px 6px 14px rgba(0, 0, 0, 0.12), -6px -6px 14px rgba(255, 255, 255, 0.9);
-    --neo-pressed: inset 4px 4px 10px rgba(0, 0, 0, 0.14), inset -4px -4px 10px rgba(255, 255, 255, 0.85);
-    --neo-well: inset 6px 6px 12px rgba(0, 0, 0, 0.12), inset -6px -6px 12px rgba(255, 255, 255, 0.9);
-    --neo-drop: drop-shadow(7px 7px 16px rgba(0, 0, 0, 0.12))
-      drop-shadow(-7px -7px 16px rgba(255, 255, 255, 0.9));
+    --neo-bg: #e6eef3;
+    --neo-surface: linear-gradient(145deg, #f7fbfd 0%, #dfe8ee 100%);
+    --neo-surface-flat: #ecf2f6;
+    --neo-light: rgba(255, 255, 255, 0.95);
+    --neo-dark: rgba(60, 90, 110, 0.22);
+    --neo-rim: inset 1px 1px 0 rgba(255, 255, 255, 0.9), inset -1px -1px 0 rgba(60, 90, 110, 0.12);
+    --neo-raised: 7px 7px 16px var(--neo-dark), -6px -6px 14px var(--neo-light), var(--neo-rim);
+    --neo-pressed: inset 5px 5px 12px rgba(60, 90, 110, 0.26), inset -4px -4px 10px var(--neo-light);
+    --neo-well: inset 6px 6px 14px rgba(60, 90, 110, 0.22), inset -5px -5px 12px var(--neo-light);
+    --neo-drop: drop-shadow(8px 8px 18px rgba(60, 90, 110, 0.2))
+      drop-shadow(-6px -6px 14px rgba(255, 255, 255, 0.95));
   }
 }
 
@@ -411,11 +431,17 @@ html[data-theme='light'] body::after {
 }
 
 /* ---- shared neon tone keys: any element with data-tone gets --tone / --tone-soft ---- */
-[data-tone='teal'] { --tone: var(--neon-teal); --tone-soft: rgba(0, 255, 209, 0.45); }
-[data-tone='magenta'] { --tone: var(--neon-magenta); --tone-soft: rgba(255, 45, 120, 0.45); }
-[data-tone='yellow'] { --tone: var(--neon-yellow); --tone-soft: rgba(255, 230, 109, 0.45); }
-[data-tone='green'] { --tone: var(--neon-green); --tone-soft: rgba(0, 255, 157, 0.45); }
-[data-tone='violet'] { --tone: var(--neon-violet); --tone-soft: rgba(183, 139, 255, 0.45); }
-[data-tone='orange'] { --tone: var(--neon-orange); --tone-soft: rgba(255, 157, 45, 0.45); }
-[data-tone='red'] { --tone: var(--neon-red); --tone-soft: rgba(255, 77, 94, 0.45); }
-[data-tone='blue'] { --tone: var(--neon-blue); --tone-soft: rgba(45, 226, 255, 0.45); }
+[data-tone='teal'] { --tone: var(--neon-teal); --tone-soft: rgba(0, 255, 209, 0.45); --tone-faint: rgba(0, 255, 209, 0.14); }
+[data-tone='magenta'] { --tone: var(--neon-magenta); --tone-soft: rgba(255, 45, 120, 0.45); --tone-faint: rgba(255, 45, 120, 0.14); }
+[data-tone='yellow'] { --tone: var(--neon-yellow); --tone-soft: rgba(255, 230, 109, 0.45); --tone-faint: rgba(255, 230, 109, 0.14); }
+[data-tone='green'] { --tone: var(--neon-green); --tone-soft: rgba(0, 255, 157, 0.45); --tone-faint: rgba(0, 255, 157, 0.14); }
+[data-tone='violet'] { --tone: var(--neon-violet); --tone-soft: rgba(183, 139, 255, 0.45); --tone-faint: rgba(183, 139, 255, 0.14); }
+[data-tone='orange'] { --tone: var(--neon-orange); --tone-soft: rgba(255, 157, 45, 0.45); --tone-faint: rgba(255, 157, 45, 0.14); }
+[data-tone='red'] { --tone: var(--neon-red); --tone-soft: rgba(255, 77, 94, 0.45); --tone-faint: rgba(255, 77, 94, 0.14); }
+[data-tone='blue'] { --tone: var(--neon-blue); --tone-soft: rgba(45, 226, 255, 0.45); --tone-faint: rgba(45, 226, 255, 0.14); }
+
+/* on dark, the neumorphic "light source" takes on the element's neon tone */
+html:not([data-theme='light']) [data-tone] { --neo-light: var(--tone-faint); }
+@media (prefers-color-scheme: light) {
+  html:not([data-theme='dark']) [data-tone] { --neo-light: rgba(255, 255, 255, 0.95); }
+}

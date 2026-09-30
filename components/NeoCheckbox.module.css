@@ -16,9 +16,10 @@
   justify-content: center;
   width: calc(var(--theme-line-height-base) * 1rem);
   height: calc(var(--theme-line-height-base) * 1rem);
-  border-radius: 6px;
-  background: var(--neo-surface);
-  box-shadow: var(--neo-well);
+  border-radius: 5px;
+  corner-shape: bevel;
+  background: var(--neo-bg);
+  box-shadow: var(--neo-well), inset 0 0 0 1px var(--theme-border);
   flex-shrink: 0;
   transition: box-shadow 180ms ease;
 }

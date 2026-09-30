@@ -20,7 +20,8 @@
   justify-content: center;
   width: calc(var(--theme-line-height-base) * 2.5rem);
   height: calc(var(--theme-line-height-base) * 2.5rem);
-  border-radius: 10px;
+  border-radius: var(--neo-corner, 10px);
+  corner-shape: bevel;
   background: var(--neo-surface);
   box-shadow: var(--neo-raised), inset 0 0 0 1px var(--tone, var(--theme-focused-foreground));
   overflow: hidden;

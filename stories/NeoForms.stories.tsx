@@ -13,7 +13,7 @@ import { NeoThemeToggle } from './NeoTheme';
 const TONES = ['teal', 'magenta', 'yellow', 'green', 'violet', 'orange', 'red', 'blue'] as const;
 
 export default {
-  title: 'Neomorphic / Forms',
+  title: 'Neumorphic / Forms',
 };
 
 export const NeoInputField: Story<{ label: string; placeholder: string; tone: string }> = ({ label, placeholder, tone }) => (

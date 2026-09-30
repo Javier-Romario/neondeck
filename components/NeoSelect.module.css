@@ -7,13 +7,16 @@
 
 .trigger {
   display: flex;
+  border: 0;
+  outline: 0;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
   width: 100%;
   padding: calc(var(--theme-line-height-base) * 0.25rem) 1ch;
   background: var(--neo-surface);
-  border-radius: 12px;
+  border-radius: var(--neo-corner, 10px);
+  corner-shape: bevel;
   box-shadow: var(--neo-raised);
   color: var(--theme-text);
   font-family: var(--font-family-mono);
@@ -27,6 +30,10 @@
 
 .trigger:hover {
   color: var(--tone, var(--theme-focused-foreground));
+  box-shadow: var(--neo-raised), inset 0 0 0 1px var(--tone, var(--theme-focused-foreground));
+}
+
+.trigger:focus-visible {
   box-shadow: var(--neo-raised), inset 0 0 0 1px var(--tone, var(--theme-focused-foreground));
 }
 
@@ -54,7 +61,8 @@
   max-height: 16rem;
   overflow-y: auto;
   background: var(--neo-surface);
-  border-radius: 12px;
+  border-radius: var(--neo-corner, 10px);
+  corner-shape: bevel;
   box-shadow: var(--neo-raised), inset 0 0 0 1px var(--tone, var(--theme-focused-foreground));
   backdrop-filter: blur(14px) saturate(140%);
   -webkit-backdrop-filter: blur(14px) saturate(140%);

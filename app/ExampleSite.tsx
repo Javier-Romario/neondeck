@@ -157,7 +157,7 @@ export default function ExampleSite() {
         </NeoCard>
       </section>
 
-      {/* neomorphic controls */}
+      {/* neumorphic controls */}
       <section className={styles.section}>
         <div className={styles.sectionHead}>
           <span className={styles.sectionLabel}>03</span>

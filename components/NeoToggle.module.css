@@ -27,7 +27,7 @@
   width: 56px;
   height: 28px;
   border-radius: 999px;
-  background: var(--neo-surface);
+  background: var(--neo-bg);
   box-shadow: var(--neo-well);
   transition: box-shadow 180ms ease;
 }
@@ -56,36 +56,4 @@
 
 .label {
   color: var(--theme-text);
-}
-
-.root[data-tone='teal'] {
-  --tone: var(--neon-teal);
-}
-
-.root[data-tone='magenta'] {
-  --tone: var(--neon-magenta);
-}
-
-.root[data-tone='yellow'] {
-  --tone: var(--neon-yellow);
-}
-
-.root[data-tone='green'] {
-  --tone: var(--neon-green);
-}
-
-.root[data-tone='violet'] {
-  --tone: var(--neon-violet);
-}
-
-.root[data-tone='orange'] {
-  --tone: var(--neon-orange);
-}
-
-.root[data-tone='red'] {
-  --tone: var(--neon-red);
-}
-
-.root[data-tone='blue'] {
-  --tone: var(--neon-blue);
 }

@@ -3,7 +3,8 @@
   overflow-x: auto;
   overflow-y: hidden;
   background: var(--neo-surface);
-  border-radius: 12px;
+  border-radius: var(--neo-corner, 10px);
+  corner-shape: bevel;
   box-shadow: var(--neo-raised), inset 0 0 0 1px var(--tone, var(--theme-border-bright));
   backdrop-filter: blur(10px) saturate(140%);
   -webkit-backdrop-filter: blur(10px) saturate(140%);
