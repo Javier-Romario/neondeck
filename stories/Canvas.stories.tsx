@@ -1,6 +1,8 @@
 import type { Story } from '@ladle/react';
 
+import AsciiScene from '@components/AsciiScene';
 import GridCanvas from '@components/GridCanvas';
+import Panel from '@components/Panel';
 import GlitchText from '@components/GlitchText';
 import Hologram from '@components/Hologram';
 import MatrixRain from '@components/MatrixRain';
@@ -66,3 +68,38 @@ Hologram3D.argTypes = {
     control: { type: 'select' },
   },
 };
+
+const TONES = ['teal', 'magenta', 'yellow', 'green', 'violet', 'orange', 'red', 'blue'] as const;
+
+export const Ascii3D: Story<{ shape: string; tone: string; resolution: number; glow: boolean; interactive: boolean }> = ({
+  shape,
+  tone,
+  resolution,
+  glow,
+  interactive,
+}) => (
+  <div style={{ maxWidth: 720 }}>
+    <AsciiScene shape={shape as any} tone={tone as any} resolution={resolution} glow={glow} interactive={interactive} height={400} label="ASCII // TRANSPARENT" />
+  </div>
+);
+Ascii3D.args = { shape: 'knot', tone: 'teal', resolution: 0.18, glow: true, interactive: false };
+Ascii3D.argTypes = {
+  shape: { options: ['knot', 'torus', 'sphere', 'diamond', 'icosahedron'], control: { type: 'select' } },
+  tone: { options: TONES, control: { type: 'select' } },
+  resolution: { control: { type: 'range', min: 0.08, max: 0.35, step: 0.01 } },
+};
+
+/** Sits inside a Panel like any other content — the glass shows through the glyphs. */
+export const AsciiInPanel: Story = () => (
+  <Panel shape="wipeout" tone="magenta" style={{ maxWidth: 720 }}>
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', alignItems: 'center', gap: 16 }}>
+      <div>
+        <strong style={{ letterSpacing: 2, textTransform: 'uppercase' }}>Ghost protocol</strong>
+        <p style={{ margin: '8px 0 0', color: 'var(--theme-muted)' }}>
+          The renderer clears to alpha 0 and maps empty pixels to a space, so only the object is drawn — as text.
+        </p>
+      </div>
+      <AsciiScene shape="torus" tone="magenta" height={260} resolution={0.2} />
+    </div>
+  </Panel>
+);

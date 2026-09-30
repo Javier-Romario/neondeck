@@ -428,6 +428,29 @@ Shared plumbing first:
 - **Deps:** `three`, `@react-three/fiber`, `@react-three/drei`. Client-only (`'use client'`).
 - **Theming:** `--theme-border`, `--theme-focused-foreground` (readout).
 
+## AsciiScene
+
+- **Path:** `components/AsciiScene.tsx`
+- **Purpose:** react-three-fiber scene rendered as text via drei's `AsciiRenderer` (three `AsciiEffect`). The WebGL canvas clears to alpha 0 and the effect maps fully transparent pixels to the first ramp character (a space), so there is no background — only the object appears, as glyphs in the tone colour and the deck's code font, sitting directly on whatever the component is placed over. Dark surfaces → dense glyphs, highlights → sparse.
+- **Props:**
+  ```ts
+  interface AsciiSceneProps extends React.HTMLAttributes<HTMLDivElement> {
+    shape?: HologramShape;      // 'knot' (default) | 'torus' | 'sphere' | 'diamond' | 'icosahedron'
+    tone?: NeonTone;
+    characters?: string;        // ramp sparse→dense; keep index 0 a space (ASCII_RAMP = ' .:-+*=%@#')
+    resolution?: number;        // cells per pixel, default 0.18
+    invert?: boolean;           // flips the ramp — also fills the background, so off by default
+    height?: number | string;
+    speed?: number;             // rotation multiplier
+    interactive?: boolean;      // OrbitControls
+    glow?: boolean;             // neon text-shadow on the glyphs
+    label?: string;             // corner readout
+    children?: React.ReactNode; // custom scene instead of the built-in shape
+  }
+  ```
+- **Deps:** `three`, `@react-three/fiber`, `@react-three/drei`. Client-only.
+- **Theming:** `--tone` / `--tone-soft`, `--font-family-code`, `--font-family-mono`.
+
 ## GlitchText
 
 - **Path:** `components/GlitchText.tsx`

@@ -3,6 +3,7 @@ export { default as ActionBar } from '@components/ActionBar';
 export { default as ActionButton } from '@components/ActionButton';
 export { default as ActionListItem } from '@components/ActionListItem';
 export { default as AlertBanner } from '@components/AlertBanner';
+export { default as AsciiScene, ASCII_RAMP } from '@components/AsciiScene';
 export { default as Avatar } from '@components/Avatar';
 export { default as Badge } from '@components/Badge';
 export { default as BarLoader } from '@components/BarLoader';

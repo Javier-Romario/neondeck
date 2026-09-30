@@ -173,10 +173,19 @@ describe('BrailleLoader', () => {
 describe('Panel rig container query', () => {
   it('targets trails by data-side, not by a class that would hash into a different module scope', async () => {
     const { readFileSync } = await import('node:fs');
-    const css = readFileSync(new URL('../components/Panel.module.css', import.meta.url), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
+    const { join } = await import('node:path');
+    const css = readFileSync(join(__dirname, '../components/Panel.module.css'), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
     const block = /@container[^{]*\{([\s\S]*?)\n\}/.exec(css);
     expect(block).not.toBeNull();
     expect(block![1]).toContain('.rig > [data-side]');
     expect(block![1]).not.toMatch(/\.trail\b/);
+  });
+});
+
+describe('AsciiScene transparency contract', () => {
+  it('default ramp starts with a space so alpha-0 pixels render as nothing', async () => {
+    const { ASCII_RAMP } = await import('@components/AsciiScene');
+    expect(ASCII_RAMP[0]).toBe(' ');
+    expect(new Set(ASCII_RAMP).size).toBe(ASCII_RAMP.length);
   });
 });

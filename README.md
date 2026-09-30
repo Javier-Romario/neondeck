@@ -108,7 +108,7 @@ export default nextConfig;
 
 ### 3D / canvas components
 
-`Hologram` needs the R3F peer deps (optional — skip unless you use it):
+`Hologram`, `NeonTunnel` and `AsciiScene` need the R3F peer deps (optional — skip unless you use them):
 
 ```sh
 npm install three @react-three/fiber @react-three/drei
@@ -230,6 +230,7 @@ ticker cap:
 | `ActionBar`, `ActionButton`, `ActionListItem`, `ButtonGroup` | ⌨ Command surfaces |
 | `Input`, `TextArea`, `Checkbox`, `BarLoader`, `BarProgress`, `BlockLoader` | ⌨ Forms + progress |
 | `BrailleLoader` | ⣿ CSS-only braille spinners (`@property` + `@counter-style`), optional glitch |
+| `AsciiScene` | ▚ three.js object rendered as transparent ASCII text, straight on the page |
 | `Avatar`, `Breadcrumbs`, `Navigation` | 🪪 Identity + navigation |
 | `Grid`, `Row`, `RowSpaceBetween`, `ContentFluid`, `Indent` | 📐 Layout |
 | `Table`, `TableRow`, `TableColumn`, `ListItem`, `Text` | 🗃 Data + copy |

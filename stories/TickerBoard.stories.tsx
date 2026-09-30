@@ -40,7 +40,7 @@ export const WrappedCard: Story<{
   tickerSpeed: number;
   tickerDirection: 'left' | 'right';
   showBottomTicker: boolean;
-  theme: 'dark' | 'light';
+  theme: 'auto' | 'dark' | 'light';
 }> = ({ message, messageTone, tickerTone, tickerSpeed, tickerDirection, showBottomTicker, theme }) => (
   <TickerBoard
     message={message}
@@ -51,7 +51,7 @@ export const WrappedCard: Story<{
     tickerSpeed={tickerSpeed}
     tickerDirection={tickerDirection}
     showBottomTicker={showBottomTicker}
-    theme={theme}
+    theme={theme === 'auto' ? undefined : theme}
   >
     <Blurb title="DECKS">
       A small message box sits right above the component. Ticker strips sit inside the frame, inset past the chamfers.
@@ -65,7 +65,7 @@ WrappedCard.args = {
   tickerSpeed: 28,
   tickerDirection: 'left',
   showBottomTicker: true,
-  theme: 'dark',
+  theme: 'auto',
 };
 WrappedCard.argTypes = {
   messageTone: { control: { type: 'select', options: TONES } },
@@ -73,7 +73,7 @@ WrappedCard.argTypes = {
   tickerDirection: { control: { type: 'select', options: ['left', 'right'] } },
   tickerSpeed: { control: { type: 'number', min: 5, max: 60, step: 1 } },
   showBottomTicker: { control: { type: 'boolean' } },
-  theme: { control: { type: 'select', options: ['dark', 'light'] } },
+  theme: { control: { type: 'select', options: ['auto', 'dark', 'light'] } },
 };
 
 export const WrappedWindow: Story<{ message: string }> = ({ message }) => (

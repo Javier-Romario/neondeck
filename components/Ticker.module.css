@@ -54,7 +54,7 @@
   padding: 3px 10px 3px 8px;
   /* 45° cut on the trailing edge, like a bezel tab */
   clip-path: polygon(0 0, calc(100% - 7px) 0, 100% 100%, 0 100%);
-  color: #03110d;
+  color: var(--tone-ink, #03110d);
   background: var(--tone, var(--theme-focused-foreground));
   box-shadow: 0 0 12px -2px var(--tone, var(--theme-focused-foreground));
   font-weight: 700;

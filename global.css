@@ -333,14 +333,16 @@ html[data-theme='light'] {
 }
 
 /* ---- shared neon tone keys: any element with data-tone gets --tone / --tone-soft ---- */
-[data-tone='teal'] { --tone: var(--neon-teal); --tone-soft: rgba(0, 255, 209, 0.45); --tone-faint: rgba(0, 255, 209, 0.14); }
-[data-tone='magenta'] { --tone: var(--neon-magenta); --tone-soft: rgba(255, 45, 120, 0.45); --tone-faint: rgba(255, 45, 120, 0.14); }
-[data-tone='yellow'] { --tone: var(--neon-yellow); --tone-soft: rgba(255, 230, 109, 0.45); --tone-faint: rgba(255, 230, 109, 0.14); }
-[data-tone='green'] { --tone: var(--neon-green); --tone-soft: rgba(0, 255, 157, 0.45); --tone-faint: rgba(0, 255, 157, 0.14); }
-[data-tone='violet'] { --tone: var(--neon-violet); --tone-soft: rgba(183, 139, 255, 0.45); --tone-faint: rgba(183, 139, 255, 0.14); }
-[data-tone='orange'] { --tone: var(--neon-orange); --tone-soft: rgba(255, 157, 45, 0.45); --tone-faint: rgba(255, 157, 45, 0.14); }
-[data-tone='red'] { --tone: var(--neon-red); --tone-soft: rgba(255, 77, 94, 0.45); --tone-faint: rgba(255, 77, 94, 0.14); }
-[data-tone='blue'] { --tone: var(--neon-blue); --tone-soft: rgba(45, 226, 255, 0.45); --tone-faint: rgba(45, 226, 255, 0.14); }
+[data-tone='teal'] { --tone: light-dark(#00a68c, var(--neon-teal)); --tone-soft: rgba(0, 255, 209, 0.45); --tone-faint: rgba(0, 255, 209, 0.14); }
+[data-tone='magenta'] { --tone: light-dark(#d81b6a, var(--neon-magenta)); --tone-soft: rgba(255, 45, 120, 0.45); --tone-faint: rgba(255, 45, 120, 0.14); }
+[data-tone='yellow'] { --tone: light-dark(#a67c00, var(--neon-yellow)); --tone-soft: rgba(255, 230, 109, 0.45); --tone-faint: rgba(255, 230, 109, 0.14); }
+[data-tone='green'] { --tone: light-dark(#009e60, var(--neon-green)); --tone-soft: rgba(0, 255, 157, 0.45); --tone-faint: rgba(0, 255, 157, 0.14); }
+[data-tone='violet'] { --tone: light-dark(#7c4dff, var(--neon-violet)); --tone-soft: rgba(183, 139, 255, 0.45); --tone-faint: rgba(183, 139, 255, 0.14); }
+[data-tone='orange'] { --tone: light-dark(#d97706, var(--neon-orange)); --tone-soft: rgba(255, 157, 45, 0.45); --tone-faint: rgba(255, 157, 45, 0.14); }
+[data-tone='red'] { --tone: light-dark(#d92638, var(--neon-red)); --tone-soft: rgba(255, 77, 94, 0.45); --tone-faint: rgba(255, 77, 94, 0.14); }
+[data-tone='blue'] { --tone: light-dark(#0891b2, var(--neon-blue)); --tone-soft: rgba(45, 226, 255, 0.45); --tone-faint: rgba(45, 226, 255, 0.14); }
+/* --tone-ink: text placed *on* a --tone fill */
+[data-tone] { --tone-ink: light-dark(#ffffff, #03110d); }
 
 /* on dark, the neumorphic "light source" takes on the element's neon tone */
 [data-tone] {
