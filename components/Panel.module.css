@@ -6,7 +6,7 @@
  * None of them is an ancestor of another, so backdrop-filter still sees the page.
  */
 .panel {
-  --nd-glass: linear-gradient(180deg, rgba(10, 17, 28, 0.6) 0%, rgba(7, 12, 19, 0.42) 100%);
+  --nd-glass: var(--theme-glass);
   --panel-pad: 16px 24px;
 
   position: relative;
@@ -17,11 +17,21 @@
 .rig {
   display: flex;
   align-items: flex-start;
+  container-type: inline-size;
+}
+
+/* trails are fixed-width (~300px each with a cap); below this the panel would be
+   starved, so they drop out and the panel renders alone */
+@container (max-width: 900px) {
+  /* attribute selector: `.trail` lives in PanelTrail.module.css and would hash differently */
+  .rig > [data-side] {
+    display: none;
+  }
 }
 
 .rig > .panel {
   flex: 1 1 auto;
-  min-width: 0;
+  min-width: 200px;
 }
 
 .halo,
@@ -72,15 +82,4 @@
 
 .content[data-clip] {
   clip-path: var(--panel-inner);
-}
-
-/* ---- light mode ---- */
-html[data-theme='light'] .panel {
-  --nd-glass: linear-gradient(180deg, rgba(255, 255, 255, 0.74) 0%, rgba(240, 246, 250, 0.56) 100%);
-}
-
-@media (prefers-color-scheme: light) {
-  html:not([data-theme='dark']) .panel {
-    --nd-glass: linear-gradient(180deg, rgba(255, 255, 255, 0.74) 0%, rgba(240, 246, 250, 0.56) 100%);
-  }
 }

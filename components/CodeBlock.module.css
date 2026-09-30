@@ -2,7 +2,7 @@
   display: block;
   margin: 0;
   padding: calc(var(--theme-line-height-base) * 0.5rem) 1ch;
-  background: rgba(4, 7, 11, 0.6);
+  background: var(--theme-background-input);
   border: 1px solid var(--theme-border);
   border-left: 3px solid var(--theme-focused-foreground);
   font-family: var(--font-family-code);
@@ -28,5 +28,5 @@
 }
 
 .code {
-  color: #bfeee6;
+  color: light-dark(#0c2b33, #bfeee6);
 }

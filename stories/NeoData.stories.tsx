@@ -14,7 +14,6 @@ import NeoTableColumn from '@components/NeoTableColumn';
 import NeoTableRow from '@components/NeoTableRow';
 
 import { SAMPLE_TABLE_DATA_CHANGE_ME } from '@common/constants';
-import { NeoThemeToggle } from './NeoTheme';
 
 const TONES = ['teal', 'magenta', 'yellow', 'green', 'violet', 'orange', 'red', 'blue'] as const;
 
@@ -24,7 +23,6 @@ export default {
 
 export const NeoNavigationBar: Story<{ tone: string }> = ({ tone }) => (
   <>
-    <NeoThemeToggle />
     <NeoNavigation
       logo="◆"
       tone={tone as any}
@@ -40,7 +38,6 @@ NeoNavigationBar.argTypes = { tone: { control: { type: 'select', options: TONES 
 
 export const NeoBreadcrumbTrail: Story<{ tone: string }> = ({ tone }) => (
   <>
-    <NeoThemeToggle />
     <NeoBreadcrumbs
       tone={tone as any}
       items={[
@@ -57,7 +54,6 @@ NeoBreadcrumbTrail.argTypes = { tone: { control: { type: 'select', options: TONE
 
 export const NeoAvatarRow: Story<{ tone: string }> = ({ tone }) => (
   <>
-    <NeoThemeToggle />
     <NeoAvatar src="https://picsum.photos/seed/ghost/64/64" tone={tone as any}>
       <span>
         MOLLY MILLIONS
@@ -72,7 +68,6 @@ NeoAvatarRow.argTypes = { tone: { control: { type: 'select', options: TONES } } 
 
 export const NeoAlert: Story<{ tone: string }> = ({ tone }) => (
   <>
-    <NeoThemeToggle />
     <NeoAlertBanner tone={tone as any}>ICE detected on the uplink. Connection is being traced.</NeoAlertBanner>
   </>
 );
@@ -81,7 +76,6 @@ NeoAlert.argTypes = { tone: { control: { type: 'select', options: TONES } } };
 
 export const NeoCode: Story<{ tone: string }> = ({ tone }) => (
   <>
-    <NeoThemeToggle />
     <NeoCodeBlock tone={tone as any}>{`function jackIn(deck) {
   deck.ice = 'black';
   deck.flatline = false;
@@ -94,7 +88,6 @@ NeoCode.argTypes = { tone: { control: { type: 'select', options: TONES } } };
 
 export const NeoDataTable: Story<{ tone: string }> = ({ tone }) => (
   <>
-    <NeoThemeToggle />
     <NeoTable tone={tone as any}>
       {SAMPLE_TABLE_DATA_CHANGE_ME.map((row, r) => (
         <NeoTableRow key={r}>
@@ -111,7 +104,6 @@ NeoDataTable.argTypes = { tone: { control: { type: 'select', options: TONES } } 
 
 export const NeoDialogExample: Story<{ tone: string }> = ({ tone }) => (
   <>
-    <NeoThemeToggle />
     <NeoDialog title="FLATLINE" tone={tone as any}>
       There are unsaved changes. Jack out?
     </NeoDialog>
@@ -122,7 +114,6 @@ NeoDialogExample.argTypes = { tone: { control: { type: 'select', options: TONES 
 
 export const NeoDrawerExample: Story<{ tone: string }> = ({ tone }) => (
   <>
-    <NeoThemeToggle />
     <NeoDrawer defaultValue tone={tone as any}>
       <NeoActionListItem icon="⊹" tone={tone as any}>
         User Commands
@@ -141,7 +132,6 @@ NeoDrawerExample.argTypes = { tone: { control: { type: 'select', options: TONES 
 
 export const NeoAccordionExample: Story<{ tone: string }> = ({ tone }) => (
   <>
-    <NeoThemeToggle />
     <NeoAccordion defaultValue title="GHOST PROTOCOL" tone={tone as any}>
       A console cowboy runs the ice with a deck and a prayer.
     </NeoAccordion>
@@ -155,7 +145,6 @@ NeoAccordionExample.argTypes = { tone: { control: { type: 'select', options: TON
 
 export const NeoDataPlayground = () => (
   <>
-    <NeoThemeToggle />
     <div style={{ display: 'grid', gap: 20, maxWidth: 640 }}>
       <NeoNavigation
         logo="◆"

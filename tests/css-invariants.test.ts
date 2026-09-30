@@ -21,22 +21,50 @@ describe('global.css tone + neumorphic tokens', () => {
     }
   });
 
-  it('declares every --neo-* token in both the dark root and the light overrides', () => {
-    const tokens = ['--neo-bg', '--neo-surface', '--neo-light', '--neo-dark', '--neo-rim', '--neo-raised', '--neo-pressed', '--neo-well', '--neo-drop'];
+  it('declares every colour token exactly once, as light-dark(), with no per-theme override blocks', () => {
+    const tokens = ['--neo-bg', '--neo-surface', '--neo-dark', '--neo-rim', '--neo-pressed', '--neo-well', '--neo-drop',
+      '--cp-bg', '--cp-panel', '--cp-text', '--theme-background', '--theme-glass'];
     for (const tok of tokens) {
-      const count = css.split(`${tok}:`).length - 1;
-      // dark root + html[data-theme='light'] + prefers-color-scheme block
-      expect(count, tok).toBeGreaterThanOrEqual(3);
+      const decls = [...css.matchAll(new RegExp(`${tok}:\\s*([^;]*);`, 'g'))].map((m) => m[1]);
+      expect(decls, tok).toHaveLength(1);
+      expect(decls[0], tok).toContain('light-dark(');
     }
+    // the only theme-specific rules left are the color-scheme switches
+    expect(css.match(/html\[data-theme='light'\]/g)).toHaveLength(1);
+    expect(css.match(/html\[data-theme='dark'\]/g)).toHaveLength(1);
+    expect(css.match(/@media \(prefers-color-scheme/g)).toHaveLength(1);
   });
 
-  it('the dark neumorphic light shadow is tone-tinted', () => {
-    expect(css).toMatch(/html:not\(\[data-theme='light'\]\) \[data-tone\] \{ --neo-light: var\(--tone-faint\); \}/);
+  it('the neumorphic light shadow is tone-tinted on dark, plain white on light', () => {
+    expect(css).toMatch(/\[data-tone\] \{\s*--neo-light: light-dark\(rgba\(255, 255, 255, 0\.95\), var\(--tone-faint\)\);/);
   });
 
   it('UI stack leads with Krypton and falls back to JetBrains Mono; code stack is JetBrains Mono', () => {
     expect(css).toMatch(/--font-family-mono: 'Monaspace Krypton', 'JetBrains Mono'/);
     expect(css).toMatch(/--font-family-code: 'JetBrains Mono'/);
+  });
+});
+
+describe('component modules theme through tokens, not their own theme blocks', () => {
+  it('no module selects on html[data-theme] or prefers-color-scheme', () => {
+    const { readdirSync } = require('node:fs') as typeof import('node:fs');
+    const offenders = readdirSync(join(root, 'components'))
+      .filter((f) => f.endsWith('.module.css'))
+      .filter((f) => /html\[data-theme|prefers-color-scheme/.test(read(`components/${f}`)));
+    expect(offenders).toEqual([]);
+  });
+
+  it('no module hardcodes the dark page/panel surface colours', () => {
+    const { readdirSync } = require('node:fs') as typeof import('node:fs');
+    const dark = /rgba\((4, 7, 11|7, 12, 19|10, 17, 28|14, 22, 36),/;
+    const offenders = readdirSync(join(root, 'components'))
+      .filter((f) => f.endsWith('.module.css'))
+      .filter((f) => {
+        // strip light-dark(...) calls — a dark value inside one is fine
+        const stripped = read(`components/${f}`).replace(/light-dark\([^;]*\)/g, '');
+        return dark.test(stripped);
+      });
+    expect(offenders).toEqual([]);
   });
 });
 

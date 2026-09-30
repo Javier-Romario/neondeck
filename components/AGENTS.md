@@ -32,7 +32,7 @@ SRCL-shaped primitive retuned for cyberpunk glass.
 ## TickerBoard
 
 - **Path:** `components/TickerBoard.tsx`
-- **Purpose:** Chamfered glass frame with gradient top/bottom borders. Renders a small message box **right above** the frame; ticker strips sit **inside** the frame, inset past the corner chamfers with 45°-cut ends, so they are always shorter than the box.
+- **Purpose:** Chamfered glass frame with gradient top/bottom borders. `theme` sets a scoped `color-scheme`, so the board (and everything inside it) can stay light on a dark page or vice versa. Renders a small message box **right above** the frame; ticker strips sit **inside** the frame, inset past the corner chamfers with 45°-cut ends, so they are always shorter than the box.
 - **Props:**
   ```ts
   interface TickerBoardProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -78,7 +78,7 @@ SRCL-shaped primitive retuned for cyberpunk glass.
   }
   ```
 - **Trails:** `PanelTrail` (`components/PanelTrail.tsx`) draws an SVG lead line that leaves the panel edge at `anchor` (0–1 of height, or px), zigzags at 45° along `route` (`'h20 u14 h28 d14 h20'`: `h` horizontal, `u`/`d` 45° up/down, px), and ends in a horizontal-teardrop `Panel` cap holding a `Ticker` (`items`, `label`, `speed`, `direction`, `capWidth`, `capHeight`, `noCap`).
-- **CSS hooks:** `--panel-pad` (content padding), `--nd-glass` (fill gradient). `shapePaths(cuts, border)` is exported if you need the `polygon()` strings elsewhere.
+- **CSS hooks:** `--panel-pad` (content padding), `--nd-glass` (fill gradient, defaults to `--theme-glass`). With `before`/`after`, the rig is an inline-size container and hides the trails under 900px so the panel is never starved. `shapePaths(cuts, border)` is exported if you need the `polygon()` strings elsewhere.
 - **Theming:** `--neon-*`, `--neo-drop`, `--theme-text`; `--tone` / `--tone-soft` come from the shared `[data-tone]` rules in `global.css`.
 
 ## PanelTrail

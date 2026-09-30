@@ -1,9 +1,16 @@
 import '@root/global-fonts.css';
 import '@root/global.css';
 
+import type { GlobalProvider } from '@ladle/react';
 import * as React from 'react';
 
-export const Provider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+/** Ladle's own light/dark toggle drives the deck: global.css keys every
+ *  light-dark() token off html[data-theme]. */
+export const Provider: GlobalProvider = ({ children, globalState }) => {
+  React.useEffect(() => {
+    document.documentElement.dataset.theme = globalState.theme;
+  }, [globalState.theme]);
+
   return (
     <div
       style={{

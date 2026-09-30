@@ -43,24 +43,20 @@
   --nd-border: 2px;
 
   /* fuzzy glass fill */
-  --nd-glass: linear-gradient(
-    180deg,
-    rgba(10, 17, 28, 0.58) 0%,
-    rgba(7, 12, 19, 0.4) 100%
-  );
+  --nd-glass: var(--theme-glass);
 
   /* gradient border (top + bottom only, no side borders) */
   --nd-border-gradient: linear-gradient(
     90deg,
-    var(--neon-teal) 0%,
-    var(--neon-blue) 50%,
-    var(--neon-magenta) 100%
+    light-dark(#00c8a8, var(--neon-teal)) 0%,
+    light-dark(#2b9fd8, var(--neon-blue)) 50%,
+    light-dark(#e0408f, var(--neon-magenta)) 100%
   );
 
   /* glow carried by the borders */
-  --nd-glow: 0 0 14px -3px rgba(0, 255, 209, 0.75),
-    0 0 30px -8px rgba(45, 226, 255, 0.55),
-    0 0 30px -8px rgba(255, 45, 120, 0.45);
+  --nd-glow: 0 0 14px -3px light-dark(rgba(0, 200, 168, 0.5), rgba(0, 255, 209, 0.75)),
+    0 0 30px -8px light-dark(rgba(43, 159, 216, 0.36), rgba(45, 226, 255, 0.55)),
+    0 0 30px -8px light-dark(transparent, rgba(255, 45, 120, 0.45));
 
   background: var(--nd-glass);
   backdrop-filter: blur(16px) saturate(160%);
@@ -123,38 +119,11 @@
   display: block;
 }
 
-/* ---- light mode: explicit component theme + global light context ---- */
-.root[data-theme='light'] .body,
-html[data-theme='light'] .body {
-  --nd-glass: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.74) 0%,
-    rgba(240, 246, 250, 0.56) 100%
-  );
-  --nd-border-gradient: linear-gradient(
-    90deg,
-    #00c8a8 0%,
-    #2b9fd8 50%,
-    #e0408f 100%
-  );
-  --nd-glow: 0 0 12px -3px rgba(0, 200, 168, 0.5),
-    0 0 26px -8px rgba(43, 159, 216, 0.36);
+/* ---- explicit component theme: flips every light-dark() token in the subtree ---- */
+.root[data-theme='light'] {
+  color-scheme: light;
 }
 
-@media (prefers-color-scheme: light) {
-  html:not([data-theme='dark']) .body {
-    --nd-glass: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.74) 0%,
-      rgba(240, 246, 250, 0.56) 100%
-    );
-    --nd-border-gradient: linear-gradient(
-      90deg,
-      #00c8a8 0%,
-      #2b9fd8 50%,
-      #e0408f 100%
-    );
-    --nd-glow: 0 0 12px -3px rgba(0, 200, 168, 0.5),
-      0 0 26px -8px rgba(43, 159, 216, 0.36);
-  }
+.root[data-theme='dark'] {
+  color-scheme: dark;
 }

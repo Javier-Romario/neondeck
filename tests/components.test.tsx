@@ -169,3 +169,14 @@ describe('BrailleLoader', () => {
     expect(el.dataset.variant).toBe('spin');
   });
 });
+
+describe('Panel rig container query', () => {
+  it('targets trails by data-side, not by a class that would hash into a different module scope', async () => {
+    const { readFileSync } = await import('node:fs');
+    const css = readFileSync(new URL('../components/Panel.module.css', import.meta.url), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
+    const block = /@container[^{]*\{([\s\S]*?)\n\}/.exec(css);
+    expect(block).not.toBeNull();
+    expect(block![1]).toContain('.rig > [data-side]');
+    expect(block![1]).not.toMatch(/\.trail\b/);
+  });
+});

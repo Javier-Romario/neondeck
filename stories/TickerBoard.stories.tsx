@@ -90,9 +90,11 @@ WrappedWindow.args = {
   message: 'SYS.LOG // FEED',
 };
 
+/** `theme` scopes color-scheme to the board, so it stays light even when the page is dark. */
 export const LightTheme: Story = () => (
-  <Light>
+  <>
     <TickerBoard
+      theme="light"
       message="SYS.UPLINK // LIGHT MODE"
       messageTone="magenta"
       tickerLabel="NEONDECK"
@@ -104,7 +106,7 @@ export const LightTheme: Story = () => (
         Light mode: the glass fill, gradient borders, glow and chamfered corners all soften for a bright backdrop.
       </Blurb>
     </TickerBoard>
-  </Light>
+  </>
 );
 
 const Blurb: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
@@ -123,12 +125,3 @@ const Blurb: React.FC<{ title: string; children: React.ReactNode }> = ({ title, 
     {children}
   </div>
 );
-
-const Light: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  React.useEffect(() => {
-    document.documentElement.setAttribute('data-theme', 'light');
-    return () => document.documentElement.removeAttribute('data-theme');
-  }, []);
-
-  return <>{children}</>;
-};

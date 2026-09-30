@@ -148,7 +148,10 @@ import Card from '@components/Card';
 
 ## // Theming — glass & neon
 
-All color comes from `global.css`. Re-theme the whole deck by overriding tokens:
+All color comes from `global.css`. Every token is `light-dark(light, dark)`, keyed off
+`color-scheme`: `html[data-theme="light" | "dark"]` wins, otherwise the OS preference applies.
+Any subtree can flip itself with its own `color-scheme` (e.g. `<TickerBoard theme="light">`).
+Re-theme the whole deck by overriding tokens:
 
 ```css
 body {
@@ -256,6 +259,8 @@ presets), trail route parsing, render contracts for `Panel` / `Ticker` / `Ticker
 bundled font files).
 
 ## // Component playground (Ladle)
+
+Ladle's light/dark toggle drives `html[data-theme]`, so stories and the Ladle chrome always agree.
 
 Components are exercised in [Ladle](https://ladle.dev) — a fast Vite-based
 Storybook alternative. Stories live in `stories/*.stories.tsx` and use the CSF

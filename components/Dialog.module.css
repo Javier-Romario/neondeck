@@ -1,7 +1,7 @@
 .backdrop {
   display: block;
   padding: 1rem;
-  background: rgba(4, 7, 11, 0.5);
+  background: var(--theme-overlay);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   border: 1px solid var(--theme-border);

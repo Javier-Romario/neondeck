@@ -4,7 +4,7 @@
   justify-content: space-between;
   gap: 12px;
   padding: calc(var(--theme-line-height-base) * 0.5rem) 2ch;
-  background: rgba(7, 12, 19, 0.66);
+  background: light-dark(rgba(255, 255, 255, 0.66), rgba(7, 12, 19, 0.66));
   border: 1px solid var(--theme-border);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);

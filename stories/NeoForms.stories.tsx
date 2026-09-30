@@ -8,7 +8,6 @@ import NeoInput from '@components/NeoInput';
 import NeoSelect from '@components/NeoSelect';
 import NeoTextArea from '@components/NeoTextArea';
 
-import { NeoThemeToggle } from './NeoTheme';
 
 const TONES = ['teal', 'magenta', 'yellow', 'green', 'violet', 'orange', 'red', 'blue'] as const;
 
@@ -18,7 +17,6 @@ export default {
 
 export const NeoInputField: Story<{ label: string; placeholder: string; tone: string }> = ({ label, placeholder, tone }) => (
   <>
-    <NeoThemeToggle />
     <NeoInput label={label} placeholder={placeholder} autoComplete="off" tone={tone as any} />
   </>
 );
@@ -27,7 +25,6 @@ NeoInputField.argTypes = { tone: { control: { type: 'select', options: TONES } }
 
 export const NeoTextAreaField: Story<{ tone: string }> = ({ tone }) => (
   <>
-    <NeoThemeToggle />
     <NeoTextArea
       tone={tone as any}
       autoPlay="The sky above the port was the color of television, tuned to a dead channel."
@@ -39,7 +36,6 @@ NeoTextAreaField.argTypes = { tone: { control: { type: 'select', options: TONES 
 
 export const NeoSelectField: Story<{ value: string; tone: string }> = ({ value, tone }) => (
   <>
-    <NeoThemeToggle />
     <NeoSelect
       name="sector"
       options={['Neo-Tokyo', 'Night City', 'Chiba City', 'The Sprawl']}
@@ -56,7 +52,6 @@ NeoSelectField.argTypes = {
 
 export const NeoCheckboxes: Story<{ tone: string }> = ({ tone }) => (
   <>
-    <NeoThemeToggle />
     <NeoCheckbox name="jack" defaultChecked tone={tone as any}>
       Jack into the matrix
     </NeoCheckbox>
@@ -73,7 +68,6 @@ NeoCheckboxes.argTypes = { tone: { control: { type: 'select', options: TONES } }
 
 export const NeoLoaders: Story<{ tone: string }> = ({ tone }) => (
   <>
-    <NeoThemeToggle />
     <NeoBarLoader progress={64} tone={tone as any} />
     <br />
     <NeoBarLoader intervalRate={80} tone={tone as any} />
@@ -93,7 +87,6 @@ NeoLoaders.argTypes = { tone: { control: { type: 'select', options: TONES } } };
 
 export const NeoFormPlayground = () => (
   <>
-    <NeoThemeToggle />
     <div style={{ display: 'grid', gap: 20, maxWidth: 560 }}>
       <NeoInput label="HANDLE" placeholder="type your alias" autoComplete="off" tone="teal" />
       <NeoSelect

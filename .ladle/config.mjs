@@ -2,6 +2,9 @@ export default {
   stories: 'stories/**/*.stories.{js,jsx,ts,tsx}',
   viteConfig: 'vite.config.mjs',
   outDir: 'build',
+  addons: {
+    theme: { enabled: true, defaultState: 'dark' },
+  },
   // Responsive sidebar: Ladle pins the aside to a fixed flex-basis (0 0 12em)
   // so story names get clipped. Size it to its content instead, with a cap so
   // it never pushes the preview off screen.
