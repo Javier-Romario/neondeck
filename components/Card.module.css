@@ -1,36 +1,4 @@
-/* wrapper carries the neumorphic drop-shadow so it follows the chamfered shape */
-.frame {
-  display: block;
-  filter: var(--neo-drop);
-}
-
-.card {
-  position: relative;
-  display: block;
-
-  --nd-cut: 18px;
-
-  --nd-glass: linear-gradient(
-    180deg,
-    rgba(10, 17, 28, 0.6) 0%,
-    rgba(7, 12, 19, 0.42) 100%
-  );
-
-  background: var(--nd-glass);
-  backdrop-filter: blur(12px) saturate(140%);
-  -webkit-backdrop-filter: blur(12px) saturate(140%);
-
-  /* 45° cutouts on two opposite corners (top-left + bottom-right) */
-  clip-path: polygon(
-    var(--nd-cut) 0,
-    100% 0,
-    100% calc(100% - var(--nd-cut)),
-    calc(100% - var(--nd-cut)) 100%,
-    0 100%,
-    0 var(--nd-cut)
-  );
-}
-
+/* chamfers, glass, border and shadow live in Panel */
 .children {
   display: block;
   padding-top: calc(var(--theme-line-height-base) * 0.5rem);
@@ -55,23 +23,4 @@
   letter-spacing: 1px;
   color: var(--theme-focused-foreground);
   text-shadow: 0 0 10px var(--theme-focused-foreground-subdued);
-}
-
-/* ---- light mode: swap dark glass for bright frosted glass ---- */
-html[data-theme='light'] .card {
-  --nd-glass: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.74) 0%,
-    rgba(240, 246, 250, 0.56) 100%
-  );
-}
-
-@media (prefers-color-scheme: light) {
-  html:not([data-theme='dark']) .card {
-    --nd-glass: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.74) 0%,
-      rgba(240, 246, 250, 0.56) 100%
-    );
-  }
 }

@@ -1,29 +1,8 @@
-import styles from '@components/CardDouble.module.css';
-
 import * as React from 'react';
+import Card from '@components/Card';
+import type { CardProps } from '@components/Card';
 
-interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
-  children?: React.ReactNode;
-  title?: string | any;
-  mode?: string | any;
-  style?: any;
-}
-
-const CardDouble: React.FC<CardProps> = ({ children, mode, title, style, ...rest }) => {
-  let titleElement = (
-    <header className={styles.action}>
-      {title ? <h2 className={styles.title}>{title}</h2> : null}
-    </header>
-  );
-
-  return (
-    <div className={styles.frame}>
-      <article className={styles.card} style={style} {...rest}>
-        {titleElement}
-        <section className={styles.children}>{children}</section>
-      </article>
-    </div>
-  );
-};
+/** @deprecated Identical to `Card`; kept for backward compatibility. */
+const CardDouble: React.FC<CardProps> = (props) => <Card {...props} />;
 
 export default CardDouble;

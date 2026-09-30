@@ -1,0 +1,76 @@
+/*
+ * Layers (back → front), all absolutely filling .panel:
+ *   halo   – drop-shadow + neon glow, clipped to *outside* the shape
+ *   ring   – neon edge, clipped to (outer − inner)
+ *   glass  – frosted fill, clipped to the inset shape
+ * None of them is an ancestor of another, so backdrop-filter still sees the page.
+ */
+.panel {
+  --nd-glass: linear-gradient(180deg, rgba(10, 17, 28, 0.6) 0%, rgba(7, 12, 19, 0.42) 100%);
+  --panel-pad: 16px 24px;
+
+  position: relative;
+  display: block;
+  color: var(--theme-text);
+}
+
+.halo,
+.ring,
+.glass {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.halo {
+  clip-path: var(--panel-halo);
+  filter: var(--neo-drop) drop-shadow(0 0 5px var(--tone-soft, rgba(0, 255, 209, 0.45)));
+}
+
+.panel[data-flat] .halo {
+  display: none;
+}
+
+.silhouette {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  clip-path: var(--panel-outer);
+}
+
+.ring {
+  clip-path: var(--panel-ring);
+  background: linear-gradient(
+    135deg,
+    var(--tone, var(--neon-teal)) 0%,
+    color-mix(in srgb, var(--tone, var(--neon-teal)) 35%, transparent) 55%,
+    var(--tone, var(--neon-teal)) 100%
+  );
+}
+
+.glass {
+  clip-path: var(--panel-inner);
+  background: var(--nd-glass);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+}
+
+.content {
+  position: relative;
+  padding: var(--panel-pad);
+}
+
+.content[data-clip] {
+  clip-path: var(--panel-inner);
+}
+
+/* ---- light mode ---- */
+html[data-theme='light'] .panel {
+  --nd-glass: linear-gradient(180deg, rgba(255, 255, 255, 0.74) 0%, rgba(240, 246, 250, 0.56) 100%);
+}
+
+@media (prefers-color-scheme: light) {
+  html:not([data-theme='dark']) .panel {
+    --nd-glass: linear-gradient(180deg, rgba(255, 255, 255, 0.74) 0%, rgba(240, 246, 250, 0.56) 100%);
+  }
+}

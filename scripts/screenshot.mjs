@@ -34,5 +34,12 @@ await ladle.goto('http://localhost:61000/?story=ticker-board--wrapped-card', { w
 await ladle.waitForTimeout(1800);
 await shot(ladle, 'ladle.png');
 
+// --- Panel presets ---
+const panels = await browser.newPage({ viewport: { width: 1280, height: 470 } });
+await panels.goto('http://localhost:61000/?story=panel--presets&mode=preview', { waitUntil: 'networkidle' });
+await panels.evaluate(() => (document.documentElement.dataset.theme = 'dark'));
+await panels.waitForTimeout(1800);
+await shot(panels, 'panels.png');
+
 await browser.close();
 console.log('done');

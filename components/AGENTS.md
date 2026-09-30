@@ -50,26 +50,53 @@ SRCL-shaped primitive retuned for cyberpunk glass.
   ```
 - **Theming:** `--theme-background-modal`, `--theme-focused-foreground`, `--neon-*`
 
+## Panel
+
+- **Path:** `components/Panel.tsx` (geometry in `common/shape.ts`)
+- **Purpose:** Base chamfered glass surface. Every edge is horizontal, vertical or 45°; corners can be chamfered and each side can carry any number of trapezoid notches (Wipeout-style HUD). Three clipped sibling layers — neon halo/drop-shadow, neon edge ring, frosted glass — so the border and glow follow every diagonal (plain `clip-path` + `border` cannot). `Card`, `CardDouble` and `NeoCard` are built on it.
+- **Props:**
+  ```ts
+  interface PanelProps extends React.HTMLAttributes<HTMLDivElement> {
+    shape?: PanelShape | Cuts;  // 'slab' | 'chamfer' | 'wipeout' | 'terminal' | custom
+    tone?: NeonTone;
+    border?: number;            // ring width px, default 1.5
+    flat?: boolean;             // no halo / drop shadow
+    clipContent?: boolean;      // clip children to the inner shape, default true
+  }
+
+  interface Cuts {
+    tl?: number; tr?: number; br?: number; bl?: number;   // corner chamfers, px
+    top?: Notch[]; right?: Notch[]; bottom?: Notch[]; left?: Notch[];
+  }
+  interface Notch {
+    at: number | string;        // px or 'NN%' along the clockwise walk of that side
+    width: number;              // opening width, px
+    depth?: number;             // ≤ width/2 keeps sides at 45°; default 8
+    anchor?: 'start' | 'center' | 'end';
+  }
+  ```
+- **CSS hooks:** `--panel-pad` (content padding), `--nd-glass` (fill gradient). `shapePaths(cuts, border)` is exported if you need the `polygon()` strings elsewhere.
+- **Theming:** `--neon-*`, `--neo-drop`, `--theme-text`; `--tone` / `--tone-soft` come from the shared `[data-tone]` rules in `global.css`.
+
 ## Card
 
 - **Path:** `components/Card.tsx`
-- **Purpose:** Glass panel with neon corner brackets, a title bar, and three title modes (`default`, `'left'`, `'right'`).
+- **Purpose:** `Panel` with a centred title bar and a padded, horizontally scrollable body.
 - **Props:**
   ```ts
-  interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  interface CardProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
     children?: React.ReactNode;
-    title?: string | any;
-    mode?: string | any;
+    title?: React.ReactNode;
+    mode?: string;
+    shape?: PanelShape | Cuts;  // default 'slab'
   }
   ```
-- **Theming:** `--theme-panel`, `--theme-border`, `--theme-text`, `--theme-focused-foreground`
+- **Theming:** as `Panel` + `--theme-focused-foreground`
 
 ## CardDouble
 
 - **Path:** `components/CardDouble.tsx`
-- **Purpose:** Double-stroked variant of `Card` for nested/emphasis groupings.
-- **Props:** same as `Card` plus `style`.
-- **Theming:** same as `Card` + `--theme-border-subdued`
+- **Purpose:** **Deprecated** alias of `Card` (was a copy-pasted duplicate). Use `Card`.
 
 ## Button
 
@@ -386,7 +413,7 @@ Every `Neo*` component mixes soft neumorphic extrusion (`--neo-surface` / `--neo
 tokens and `--theme-*` text re-key in `global.css` under `html[data-theme='light']` and
 `prefers-color-scheme: light`.
 
-Surfaces: `NeoButton`, `NeoCard`, `NeoToggle`, `NeoTicker` (see `stories/Neomorphic.stories.tsx`).
+Surfaces: `NeoButton`, `NeoCard` (built on `Panel`; accepts `shape`), `NeoToggle`, `NeoTicker` (see `stories/Neomorphic.stories.tsx`).
 
 ### Forms
 

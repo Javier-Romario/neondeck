@@ -409,3 +409,13 @@ html[data-theme='light'] body::after {
       repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 3px);
   }
 }
+
+/* ---- shared neon tone keys: any element with data-tone gets --tone / --tone-soft ---- */
+[data-tone='teal'] { --tone: var(--neon-teal); --tone-soft: rgba(0, 255, 209, 0.45); }
+[data-tone='magenta'] { --tone: var(--neon-magenta); --tone-soft: rgba(255, 45, 120, 0.45); }
+[data-tone='yellow'] { --tone: var(--neon-yellow); --tone-soft: rgba(255, 230, 109, 0.45); }
+[data-tone='green'] { --tone: var(--neon-green); --tone-soft: rgba(0, 255, 157, 0.45); }
+[data-tone='violet'] { --tone: var(--neon-violet); --tone-soft: rgba(183, 139, 255, 0.45); }
+[data-tone='orange'] { --tone: var(--neon-orange); --tone-soft: rgba(255, 157, 45, 0.45); }
+[data-tone='red'] { --tone: var(--neon-red); --tone-soft: rgba(255, 77, 94, 0.45); }
+[data-tone='blue'] { --tone: var(--neon-blue); --tone-soft: rgba(45, 226, 255, 0.45); }

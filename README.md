@@ -26,9 +26,13 @@ through CSS custom properties (`--theme-*`, `--neon-*`, `--cp-*`).
 
 ![NEONDECK kitchen sink](docs/screenshots/hero.png)
 
-**Component grid** — neon-cornered glass cards:
+**Component grid** — chamfered glass cards:
 
 ![NEONDECK component grid](docs/screenshots/components.png)
+
+**Panel presets** — 45° chamfers + multi-notch sides, neon edge ring following every diagonal:
+
+![NEONDECK panel presets](docs/screenshots/panels.png)
 
 <div align="center">
   <img src="docs/screenshots/mobile.png" width="32%" alt="NEONDECK mobile" />
@@ -150,12 +154,35 @@ body {
 Tint classes ship ready: `body.tint-magenta`, `body.tint-yellow`, `body.tint-green`,
 `body.tint-violet`, `body.tint-orange`, `body.tint-red`, `body.tint-blue`.
 
+## // Chamfered panels
+
+`Panel` draws Wipeout-style HUD silhouettes: no square corners, and any side can carry
+several 45° notches. Pick a preset or pass a `Cuts` spec:
+
+```tsx
+<Panel shape="wipeout" tone="magenta">…</Panel>
+
+<Panel
+  shape={{
+    tl: 26, tr: 10, br: 26, bl: 10,
+    top: [{ at: 70, width: 24, depth: 6 }, { at: '70%', width: 44, depth: 10 }],
+    right: [{ at: '50%', anchor: 'center', width: 36, depth: 9 }],
+  }}
+>
+  …
+</Panel>
+```
+
+The neon edge and glow are separate clipped layers, so they follow every diagonal —
+something a plain `clip-path` + `border` can't do.
+
 ## // Component catalog
 
 | Primitive | Purpose |
 | --- | --- |
 | `Ticker`, `TickerBoard` | 📟 Scrolling marquee + edge message box |
-| `Card`, `CardDouble` | 🪟 Neon-cornered glass panels |
+| `Panel` | ◢ Chamfered glass base — 45° corners + multi-notch sides, neon edge ring |
+| `Card`, `NeoCard` | 🪟 Titled glass panels on top of `Panel` |
 | `Button` | ⚡ PRIMARY / SECONDARY, disabled |
 | `Window` | 🖥 Semi-transparent terminal frame with scanlines |
 | `Accordion`, `Dialog`, `Drawer`, `Select` | 🗂 Disclosure + overlay + menu |
