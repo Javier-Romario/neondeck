@@ -56,4 +56,10 @@ for (const entry of readdirSync(join(root, 'components'))) {
 copyFileSync(join(root, 'global.css'), join(dist, 'global.css'));
 copyFileSync(join(root, 'global-fonts.css'), join(dist, 'global-fonts.css'));
 
+// 4. Bundled fonts (+ their OFL licenses) sit next to global-fonts.css.
+mkdirSync(join(dist, 'fonts'), { recursive: true });
+for (const entry of readdirSync(join(root, 'fonts'))) {
+  copyFileSync(join(root, 'fonts', entry), join(dist, 'fonts', entry));
+}
+
 console.log('✓ build complete → dist/');

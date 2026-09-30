@@ -26,7 +26,7 @@
   outline: 0;
   resize: vertical;
   color: var(--theme-text);
-  font-family: var(--font-family-mono);
+  font-family: var(--font-family-code);
   font-size: var(--font-size);
   line-height: var(--theme-line-height-base);
 }

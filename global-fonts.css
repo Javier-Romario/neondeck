@@ -1,16 +1,36 @@
 /*
-NEONDECK fonts.
-Primary display/mono face is JetBrains Mono (system fallback unless bundled).
-To ship a custom cut (e.g. Berkeley Mono), drop your .woff2 into public/fonts
-and uncomment the block below, then point --font-family-mono in global.css at it.
+NEONDECK fonts — both under the SIL Open Font License 1.1 (see fonts/LICENSE-*.txt).
+
+  Primary   Monaspace Krypton Var (GitHub Next) — variable: wght 200–800, wdth 100–125, slnt -11–0.
+            Mechanical, squared-off; carries all UI text.
+  Secondary JetBrains Mono — code blocks, inputs and text areas, and the fallback for Krypton.
+
+`global.css` reads --font-family-mono (UI) and --font-family-code (code / inputs).
+Import this file once at the app root; skip it to fall back to system monospace.
 */
 
-/*
 @font-face {
-  font-family: 'Berkeley Mono';
-  src: url('/fonts/BerkeleyMono-Regular.woff2') format('woff2');
+  font-family: 'Monaspace Krypton';
+  src: url('./fonts/MonaspaceKryptonVar.woff2') format('woff2-variations'),
+    url('./fonts/MonaspaceKryptonVar.woff2') format('woff2');
+  font-weight: 200 800;
+  font-stretch: 100% 125%;
+  font-style: oblique 0deg 11deg;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('./fonts/JetBrainsMono-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
-*/
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('./fonts/JetBrainsMono-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

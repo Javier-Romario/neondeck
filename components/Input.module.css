@@ -6,7 +6,7 @@
   display: block;
   margin-bottom: 4px;
   color: var(--theme-muted);
-  font-family: var(--font-family-mono);
+  font-family: var(--font-family-code);
   font-size: 11px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
@@ -35,7 +35,7 @@
   border: 0;
   outline: 0;
   color: var(--theme-text);
-  font-family: var(--font-family-mono);
+  font-family: var(--font-family-code);
   font-size: var(--font-size);
 }
 

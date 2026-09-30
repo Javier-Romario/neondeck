@@ -66,7 +66,14 @@ Once, at your app root (`app/layout.tsx`, `main.tsx`, etc.):
 import '@javierromario/neondeck/global.css';
 ```
 
-`global-fonts.css` is optional — it loads the bundled cyberpunk display font.
+`global-fonts.css` is optional — it loads the bundled faces: **Monaspace Krypton** (variable,
+UI text) and **JetBrains Mono** (code blocks, inputs, and Krypton's fallback). Both ship under
+the SIL Open Font License 1.1 (`dist/fonts/LICENSE-*.txt`). Skip the import to fall back to
+system monospace.
+
+```tsx
+import '@javierromario/neondeck/global-fonts.css';
+```
 
 ### 2. Use the components
 

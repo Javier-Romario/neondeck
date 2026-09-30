@@ -54,7 +54,8 @@ section {
   --cp-glow-teal: 0 0 8px rgba(0, 255, 209, 0.55), 0 0 24px rgba(0, 255, 209, 0.22);
   --cp-glow-magenta: 0 0 8px rgba(255, 45, 120, 0.55), 0 0 24px rgba(255, 45, 120, 0.22);
 
-  --font-family-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-family-mono: 'Monaspace Krypton', 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-family-code: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --theme-line-height-base: 1.25;
   --font-size: 15px;
 
@@ -71,6 +72,7 @@ body {
   background: var(--theme-background);
   color: var(--theme-text);
   font-family: var(--font-family-mono);
+  font-feature-settings: 'calt' 1, 'liga' 1;
   line-height: calc(var(--theme-line-height-base) * 1rem);
   font-size: var(--font-size);
   font-weight: 400;
