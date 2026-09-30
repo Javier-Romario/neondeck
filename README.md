@@ -243,6 +243,18 @@ npm run build-ladle  # static Ladle build → build/
 npm run screenshot   # Playwright → docs/screenshots/*.png
 ```
 
+## // Tests
+
+```bash
+npm test          # vitest run
+npm run test:watch
+```
+
+Vitest + Testing Library. Covers the `Panel` geometry generator (45° invariant, uniform inset,
+presets), trail route parsing, render contracts for `Panel` / `Ticker` / `TickerBoard` /
+`BrailleLoader`, and CSS invariants (tone tokens, neumorphic tokens, braille frame tables,
+bundled font files).
+
 ## // Component playground (Ladle)
 
 Components are exercised in [Ladle](https://ladle.dev) — a fast Vite-based

@@ -96,7 +96,10 @@ function buildPoints(cuts: Cuts): Pt[] {
   // drop consecutive duplicates (square corners emit the same point twice)
   const same = (a: Pt, b: Pt) =>
     a.x.p === b.x.p && a.x.px === b.x.px && a.y.p === b.y.p && a.y.px === b.y.px;
-  const out = pts.filter((p, i) => !same(p, pts[(i + pts.length - 1) % pts.length]));
+  // keep the first point; drop any point equal to its predecessor, and a
+  // trailing point equal to the first (closing duplicate)
+  const out = pts.filter((p, i) => i === 0 || !same(p, pts[i - 1]));
+  if (out.length > 1 && same(out[out.length - 1], out[0])) out.pop();
   return out;
 }
 

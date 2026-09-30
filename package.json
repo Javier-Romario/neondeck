@@ -1,7 +1,7 @@
 {
   "name": "@javierromario/neondeck",
   "version": "0.1.3",
-  "description": "NEONDECK — a cyberpunk React component library. Terminal-monospace primitives (à la SRCL / www-sacred) rebuilt with neon glows, semi-transparent glass panels, and ticker-board edge readouts.",
+  "description": "NEONDECK \u2014 a cyberpunk React component library. Terminal-monospace primitives (\u00e0 la SRCL / www-sacred) rebuilt with neon glows, semi-transparent glass panels, and ticker-board edge readouts.",
   "license": "MIT",
   "engines": {
     "node": ">=18"
@@ -34,13 +34,15 @@
     "typecheck": "tsc --noEmit",
     "ladle": "ladle serve",
     "build-ladle": "ladle build",
-    "screenshot": "node scripts/screenshot.mjs"
+    "screenshot": "node scripts/screenshot.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "peerDependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
     "@react-three/drei": "^10.0.0",
     "@react-three/fiber": "^9.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "three": "^0.174.0"
   },
   "peerDependenciesMeta": {
@@ -62,14 +64,18 @@
     "@playwright/mcp": "^0.0.79",
     "@react-three/drei": "^10.0.0",
     "@react-three/fiber": "^9.0.0",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/react": "^16.3.3",
     "@types/node": "^22.10.0",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
+    "jsdom": "^30.1.1",
     "next": "^16.2.12",
     "playwright": "^1.63.0-alpha-2026-08-05",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "three": "^0.174.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.3"
   }
 }

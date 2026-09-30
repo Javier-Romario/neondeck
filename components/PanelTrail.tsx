@@ -34,9 +34,10 @@ interface PanelTrailProps extends TrailProps {
 
 const PAD = 6; // room for glow + bend nodes
 
-type Seg = { kind: "h" | "u" | "d"; len: number };
+export type Seg = { kind: "h" | "u" | "d"; len: number };
 
-function parseRoute(route: string): Seg[] {
+/** Parse `"h20 u14 h28"` → segments. Unknown tokens are ignored. */
+export function parseRoute(route: string): Seg[] {
   const out: Seg[] = [];
   for (const tok of route.trim().split(/\s+/)) {
     const m = /^([hud])(\d+(?:\.\d+)?)$/i.exec(tok);
@@ -47,6 +48,34 @@ function parseRoute(route: string): Seg[] {
       });
   }
   return out;
+}
+
+export interface RouteGeometry {
+  /** Polyline points, origin (0,0) at the panel edge, before shifting. */
+  pts: [number, number][];
+  /** y of the last point (cap centre) before shifting. */
+  yEnd: number;
+  svgW: number;
+  svgH: number;
+  /** Added to every y so the drawing fits in the svg with PAD around it. */
+  shift: number;
+}
+
+/** Walk a route outward from the panel edge; every u/d step is 45°. */
+export function routeGeometry(route: string, capH: number): RouteGeometry {
+  const pts: [number, number][] = [[0, 0]];
+  let x = 0;
+  let y = 0;
+  for (const s of parseRoute(route)) {
+    x += s.len;
+    if (s.kind === "u") y -= s.len;
+    if (s.kind === "d") y += s.len;
+    pts.push([x, y]);
+  }
+  const ys = pts.map((p) => p[1]);
+  const yMin = Math.min(...ys, y - capH / 2);
+  const yMax = Math.max(...ys, y + capH / 2);
+  return { pts, yEnd: y, svgW: x + PAD, svgH: yMax - yMin + PAD * 2, shift: -yMin + PAD };
 }
 
 const PanelTrail: React.FC<PanelTrailProps> = ({
@@ -62,27 +91,8 @@ const PanelTrail: React.FC<PanelTrailProps> = ({
   speed = 18,
   direction,
 }) => {
-  const segs = parseRoute(route);
-
-  // walk the route from (0,0) — panel edge — outward
-  const pts: [number, number][] = [[0, 0]];
-  let x = 0;
-  let y = 0;
-  for (const s of segs) {
-    x += s.len;
-    if (s.kind === "u") y -= s.len;
-    if (s.kind === "d") y += s.len;
-    pts.push([x, y]);
-  }
-  const yEnd = y;
   const capH = noCap ? 0 : capHeight;
-
-  const ys = pts.map((p) => p[1]);
-  const yMin = Math.min(...ys, yEnd - capH / 2);
-  const yMax = Math.max(...ys, yEnd + capH / 2);
-  const svgW = x;
-  const svgH = yMax - yMin + PAD * 2;
-  const shift = -yMin + PAD;
+  const { pts, yEnd, svgW, svgH, shift } = routeGeometry(route, capH);
 
   const points = pts.map(([px, py]) => `${px},${py + shift}`).join(" ");
   const bends = pts.slice(1, -1);
