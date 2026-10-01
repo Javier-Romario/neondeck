@@ -2,7 +2,8 @@
 
 import * as React from 'react';
 import CanvasShell from '@components/CanvasShell';
-import { hexToRgba } from '@common/color';
+import type { CanvasTheme } from '@common/theme';
+import { withAlpha } from '@common/theme';
 
 interface NeuralFieldProps extends React.HTMLAttributes<HTMLDivElement> {
   height?: number | string;
@@ -29,7 +30,7 @@ interface FieldState {
 
 const NeuralField: React.FC<NeuralFieldProps> = ({
   height,
-  color = '#00ffd1',
+  color,
   nodeCount = 70,
   linkDistance = 110,
   nodeRadius = 2,
@@ -41,7 +42,8 @@ const NeuralField: React.FC<NeuralFieldProps> = ({
   const mouse = React.useRef<{ x: number; y: number } | null>(null);
 
   const draw = React.useCallback(
-    (ctx: CanvasRenderingContext2D, w: number, h: number) => {
+    (ctx: CanvasRenderingContext2D, w: number, h: number, _t: number, _frame: number, theme: CanvasTheme) => {
+      const fg = color ?? theme.fg;
       if (!state.current || state.current.w !== w || state.current.h !== h) {
         const nodes = new Array(nodeCount).fill(0).map(() => ({
           x: Math.random() * w,
@@ -96,7 +98,7 @@ const NeuralField: React.FC<NeuralFieldProps> = ({
           const d2 = dx * dx + dy * dy;
           if (d2 < linkDistance * linkDistance) {
             const alpha = (1 - Math.sqrt(d2) / linkDistance) * 0.4;
-            ctx.strokeStyle = hexToRgba(color, alpha);
+            ctx.strokeStyle = withAlpha(fg, alpha);
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
@@ -106,7 +108,7 @@ const NeuralField: React.FC<NeuralFieldProps> = ({
       }
 
       // nodes
-      ctx.fillStyle = color;
+      ctx.fillStyle = fg;
       for (const n of s.nodes) {
         ctx.beginPath();
         ctx.arc(n.x, n.y, nodeRadius, 0, Math.PI * 2);

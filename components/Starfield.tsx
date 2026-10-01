@@ -2,7 +2,8 @@
 
 import * as React from 'react';
 import CanvasShell from '@components/CanvasShell';
-import { hexToRgba } from '@common/color';
+import type { CanvasTheme } from '@common/theme';
+import { withAlpha } from '@common/theme';
 
 interface StarfieldProps extends React.HTMLAttributes<HTMLDivElement> {
   height?: number | string;
@@ -22,11 +23,12 @@ function makeStar(): Star {
   return { ux: Math.cos(a), uy: Math.sin(a), z: 1 };
 }
 
-const Starfield: React.FC<StarfieldProps> = ({ height, color = '#00ffd1', count = 220, speed = 1, ...rest }) => {
+const Starfield: React.FC<StarfieldProps> = ({ height, color, count = 220, speed = 1, ...rest }) => {
   const stars = React.useRef<Star[] | null>(null);
 
   const draw = React.useCallback(
-    (ctx: CanvasRenderingContext2D, w: number, h: number) => {
+    (ctx: CanvasRenderingContext2D, w: number, h: number, _t: number, _frame: number, theme: CanvasTheme) => {
+      const fg = color ?? theme.fg;
       if (!stars.current) {
         stars.current = new Array(count).fill(0).map(() => makeStar());
       }
@@ -50,7 +52,7 @@ const Starfield: React.FC<StarfieldProps> = ({ height, color = '#00ffd1', count 
         const ppy = cy + (st.uy * R) / prevZ;
         const alpha = Math.min(1, (1 - st.z) * 2);
 
-        ctx.strokeStyle = hexToRgba(color, alpha);
+        ctx.strokeStyle = withAlpha(fg, alpha);
         ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.moveTo(pp, ppy);

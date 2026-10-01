@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import CanvasShell from '@components/CanvasShell';
+import type { CanvasTheme } from '@common/theme';
 
 interface GlitchTextProps extends React.HTMLAttributes<HTMLDivElement> {
   text: string;
@@ -16,9 +17,9 @@ interface GlitchTextProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const GlitchText: React.FC<GlitchTextProps> = ({
   text,
-  color = '#00ffd1',
-  accentA = '#ff2d78',
-  accentB = '#2de2ff',
+  color,
+  accentA,
+  accentB,
   fontSize = 44,
   height = 160,
   glitchRate = 0.08,
@@ -26,7 +27,10 @@ const GlitchText: React.FC<GlitchTextProps> = ({
   ...rest
 }) => {
   const draw = React.useCallback(
-    (ctx: CanvasRenderingContext2D, w: number, h: number) => {
+    (ctx: CanvasRenderingContext2D, w: number, h: number, _t: number, _frame: number, theme: CanvasTheme) => {
+      const fg = color ?? theme.fg;
+      const a = accentA ?? theme.accent;
+      const b = accentB ?? theme.accent2;
       ctx.clearRect(0, 0, w, h);
 
       const fs = Math.min(fontSize, h * 0.6);
@@ -42,12 +46,12 @@ const GlitchText: React.FC<GlitchTextProps> = ({
       const split = intensity * 0.5;
 
       ctx.globalAlpha = 0.9;
-      ctx.fillStyle = accentA;
+      ctx.fillStyle = a;
       ctx.fillText(text, cx - split + jx, cy + jy);
-      ctx.fillStyle = accentB;
+      ctx.fillStyle = b;
       ctx.fillText(text, cx + split + jx, cy + jy);
       ctx.globalAlpha = 1;
-      ctx.fillStyle = color;
+      ctx.fillStyle = fg;
       ctx.fillText(text, cx + jx, cy + jy);
 
       // periodic slice glitch: displace horizontal bands

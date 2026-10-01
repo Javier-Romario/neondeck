@@ -2,7 +2,8 @@
 
 import * as React from 'react';
 import CanvasShell from '@components/CanvasShell';
-import { hexToRgba } from '@common/color';
+import type { CanvasTheme } from '@common/theme';
+import { withAlpha } from '@common/theme';
 
 interface SpectrumProps extends React.HTMLAttributes<HTMLDivElement> {
   height?: number | string;
@@ -19,7 +20,7 @@ interface SpectrumState {
 
 const Spectrum: React.FC<SpectrumProps> = ({
   height,
-  color = '#00ffd1',
+  color,
   bars = 48,
   speed = 0.12,
   glow = true,
@@ -28,7 +29,8 @@ const Spectrum: React.FC<SpectrumProps> = ({
   const state = React.useRef<SpectrumState | null>(null);
 
   const draw = React.useCallback(
-    (ctx: CanvasRenderingContext2D, w: number, h: number) => {
+    (ctx: CanvasRenderingContext2D, w: number, h: number, _t: number, _frame: number, theme: CanvasTheme) => {
+      const fg = color ?? theme.fg;
       if (!state.current) {
         state.current = {
           targets: new Array(bars).fill(0.2),
@@ -51,12 +53,12 @@ const Spectrum: React.FC<SpectrumProps> = ({
         const x = i * (bw + gap);
         const y = h - bh;
         if (glow) {
-          ctx.shadowColor = color;
+          ctx.shadowColor = fg;
           ctx.shadowBlur = 8;
         }
         const grad = ctx.createLinearGradient(0, y, 0, h);
-        grad.addColorStop(0, color);
-        grad.addColorStop(1, hexToRgba(color, 0.15));
+        grad.addColorStop(0, fg);
+        grad.addColorStop(1, withAlpha(fg, 0.15));
         ctx.fillStyle = grad;
         ctx.fillRect(x, y, bw, bh);
         ctx.shadowBlur = 0;

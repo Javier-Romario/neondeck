@@ -2,7 +2,8 @@
 
 import * as React from 'react';
 import CanvasShell from '@components/CanvasShell';
-import { hexToRgba } from '@common/color';
+import type { CanvasTheme } from '@common/theme';
+import { withAlpha } from '@common/theme';
 
 interface HexGridProps extends React.HTMLAttributes<HTMLDivElement> {
   height?: number | string;
@@ -14,14 +15,15 @@ interface HexGridProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const HexGrid: React.FC<HexGridProps> = ({
   height,
-  color = '#00ffd1',
+  color,
   size = 26,
   pulseRate = 0.4,
   glow = true,
   ...rest
 }) => {
   const draw = React.useCallback(
-    (ctx: CanvasRenderingContext2D, w: number, h: number, t: number) => {
+    (ctx: CanvasRenderingContext2D, w: number, h: number, t: number, _frame: number, theme: CanvasTheme) => {
+      const fg = color ?? theme.fg;
       ctx.clearRect(0, 0, w, h);
 
       const rowH = Math.sqrt(3) * size;
@@ -52,14 +54,14 @@ const HexGrid: React.FC<HexGridProps> = ({
           ctx.closePath();
 
           if (inWave && glow) {
-            ctx.strokeStyle = color;
-            ctx.shadowColor = color;
+            ctx.strokeStyle = fg;
+            ctx.shadowColor = fg;
             ctx.shadowBlur = 10;
             ctx.stroke();
-            ctx.fillStyle = hexToRgba(color, 0.07);
+            ctx.fillStyle = withAlpha(fg, 0.07);
             ctx.fill();
           } else {
-            ctx.strokeStyle = hexToRgba(color, 0.28);
+            ctx.strokeStyle = withAlpha(fg, 0.28);
             ctx.shadowBlur = 0;
             ctx.stroke();
           }

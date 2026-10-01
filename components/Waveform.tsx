@@ -2,7 +2,8 @@
 
 import * as React from 'react';
 import CanvasShell from '@components/CanvasShell';
-import { hexToRgba } from '@common/color';
+import type { CanvasTheme } from '@common/theme';
+import { withAlpha } from '@common/theme';
 
 interface WaveformProps extends React.HTMLAttributes<HTMLDivElement> {
   height?: number | string;
@@ -15,7 +16,7 @@ interface WaveformProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const Waveform: React.FC<WaveformProps> = ({
   height,
-  color = '#00ffd1',
+  color,
   speed = 1,
   amplitude = 0.32,
   layers = 3,
@@ -23,11 +24,12 @@ const Waveform: React.FC<WaveformProps> = ({
   ...rest
 }) => {
   const draw = React.useCallback(
-    (ctx: CanvasRenderingContext2D, w: number, h: number, t: number) => {
+    (ctx: CanvasRenderingContext2D, w: number, h: number, t: number, _frame: number, theme: CanvasTheme) => {
+      const fg = color ?? theme.fg;
       ctx.clearRect(0, 0, w, h);
 
       // faint baseline grid
-      ctx.strokeStyle = 'rgba(95, 143, 136, 0.15)';
+      ctx.strokeStyle = withAlpha(theme.muted, 0.25);
       ctx.lineWidth = 1;
       ctx.beginPath();
       for (let i = 1; i < 4; i++) {
@@ -39,13 +41,13 @@ const Waveform: React.FC<WaveformProps> = ({
 
       const mid = h / 2;
       ctx.lineWidth = 2;
-      ctx.shadowColor = color;
+      ctx.shadowColor = fg;
       ctx.shadowBlur = 14;
 
       for (let L = 0; L < layers; L++) {
         const freq = 1 + L * 2.3;
         const amp = (amplitude * h * 0.5) / (1 + L * 0.6);
-        ctx.strokeStyle = L === 0 ? color : hexToRgba(color, Math.max(0.05, 0.4 - L * 0.1));
+        ctx.strokeStyle = L === 0 ? fg : withAlpha(fg, Math.max(0.05, 0.4 - L * 0.1));
         ctx.beginPath();
         for (let x = 0; x <= w; x += 2) {
           const nx = x / w;
@@ -63,7 +65,7 @@ const Waveform: React.FC<WaveformProps> = ({
       if (Math.random() < glitch) {
         const gx = Math.random() * w;
         const gy = Math.random() * h;
-        ctx.strokeStyle = color;
+        ctx.strokeStyle = fg;
         ctx.globalAlpha = 0.9;
         ctx.beginPath();
         ctx.moveTo(gx, gy);

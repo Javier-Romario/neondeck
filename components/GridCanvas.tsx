@@ -2,7 +2,8 @@
 
 import * as React from 'react';
 import CanvasShell from '@components/CanvasShell';
-import { hexToRgba } from '@common/color';
+import type { CanvasTheme } from '@common/theme';
+import { withAlpha } from '@common/theme';
 
 interface GridCanvasProps extends React.HTMLAttributes<HTMLDivElement> {
   height?: number | string;
@@ -15,31 +16,33 @@ interface GridCanvasProps extends React.HTMLAttributes<HTMLDivElement> {
 const GridCanvas: React.FC<GridCanvasProps> = ({
   height,
   speed = 1.2,
-  color = '#00ffd1',
+  color,
   horizon = 0.42,
-  sunColor = '#ff2d78',
+  sunColor,
   ...rest
 }) => {
   const draw = React.useCallback(
-    (ctx: CanvasRenderingContext2D, w: number, h: number, t: number) => {
+    (ctx: CanvasRenderingContext2D, w: number, h: number, t: number, _frame: number, theme: CanvasTheme) => {
+      const fg = color ?? theme.fg;
+      const sun = sunColor ?? theme.accent;
       ctx.clearRect(0, 0, w, h);
       const horizonY = h * horizon;
       const vanishX = w / 2;
 
       // sky
       const sky = ctx.createLinearGradient(0, 0, 0, horizonY);
-      sky.addColorStop(0, 'rgba(4, 7, 11, 0.98)');
-      sky.addColorStop(1, 'rgba(8, 14, 23, 0.9)');
+      sky.addColorStop(0, withAlpha(theme.bg, 0.98));
+      sky.addColorStop(1, withAlpha(theme.bg2, 0.9));
       ctx.fillStyle = sky;
       ctx.fillRect(0, 0, w, horizonY);
 
       // synthwave sun
-      if (sunColor !== 'transparent') {
+      if (sun !== 'transparent') {
         const r = Math.min(w, h) * 0.16;
-        const sun = ctx.createLinearGradient(0, horizonY - r, 0, horizonY + r * 0.1);
-        sun.addColorStop(0, sunColor);
-        sun.addColorStop(1, 'rgba(0,0,0,0)');
-        ctx.fillStyle = sun;
+        const sunGrad = ctx.createLinearGradient(0, horizonY - r, 0, horizonY + r * 0.1);
+        sunGrad.addColorStop(0, sun);
+        sunGrad.addColorStop(1, withAlpha(sun, 0));
+        ctx.fillStyle = sunGrad;
         ctx.beginPath();
         ctx.arc(vanishX, horizonY, r, Math.PI, 0);
         ctx.fill();
@@ -48,7 +51,7 @@ const GridCanvas: React.FC<GridCanvasProps> = ({
         ctx.beginPath();
         ctx.rect(0, horizonY, w, h);
         ctx.clip();
-        ctx.fillStyle = 'rgba(4, 7, 11, 0.92)';
+        ctx.fillStyle = withAlpha(theme.bg, 0.92);
         for (let i = 0; i < 6; i++) {
           const sy = horizonY + 2 + i * (r / 6);
           ctx.fillRect(0, sy, w, (r / 6) * (0.5 - i * 0.055));
@@ -58,20 +61,20 @@ const GridCanvas: React.FC<GridCanvasProps> = ({
 
       // horizon glow
       const glow = ctx.createLinearGradient(0, horizonY - 40, 0, horizonY);
-      glow.addColorStop(0, 'rgba(0,0,0,0)');
-      glow.addColorStop(1, hexToRgba(color, 0.35));
+      glow.addColorStop(0, withAlpha(fg, 0));
+      glow.addColorStop(1, withAlpha(fg, 0.35));
       ctx.fillStyle = glow;
       ctx.fillRect(0, horizonY - 40, w, 40);
 
       // ground
       const ground = ctx.createLinearGradient(0, horizonY, 0, h);
-      ground.addColorStop(0, 'rgba(10, 17, 28, 0.85)');
-      ground.addColorStop(1, 'rgba(4, 7, 11, 0.98)');
+      ground.addColorStop(0, withAlpha(theme.panel, 0.85));
+      ground.addColorStop(1, withAlpha(theme.bg, 0.98));
       ctx.fillStyle = ground;
       ctx.fillRect(0, horizonY, w, h - horizonY);
 
       // horizontal grid lines scrolling toward the viewer
-      ctx.strokeStyle = color;
+      ctx.strokeStyle = fg;
       ctx.lineWidth = 1;
       const rows = 16;
       const scroll = (t * speed) % 1;

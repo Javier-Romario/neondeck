@@ -87,4 +87,5 @@ export { useCanvas } from '@common/useCanvas';
 export type { CanvasDrawFn } from '@common/useCanvas';
 export * from '@common/utilities';
 export * from '@common/shape';
+export * from '@common/theme';
 export * from '@common/constants';

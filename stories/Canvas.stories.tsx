@@ -14,19 +14,21 @@ export default {
   title: 'Canvas + 3D',
 };
 
+// colour controls default to '' → the component falls back to the theme palette
+
 export const Grid: Story<{ color: string; horizon: number; sunColor: string }> = ({ color, horizon, sunColor }) => (
   <div style={{ maxWidth: 720 }}>
-    <GridCanvas height={320} color={color} horizon={horizon} sunColor={sunColor} />
+    <GridCanvas height={320} color={color || undefined} horizon={horizon} sunColor={sunColor || undefined} />
   </div>
 );
-Grid.args = { color: '#00ffd1', horizon: 0.42, sunColor: '#ff2d78' };
+Grid.args = { color: '', horizon: 0.42, sunColor: '' };
 
 export const Rain: Story<{ color: string; fontSize: number }> = ({ color, fontSize }) => (
   <div style={{ maxWidth: 720 }}>
-    <MatrixRain height={320} color={color} fontSize={fontSize} />
+    <MatrixRain height={320} color={color || undefined} fontSize={fontSize} />
   </div>
 );
-Rain.args = { color: '#00ff9d', fontSize: 16 };
+Rain.args = { color: '', fontSize: 16 };
 
 export const Field: Story<{ nodeCount: number; linkDistance: number }> = ({ nodeCount, linkDistance }) => (
   <div style={{ maxWidth: 720 }}>
@@ -37,31 +39,31 @@ Field.args = { nodeCount: 70, linkDistance: 110 };
 
 export const Signal: Story<{ color: string; layers: number }> = ({ color, layers }) => (
   <div style={{ maxWidth: 720 }}>
-    <Waveform height={240} color={color} layers={layers} />
+    <Waveform height={240} color={color || undefined} layers={layers} />
   </div>
 );
-Signal.args = { color: '#00ffd1', layers: 3 };
+Signal.args = { color: '', layers: 3 };
 
 export const Sweep: Story<{ color: string; sweepSpeed: number }> = ({ color, sweepSpeed }) => (
   <div style={{ maxWidth: 720 }}>
-    <Radar height={320} color={color} sweepSpeed={sweepSpeed} />
+    <Radar height={320} color={color || undefined} sweepSpeed={sweepSpeed} />
   </div>
 );
-Sweep.args = { color: '#00ffd1', sweepSpeed: 0.4 };
+Sweep.args = { color: '', sweepSpeed: 0.4 };
 
 export const Glitch: Story<{ text: string; color: string; intensity: number }> = ({ text, color, intensity }) => (
   <div style={{ maxWidth: 720 }}>
-    <GlitchText text={text} color={color} fontSize={56} height={200} intensity={intensity} />
+    <GlitchText text={text} color={color || undefined} fontSize={56} height={200} intensity={intensity} />
   </div>
 );
-Glitch.args = { text: 'NEONDECK', color: '#00ffd1', intensity: 6 };
+Glitch.args = { text: 'NEONDECK', color: '', intensity: 6 };
 
 export const Hologram3D: Story<{ shape: string; color: string }> = ({ shape, color }) => (
   <div style={{ maxWidth: 720 }}>
-    <Hologram shape={shape as any} color={color} accent="#ff2d78" height={400} />
+    <Hologram shape={shape as any} color={color || undefined} height={400} />
   </div>
 );
-Hologram3D.args = { shape: 'diamond', color: '#00ffd1' };
+Hologram3D.args = { shape: 'diamond', color: '' };
 Hologram3D.argTypes = {
   shape: {
     options: ['diamond', 'sphere', 'torus', 'knot', 'icosahedron'],

@@ -2,6 +2,8 @@
 
 import * as React from 'react';
 import CanvasShell from '@components/CanvasShell';
+import { withAlpha } from '@common/theme';
+import type { CanvasTheme } from '@common/theme';
 
 const KATAKANA =
   'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEFXYZ';
@@ -22,7 +24,7 @@ interface RainState {
 
 const MatrixRain: React.FC<MatrixRainProps> = ({
   height,
-  color = '#00ff9d',
+  color,
   fontSize = 16,
   speed = 1,
   density = 0.9,
@@ -31,7 +33,8 @@ const MatrixRain: React.FC<MatrixRainProps> = ({
   const state = React.useRef<RainState | null>(null);
 
   const draw = React.useCallback(
-    (ctx: CanvasRenderingContext2D, w: number, h: number) => {
+    (ctx: CanvasRenderingContext2D, w: number, h: number, _t: number, _frame: number, theme: CanvasTheme) => {
+      const fg = color ?? theme.green;
       const cols = Math.max(1, Math.floor(w / fontSize));
       if (!state.current || state.current.cols !== cols) {
         const drops = new Array(cols).fill(0).map(() => Math.floor(Math.random() * -40));
@@ -41,7 +44,7 @@ const MatrixRain: React.FC<MatrixRainProps> = ({
       const s = state.current;
 
       // translucent fade leaves ghost trails
-      ctx.fillStyle = 'rgba(4, 7, 11, 0.14)';
+      ctx.fillStyle = withAlpha(theme.bg, 0.14);
       ctx.fillRect(0, 0, w, h);
 
       ctx.font = `${fontSize}px 'JetBrains Mono', monospace`;
@@ -50,7 +53,7 @@ const MatrixRain: React.FC<MatrixRainProps> = ({
         const char = KATAKANA[Math.floor(Math.random() * KATAKANA.length)];
         const x = i * fontSize;
         const y = s.drops[i] * fontSize;
-        ctx.fillStyle = color;
+        ctx.fillStyle = fg;
         ctx.fillText(char, x, y);
         if (y > h && Math.random() > 0.975) {
           s.drops[i] = 0;

@@ -2,7 +2,8 @@
 
 import * as React from 'react';
 import CanvasShell from '@components/CanvasShell';
-import { hexToRgba } from '@common/color';
+import type { CanvasTheme } from '@common/theme';
+import { withAlpha } from '@common/theme';
 
 interface RadarProps extends React.HTMLAttributes<HTMLDivElement> {
   height?: number | string;
@@ -27,7 +28,7 @@ interface RadarState {
 
 const Radar: React.FC<RadarProps> = ({
   height,
-  color = '#00ffd1',
+  color,
   sweepSpeed = 0.4,
   blipRate = 0.03,
   maxBlips = 24,
@@ -36,7 +37,8 @@ const Radar: React.FC<RadarProps> = ({
   const state = React.useRef<RadarState | null>(null);
 
   const draw = React.useCallback(
-    (ctx: CanvasRenderingContext2D, w: number, h: number, t: number) => {
+    (ctx: CanvasRenderingContext2D, w: number, h: number, t: number, _frame: number, theme: CanvasTheme) => {
+      const fg = color ?? theme.fg;
       const cx = w / 2;
       const cy = h / 2;
       const r = Math.min(w, h) / 2 - 12;
@@ -47,11 +49,11 @@ const Radar: React.FC<RadarProps> = ({
       s.r = r;
 
       // translucent fade leaves sweeping trails
-      ctx.fillStyle = 'rgba(4, 7, 11, 0.1)';
+      ctx.fillStyle = withAlpha(theme.bg, 0.1);
       ctx.fillRect(0, 0, w, h);
 
       // rings + cross
-      ctx.strokeStyle = hexToRgba(color, 0.35);
+      ctx.strokeStyle = withAlpha(fg, 0.35);
       ctx.lineWidth = 1;
       ctx.beginPath();
       for (const f of [1, 0.66, 0.33]) {
@@ -79,7 +81,7 @@ const Radar: React.FC<RadarProps> = ({
           continue;
         }
         const alpha = Math.max(0, 1 - b.age / 160);
-        ctx.fillStyle = hexToRgba(color, alpha);
+        ctx.fillStyle = withAlpha(fg, alpha);
         ctx.beginPath();
         ctx.arc(b.x, b.y, 2.5, 0, Math.PI * 2);
         ctx.fill();
@@ -89,7 +91,7 @@ const Radar: React.FC<RadarProps> = ({
       const angle = t * sweepSpeed * Math.PI * 2;
       for (let g = 0; g < 10; g++) {
         const a = angle - g * 0.06;
-        ctx.strokeStyle = hexToRgba(color, 0.8 - g * 0.075);
+        ctx.strokeStyle = withAlpha(fg, 0.8 - g * 0.075);
         ctx.lineWidth = g === 0 ? 2 : 1;
         ctx.beginPath();
         ctx.moveTo(cx, cy);

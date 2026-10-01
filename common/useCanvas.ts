@@ -1,11 +1,16 @@
 import * as React from 'react';
 
+import { CANVAS_THEME, observeTheme, resolveThemeColors } from '@common/theme';
+import type { CanvasTheme } from '@common/theme';
+
 export type CanvasDrawFn = (
   ctx: CanvasRenderingContext2D,
   width: number,
   height: number,
   time: number,
   frame: number,
+  /** Theme palette resolved through the cascade; follows light/dark and tint classes. */
+  theme: CanvasTheme,
 ) => void;
 
 /**
@@ -44,6 +49,12 @@ export function useCanvas(draw: CanvasDrawFn, fps = 60) {
     const ro = new ResizeObserver(resize);
     ro.observe(canvas);
 
+    // the canvas sits in the cascade, so it can resolve var()/light-dark() for us
+    let theme = resolveThemeColors(canvas, CANVAS_THEME);
+    const unobserve = observeTheme(() => {
+      theme = resolveThemeColors(canvas, CANVAS_THEME);
+    });
+
     const step = (now: number) => {
       raf = requestAnimationFrame(step);
       const interval = 1000 / fps;
@@ -51,13 +62,14 @@ export function useCanvas(draw: CanvasDrawFn, fps = 60) {
       last = now - ((now - last) % interval);
       frame += 1;
       const rect = canvas.getBoundingClientRect();
-      drawRef.current(ctx, rect.width, rect.height, (now - start) / 1000, frame);
+      drawRef.current(ctx, rect.width, rect.height, (now - start) / 1000, frame, theme);
     };
 
     raf = requestAnimationFrame(step);
     return () => {
       cancelAnimationFrame(raf);
       ro.disconnect();
+      unobserve();
     };
   }, [fps]);
 

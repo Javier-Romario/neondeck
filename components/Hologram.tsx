@@ -7,6 +7,8 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Stars } from '@react-three/drei';
 import * as THREE from 'three';
 
+import { CANVAS_THEME, useThemeColors } from '@common/theme';
+
 export type HologramShape = 'diamond' | 'sphere' | 'torus' | 'knot' | 'icosahedron';
 
 interface HologramProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -98,8 +100,8 @@ function HaloRing({ accent }: { accent: string }) {
 
 const Hologram: React.FC<HologramProps> = ({
   shape = 'diamond',
-  color = '#00ffd1',
-  accent = '#ff2d78',
+  color: colorProp,
+  accent: accentProp,
   height = 360,
   interactive = true,
   autoRotate = true,
@@ -107,9 +109,13 @@ const Hologram: React.FC<HologramProps> = ({
   ...rest
 }) => {
   const [hovered, setHovered] = React.useState(false);
+  const rootRef = React.useRef<HTMLDivElement>(null);
+  const { colors } = useThemeColors(rootRef, CANVAS_THEME);
+  const color = colorProp ?? colors.fg;
+  const accent = accentProp ?? colors.accent;
 
   return (
-    <div className={styles.root} style={{ height, ...style }} {...rest}>
+    <div ref={rootRef} className={styles.root} style={{ height, ...style }} {...rest}>
       <Canvas camera={{ position: [0, 0, 6], fov: 45 }} dpr={[1, 2]}>
         <ambientLight intensity={0.4} />
         <pointLight position={[6, 6, 6]} intensity={40} color={color} />

@@ -7,6 +7,8 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Stars } from '@react-three/drei';
 import * as THREE from 'three';
 
+import { CANVAS_THEME, useThemeColors } from '@common/theme';
+
 interface NeonTunnelProps extends React.HTMLAttributes<HTMLDivElement> {
   height?: number | string;
   color?: string;
@@ -53,17 +55,22 @@ function Tunnel({ rings, speed, color, accent }: { rings: number; speed: number;
 
 const NeonTunnel: React.FC<NeonTunnelProps> = ({
   height = 360,
-  color = '#00ffd1',
-  accent = '#ff2d78',
+  color: colorProp,
+  accent: accentProp,
   speed = 6,
   rings = 40,
   style,
   ...rest
 }) => {
+  const rootRef = React.useRef<HTMLDivElement>(null);
+  const { colors } = useThemeColors(rootRef, CANVAS_THEME);
+  const color = colorProp ?? colors.fg;
+  const accent = accentProp ?? colors.accent;
+
   return (
-    <div className={styles.root} style={{ height, ...style }} {...rest}>
+    <div ref={rootRef} className={styles.root} style={{ height, ...style }} {...rest}>
       <Canvas camera={{ position: [0, 0, 5], fov: 70 }} dpr={[1, 2]}>
-        <color attach="background" args={['#04070b']} />
+        <color attach="background" args={[colors.bg]} />
         <Tunnel rings={rings} speed={speed} color={color} accent={accent} />
         <Stars radius={80} depth={60} count={2000} factor={4} fade speed={2} />
       </Canvas>

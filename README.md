@@ -151,6 +151,8 @@ import Card from '@components/Card';
 All color comes from `global.css`. Every token is `light-dark(light, dark)`, keyed off
 `color-scheme`: `html[data-theme="light" | "dark"]` wins, otherwise the OS preference applies.
 Any subtree can flip itself with its own `color-scheme` (e.g. `<TickerBoard theme="light">`).
+Canvas and 3D components resolve their palette from the same tokens at runtime, so leaving
+`color` unset keeps them on-theme too.
 Re-theme the whole deck by overriding tokens:
 
 ```css
