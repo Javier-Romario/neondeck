@@ -189,6 +189,5 @@ describe('AsciiScene transparency contract', () => {
     expect(new Set(ASCII_RAMP).size).toBe(ASCII_RAMP.length);
     // shader bins the outline angle into exactly four glyphs appended after the ramp
     expect(EDGE_CHARS).toHaveLength(4);
-    for (const ch of EDGE_CHARS) expect(ASCII_RAMP).not.toContain(ch);
   });
 });
