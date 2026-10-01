@@ -1,6 +1,6 @@
-/* The three.js canvas is hidden by drei's AsciiRenderer; what shows is a <table>
-   of glyphs it appends next to the canvas. No frame, no fill: the glyphs sit
-   straight on the page in the tone colour and the deck's code face. */
+/* The scene is rendered to an offscreen target, then a full-screen shader
+   turns each cell into a glyph from a font atlas. Empty cells output alpha 0,
+   so the canvas is transparent and the glyphs sit straight on the page. */
 .root {
   position: relative;
   display: block;
@@ -14,14 +14,17 @@
   display: block;
 }
 
-/* drei/three hardcode "courier new" — match the rest of the deck */
-.root table {
-  font-family: var(--font-family-code) !important;
-  color: inherit;
+/* glow rides the canvas alpha, so it hugs the glyphs and nothing else */
+.root[data-glow] canvas {
+  filter: drop-shadow(0 0 6px var(--tone-soft, var(--theme-focused-foreground-subdued)));
 }
 
-.root[data-glow] table {
-  text-shadow: 0 0 6px var(--tone-soft, var(--theme-focused-foreground-subdued));
+.probe {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  color: var(--tone);
 }
 
 .readout {

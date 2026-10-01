@@ -71,22 +71,39 @@ Hologram3D.argTypes = {
 
 const TONES = ['teal', 'magenta', 'yellow', 'green', 'violet', 'orange', 'red', 'blue'] as const;
 
-export const Ascii3D: Story<{ shape: string; tone: string; resolution: number; glow: boolean; interactive: boolean }> = ({
-  shape,
-  tone,
-  resolution,
-  glow,
-  interactive,
-}) => (
+export const Ascii3D: Story<{
+  shape: string;
+  tone: string;
+  accent: string;
+  cell: number;
+  edges: boolean;
+  glitch: boolean;
+  scanlines: boolean;
+  glow: boolean;
+  interactive: boolean;
+}> = ({ shape, tone, accent, cell, edges, glitch, scanlines, glow, interactive }) => (
   <div style={{ maxWidth: 720 }}>
-    <AsciiScene shape={shape as any} tone={tone as any} resolution={resolution} glow={glow} interactive={interactive} height={400} label="ASCII // TRANSPARENT" />
+    <AsciiScene
+      shape={shape as any}
+      tone={tone as any}
+      accent={accent as any}
+      cell={cell}
+      edges={edges}
+      glitch={glitch}
+      scanlines={scanlines}
+      glow={glow}
+      interactive={interactive}
+      height={400}
+      label="ASCII // TRANSPARENT"
+    />
   </div>
 );
-Ascii3D.args = { shape: 'knot', tone: 'teal', resolution: 0.18, glow: true, interactive: false };
+Ascii3D.args = { shape: 'knot', tone: 'teal', accent: 'magenta', cell: 14, edges: true, glitch: true, scanlines: true, glow: true, interactive: false };
 Ascii3D.argTypes = {
   shape: { options: ['knot', 'torus', 'sphere', 'diamond', 'icosahedron'], control: { type: 'select' } },
   tone: { options: TONES, control: { type: 'select' } },
-  resolution: { control: { type: 'range', min: 0.08, max: 0.35, step: 0.01 } },
+  accent: { options: TONES, control: { type: 'select' } },
+  cell: { control: { type: 'range', min: 8, max: 28, step: 1 } },
 };
 
 /** Sits inside a Panel like any other content — the glass shows through the glyphs. */
@@ -96,10 +113,10 @@ export const AsciiInPanel: Story = () => (
       <div>
         <strong style={{ letterSpacing: 2, textTransform: 'uppercase' }}>Ghost protocol</strong>
         <p style={{ margin: '8px 0 0', color: 'var(--theme-muted)' }}>
-          The renderer clears to alpha 0 and maps empty pixels to a space, so only the object is drawn — as text.
+          Rendered to an offscreen target, then a shader swaps each cell for a glyph. Empty cells are alpha 0, so only the object is drawn — as text.
         </p>
       </div>
-      <AsciiScene shape="torus" tone="magenta" height={260} resolution={0.2} />
+      <AsciiScene shape="torus" tone="magenta" accent="blue" height={260} cell={12} />
     </div>
   </Panel>
 );

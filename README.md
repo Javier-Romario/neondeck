@@ -230,7 +230,7 @@ ticker cap:
 | `ActionBar`, `ActionButton`, `ActionListItem`, `ButtonGroup` | ⌨ Command surfaces |
 | `Input`, `TextArea`, `Checkbox`, `BarLoader`, `BarProgress`, `BlockLoader` | ⌨ Forms + progress |
 | `BrailleLoader` | ⣿ CSS-only braille spinners (`@property` + `@counter-style`), optional glitch |
-| `AsciiScene` | ▚ three.js object rendered as transparent ASCII text, straight on the page |
+| `AsciiScene` | ▚ three.js object as transparent ASCII via a GPU glyph shader — outline, two-tone, reveal, glitch |
 | `Avatar`, `Breadcrumbs`, `Navigation` | 🪪 Identity + navigation |
 | `Grid`, `Row`, `RowSpaceBetween`, `ContentFluid`, `Indent` | 📐 Layout |
 | `Table`, `TableRow`, `TableColumn`, `ListItem`, `Text` | 🗃 Data + copy |
